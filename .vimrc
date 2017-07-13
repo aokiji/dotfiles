@@ -1,48 +1,89 @@
+" ============================================================================
+" Plugins
+" ============================================================================
 " Specify a directory for plugins
 silent! if plug#begin('~/.vim/plugged')
 
+" ----------------------------------------------------------------------------
+" Integrations
+" ----------------------------------------------------------------------------
+" Git plugin
+Plug 'tpope/vim-fugitive'
+" A git commit browser.
+Plug 'junegunn/gv.vim'
+
+" ----------------------------------------------------------------------------
+" Language support
+" ----------------------------------------------------------------------------
+Plug 'vim-ruby/vim-ruby'
+" This adds #{} in surround
+" this means that we can select text and use S# to interpolate selection
+Plug 'p0deje/vim-ruby-interpolation', {'for': 'ruby'}
+" use ar (external) and ir (internal) to select blocks in visual mode
+Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'} " depends: vim-textobj-user
+Plug 'tpope/vim-endwise', {'for': 'ruby'}
+
+" ----------------------------------------------------------------------------
+" Navigation
+" ----------------------------------------------------------------------------
 " use fzf on vim
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 " Improves search experience
 Plug 'junegunn/vim-slash'
-" A git commit browser.
-Plug 'junegunn/gv.vim'
+" Automatically change root directory
+Plug 'airblade/vim-rooter'
+
+" ----------------------------------------------------------------------------
+" Edit Steroids
+" ----------------------------------------------------------------------------
+Plug 'kana/vim-textobj-user'
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
-Plug 'vim-syntastic/syntastic'
-Plug 'tpope/vim-repeat'
 " use cs<DEL1><DEL2>
 Plug 'tpope/vim-surround'
 " use gcc or gc in visual mode to comment
 Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
-Plug 'tpope/vim-endwise'
+Plug 'vim-scripts/DeleteTrailingWhitespace'
 " gS split one-liner into multiple lines
 " gJ (with the cursor on the first line of the block) join a block
 Plug 'AndrewRadev/splitjoin.vim'
-" Git plugin
-Plug 'tpope/vim-fugitive'
 " Plug 'terryma/vim-multiple-cursors'
 Plug 'mattn/sonictemplate-vim'
-" Use crc to modify word to camelcase and crs to snakecase
+" Add matching pairs [], (), etc
+Plug 'jiangmiao/auto-pairs'
+" Abbreviation, substitution and coercion
 Plug 'tpope/tpope-vim-abolish'
+
+" ----------------------------------------------------------------------------
+" Linters
+" ----------------------------------------------------------------------------
+Plug 'vim-syntastic/syntastic'
+
+" ----------------------------------------------------------------------------
+" Vim improved
+" ----------------------------------------------------------------------------
+Plug 'tpope/vim-repeat'
 
 call plug#end()
 endif
 
+" ============================================================================
+" Basic Settings
+" ============================================================================
 " Change leader key to <Space>
 let mapleader      = ' '
 let maplocalleader = ' '
 
 " Basic settings
-set nu
-set autoindent
-set smartindent
-set hlsearch
-set incsearch
-set tabstop=2
-set shiftwidth=2
-set expandtab smarttab
-set ignorecase smartcase
+set nu                   " show line numbers
+set autoindent           " copy indent from current line when starting a new line
+set smartindent          " smart autoindenting for C-like programs
+set hlsearch             " highlight search results
+set incsearch            " go to first match on search result as is typed
+set tabstop=2            " how many space a tab is equal to
+set shiftwidth=2         " number of spaces used in indent (<<, >>)
+set expandtab smarttab   " use spaces instead of tabs in insert mode
+set ignorecase smartcase " ignore case in searches, unless explicit case given
 
 " Save
 inoremap <C-s>     <C-O>:update<cr>
@@ -86,6 +127,28 @@ nnoremap [t :tabp<cr>
 " ----------------------------------------------------------------------------
 nnoremap <tab>   <c-w>w
 nnoremap <S-tab> <c-w>W
+
+" ============================================================================
+" Plugin Settings
+" ============================================================================
+" ----------------------------------------------------------------------------
+" auto-pairs
+" ----------------------------------------------------------------------------
+" Clear <M-p> mapping
+let g:AutoPairsShortcutToggle = ''
+
+" Autoclose pipe in Ruby
+autocmd FileType ruby
+      \ let b:AutoPairs = {'|': '|'} |
+      \ for key in keys(g:AutoPairs) |
+      \   let b:AutoPairs[key] = g:AutoPairs[key] |
+\ endfor
+
+" ----------------------------------------------------------------------------
+" DeleteTrailingWhitespace
+" ----------------------------------------------------------------------------
+let g:DeleteTrailingWhitespace = 1
+let g:DeleteTrailingWhitespace_Action = 'delete'
 
 " ----------------------------------------------------------------------------
 " vim-commentary
@@ -276,7 +339,7 @@ function! GenerateRubySpecDefinition()
   let l:class_name = l:parts[-1]
   let l:class_name = substitute(l:class_name, "_spec", "", "")
   let l:module_names = l:parts[1:-2]
-  call map(l:module_names, 'g:Abolish.mixedcase(v:val)') 
+  call map(l:module_names, 'g:Abolish.mixedcase(v:val)')
 
   " generate
   let l:class_name = g:Abolish.mixedcase(l:class_name)
