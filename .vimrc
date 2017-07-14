@@ -55,9 +55,18 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/tpope-vim-abolish'
 
 " ----------------------------------------------------------------------------
-" Linters
+" Linters, testers
 " ----------------------------------------------------------------------------
 Plug 'vim-syntastic/syntastic'
+Plug 'tpope/vim-dispatch'
+Plug 'thoughtbot/vim-rspec'
+" adds several useful mappings with ([|])<sequence> pattern
+" [b or ]b to map buffer navigation
+" [e or ]e to exchange lines
+" [u ]u encode and decode url
+" [f ]f next/previous file
+" [n ]n navigate conflicts in SCM
+Plug 'tpope/vim-unimpaired'
 
 " ----------------------------------------------------------------------------
 " Vim improved
@@ -98,12 +107,6 @@ vnoremap <C-Q>     <esc>
 nnoremap <Leader>q :q<cr>
 nnoremap <Leader>Q :qa!<cr>
 
-" ----------------------------------------------------------------------------
-" Buffers
-" ----------------------------------------------------------------------------
-nnoremap ]b :bnext<cr>
-nnoremap [b :bprev<cr>
-
 " Annoying temporary files
 set backupdir=/tmp//,.
 set directory=/tmp//,.
@@ -116,21 +119,25 @@ if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
 
-" ----------------------------------------------------------------------------
-" Tabs
-" ----------------------------------------------------------------------------
-nnoremap ]t :tabn<cr>
-nnoremap [t :tabp<cr>
-
-" ----------------------------------------------------------------------------
 " <tab> / <s-tab> | Circular windows navigation
-" ----------------------------------------------------------------------------
 nnoremap <tab>   <c-w>w
 nnoremap <S-tab> <c-w>W
+
+inoremap jj <Esc>
 
 " ============================================================================
 " Plugin Settings
 " ============================================================================
+" ----------------------------------------------------------------------------
+" unimpaired
+" ----------------------------------------------------------------------------
+nmap - [
+nmap + ]
+omap - [
+omap + ]
+xmap - [
+xmap + ]
+
 " ----------------------------------------------------------------------------
 " auto-pairs
 " ----------------------------------------------------------------------------
@@ -230,6 +237,14 @@ nnoremap <Leader>d :Gdiff<CR>
 " sonictemplate
 " ----------------------------------------------------------------------------
 let g:sonictemplate_vim_template_dir = '$HOME/.vim/templates'
+
+" ----------------------------------------------------------------------------
+" vim-rspec
+" ----------------------------------------------------------------------------
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+let g:rspec_command = "Dispatch bin/rspec_docker {spec}"
 
 " ============================================================================
 " AUTOCMD {{{
