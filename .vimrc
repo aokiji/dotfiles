@@ -27,7 +27,7 @@ Plug 'tpope/vim-endwise', {'for': 'ruby'}
 " Navigation
 " ----------------------------------------------------------------------------
 " use fzf on vim
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf',  { 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " Improves search experience
 Plug 'junegunn/vim-slash'
@@ -47,12 +47,13 @@ Plug 'vim-scripts/DeleteTrailingWhitespace'
 " gS split one-liner into multiple lines
 " gJ (with the cursor on the first line of the block) join a block
 Plug 'AndrewRadev/splitjoin.vim'
-" Plug 'terryma/vim-multiple-cursors'
 Plug 'mattn/sonictemplate-vim'
 " Add matching pairs [], (), etc
 Plug 'jiangmiao/auto-pairs'
 " Abbreviation, substitution and coercion
 Plug 'tpope/tpope-vim-abolish'
+" autocomplete
+Plug 'lifepillar/vim-mucomplete'
 
 " ----------------------------------------------------------------------------
 " Linters, testers
@@ -72,6 +73,14 @@ Plug 'tpope/vim-unimpaired'
 " Vim improved
 " ----------------------------------------------------------------------------
 Plug 'tpope/vim-repeat'
+" Display, place and toggle marks
+Plug 'kshenoy/vim-signature'
+
+" ----------------------------------------------------------------------------
+" UI
+" ----------------------------------------------------------------------------
+" Provides a fancy start screen
+Plug 'mhinz/vim-startify'
 
 call plug#end()
 endif
@@ -125,18 +134,56 @@ nnoremap <S-tab> <c-w>W
 
 inoremap jj <Esc>
 
+" completion improvements
+set completeopt+=menu
+set completeopt+=menuone
+set completeopt+=noinsert
+set completeopt+=noselect
+set shortmess+=c
+
 " ============================================================================
 " Plugin Settings
 " ============================================================================
 " ----------------------------------------------------------------------------
+" mucomplete
+" ----------------------------------------------------------------------------
+let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#chains = {
+      \ 'default': ['path', 'keyn', 'omni', 'dict'],
+      \ 'cucumber' : ['keyn', 'dict', 'line', 'uspl'],
+      \ 'gitcommit' : ['keyn', 'dict', 'uspl'],
+      \ 'ruby': ['path', 'dict'],
+      \ }
+" ----------------------------------------------------------------------------
+" vim-signature
+" ----------------------------------------------------------------------------
+" Leave "m" for other plugins
+let g:SignatureMap = {'Leader': 'gm'}
+
+" ----------------------------------------------------------------------------
+" startify
+" ----------------------------------------------------------------------------
+let g:startify_session_dir = '~/.vim/sessions'
+let g:startify_session_persistence = 1
+let g:startify_relative_path = 1
+let g:startify_list_order = [
+  \ ['   Sessions:'],
+  \ 'sessions',
+  \ ['   Recent files:'],
+  \ 'files',
+  \ ['   Recent files in current directory:'],
+  \ 'dir',
+  \ ]
+
+" ----------------------------------------------------------------------------
 " unimpaired
 " ----------------------------------------------------------------------------
-nmap - [
-nmap + ]
-omap - [
-omap + ]
-xmap - [
-xmap + ]
+nmap < [
+nmap > ]
+omap < [
+omap > ]
+xmap < [
+xmap > ]
 
 " ----------------------------------------------------------------------------
 " auto-pairs
@@ -150,6 +197,7 @@ autocmd FileType ruby
       \ for key in keys(g:AutoPairs) |
       \   let b:AutoPairs[key] = g:AutoPairs[key] |
 \ endfor
+autocmd FileType ruby compiler rspec
 
 " ----------------------------------------------------------------------------
 " DeleteTrailingWhitespace
@@ -225,13 +273,6 @@ nmap gaa ga_
 " ----------------------------------------------------------------------------
 nmap     <Leader>g :Gstatus<CR>gg<c-n>
 nnoremap <Leader>d :Gdiff<CR>
-
-" ----------------------------------------------------------------------------
-" vim-multiple-cursor
-" ----------------------------------------------------------------------------
-" nnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
-" vnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
-
 
 " ----------------------------------------------------------------------------
 " sonictemplate
