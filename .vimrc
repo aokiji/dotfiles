@@ -54,13 +54,21 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/tpope-vim-abolish'
 " autocomplete
 Plug 'lifepillar/vim-mucomplete'
+" snipmate dependencies
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+" snipmate engine
+Plug 'garbas/vim-snipmate'
+" some useful snippets
+Plug 'honza/vim-snippets'
 
 " ----------------------------------------------------------------------------
 " Linters, testers
 " ----------------------------------------------------------------------------
 Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-dispatch'
-Plug 'thoughtbot/vim-rspec'
+" A Vim wrapper for running tests on different granularities
+Plug 'janko-m/vim-test'
 " adds several useful mappings with ([|])<sequence> pattern
 " [b or ]b to map buffer navigation
 " [e or ]e to exchange lines
@@ -88,6 +96,9 @@ endif
 " ============================================================================
 " Basic Settings
 " ============================================================================
+" Don't be compatible with vi
+set nocompatible
+
 " Change leader key to <Space>
 let mapleader      = ' '
 let maplocalleader = ' '
@@ -116,11 +127,42 @@ vnoremap <C-Q>     <esc>
 nnoremap <Leader>q :q<cr>
 nnoremap <Leader>Q :qa!<cr>
 
-" Annoying temporary files
-set backupdir=/tmp//,.
-set directory=/tmp//,.
-if v:version >= 703
-  set undodir=/tmp//,.
+" Backup files
+if isdirectory($HOME . '/.vim/backup') == 0
+    :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
+endif
+set backupdir-=.
+set backupdir+=.
+set backupdir-=~/
+set backupdir^=~/.vim/backup/
+set backupdir^=./.vim-backup/
+set backup
+
+" Save your swp files to a less annoying place than the current directory.
+" " If you have .vim-swap in the current directory, it'll use that.
+" " Otherwise it saves it to ~/.vim/swap, ~/tmp or .
+if isdirectory($HOME . '/.vim/swap') == 0
+    :silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
+endif
+set directory=./.vim-swap//
+set directory+=~/.vim/swap//
+set directory+=~/tmp//
+set directory+=.
+
+" viminfo stores the the state of your previous editing session
+set viminfo+=n~/.vim/viminfo
+
+if exists("+undofile")
+    " undofile - This allows you to use undos after exiting and restarting
+    " This, like swap and backups, uses .vim-undo first, then ~/.vim/undo
+    " :help undo-persistence
+    " This is only present in 7.3+
+    if isdirectory($HOME . '/.vim/undo') == 0
+        :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+    endif
+    set undodir=./.vim-undo//
+    set undodir+=~/.vim/undo//
+    set undofile
 endif
 
 " Terminal settings
@@ -132,7 +174,16 @@ endif
 nnoremap <tab>   <c-w>w
 nnoremap <S-tab> <c-w>W
 
-inoremap jj <Esc>
+" Removing escape
+ino jj <esc>
+cno jj <c-c>
+vno v <esc>
+
+" Remap indentation, as will be using < and > for other purposes
+nnoremap - <<
+nnoremap + >>
+vnoremap - <<
+vnoremap + >>
 
 " completion improvements
 set completeopt+=menu
@@ -144,6 +195,12 @@ set shortmess+=c
 " ============================================================================
 " Plugin Settings
 " ============================================================================
+" ----------------------------------------------------------------------------
+" snipmate
+" ----------------------------------------------------------------------------
+:imap <c-s> <Plug>snipMateNextOrTrigger
+:smap <c-s> <Plug>snipMateNextOrTrigger
+
 " ----------------------------------------------------------------------------
 " mucomplete
 " ----------------------------------------------------------------------------
@@ -280,12 +337,15 @@ nnoremap <Leader>d :Gdiff<CR>
 let g:sonictemplate_vim_template_dir = '$HOME/.vim/templates'
 
 " ----------------------------------------------------------------------------
-" vim-rspec
+" vim-test
 " ----------------------------------------------------------------------------
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-let g:rspec_command = "Dispatch bin/rspec_docker {spec}"
+map <Leader>t :TestFile<CR>
+map <Leader>l :TestLast<CR>
+map <Leader>a :TestSuite<CR>
+map <Leader>n :TestNearest<CR>
+let test#ruby#rspec#executable = 'bin/rspec_docker'
+" make test commands execute using dispatch.vim
+let test#strategy = "dispatch"
 
 " ============================================================================
 " AUTOCMD {{{
@@ -404,6 +464,9 @@ function! GenerateRubySpecDefinition()
 
   return l:output
 endfunction
+
+" Ruby hash syntax conversion
+nnoremap <c-h> :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<return>
 
 " set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 set statusline=%<[%n]\ %F\ %m%r%y\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}\ %=%-14.(%l,%c%V%)\ %P
