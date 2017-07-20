@@ -347,6 +347,9 @@ let test#ruby#rspec#executable = 'bin/rspec_docker'
 " make test commands execute using dispatch.vim
 let test#strategy = "dispatch"
 
+let g:dispatch_compilers = {}
+let g:dispatch_compilers['bin/rspec_docker'] = 'rspec'
+
 " ============================================================================
 " AUTOCMD {{{
 " ============================================================================
