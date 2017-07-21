@@ -83,6 +83,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 " Display, place and toggle marks
 Plug 'kshenoy/vim-signature'
+" Improve clipboard feature
+Plug 'svermeulen/vim-easyclip'
 
 " ----------------------------------------------------------------------------
 " UI
@@ -192,9 +194,28 @@ set completeopt+=noinsert
 set completeopt+=noselect
 set shortmess+=c
 
+" share clipboard with system
+set clipboard=unnamed
+
 " ============================================================================
 " Plugin Settings
 " ============================================================================
+" ----------------------------------------------------------------------------
+" easyalign
+" ----------------------------------------------------------------------------
+let g:EasyClipAutoFormat = 1
+let g:EasyClipDoSystemSync = 0
+
+nmap M m$
+
+nmap <M-p> <plug>EasyClipSwapPasteForward
+nmap <M-S-p> <plug>EasyClipSwapPasteBackwards
+
+" Substitute operator
+nmap <silent> gr <plug>SubstituteOverMotionMap
+nmap grr <plug>SubstituteLine
+xmap gr <plug>XEasyClipPaste
+
 " ----------------------------------------------------------------------------
 " snipmate
 " ----------------------------------------------------------------------------
@@ -210,6 +231,7 @@ let g:mucomplete#chains = {
       \ 'cucumber' : ['keyn', 'dict', 'line', 'uspl'],
       \ 'gitcommit' : ['keyn', 'dict', 'uspl'],
       \ 'ruby': ['path', 'dict'],
+      \ 'sql': ['file', 'dict', 'keyn'],
       \ }
 " ----------------------------------------------------------------------------
 " vim-signature
