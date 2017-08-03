@@ -91,6 +91,9 @@ Plug 'svermeulen/vim-easyclip'
 " ----------------------------------------------------------------------------
 " Provides a fancy start screen
 Plug 'mhinz/vim-startify'
+" Improved statusline for vim
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 endif
@@ -184,8 +187,9 @@ vno v <esc>
 " Remap indentation, as will be using < and > for other purposes
 nnoremap - <<
 nnoremap + >>
-vnoremap - <<
-vnoremap + >>
+" in visual mode maintain selection
+vnoremap - <gv
+vnoremap + >gv
 
 " completion improvements
 set completeopt+=menu
@@ -197,9 +201,22 @@ set shortmess+=c
 " share clipboard with system
 set clipboard=unnamed
 
+" Disable terrible Ex mode
+nnoremap Q <nop>
+
+" return to previous cursor position when copying from visual selection
+vnoremap y y`]
+
+" duplicate selection
+vnoremap D y'>p
+
 " ============================================================================
 " Plugin Settings
 " ============================================================================
+" ----------------------------------------------------------------------------
+" airline
+" ----------------------------------------------------------------------------
+let g:airline_theme='aurora'
 " ----------------------------------------------------------------------------
 " easyalign
 " ----------------------------------------------------------------------------
@@ -492,14 +509,6 @@ endfunction
 
 " Ruby hash syntax conversion
 nnoremap <c-h> :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<return>
-
-" set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
-set statusline=%<[%n]\ %F\ %m%r%y\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}\ %=%-14.(%l,%c%V%)\ %P
-
-" syntastic config
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list            = 1
