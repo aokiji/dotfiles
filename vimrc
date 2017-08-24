@@ -132,6 +132,10 @@ vnoremap <C-Q>     <esc>
 nnoremap <Leader>q :q<cr>
 nnoremap <Leader>Q :qa!<cr>
 
+" Move current line up/down
+nnoremap <C-j> yyddp=
+nnoremap <C-k> yyddkP=
+
 " Backup files
 if isdirectory($HOME . '/.vim/backup') == 0
     :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
@@ -507,6 +511,9 @@ function! GenerateRubySpecDefinition()
   return l:output
 endfunction
 
+" Format json
+com! FormatJSON %!python -m json.tool
+
 " Ruby hash syntax conversion
 nnoremap <c-h> :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<return>
 
@@ -518,4 +525,4 @@ let g:syntastic_check_on_wq              = 0
 let g:syntastic_ruby_checkers          = ['rubocop', 'mri', 'reek']
 let g:syntastic_ruby_rubocop_exec      = '/home/nicolas.delossantos/.rbenv/shims/rubocop'
 
-nmap fs i# frozen_string_literal: true<cr><cr><esc>
+nmap fs :set paste<cr>i# frozen_string_literal: true<cr><cr><esc>:set nopaste<cr>
