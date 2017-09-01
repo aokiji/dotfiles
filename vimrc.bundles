@@ -23,9 +23,8 @@ Plug 'tpope/vim-endwise', {'for': 'ruby'}
 " ----------------------------------------------------------------------------
 " Navigation
 " ----------------------------------------------------------------------------
-" use fzf on vim
-Plug 'junegunn/fzf',  { 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+" file navigation
+Plug 'ctrlpvim/ctrlp.vim'
 " Improves search experience
 Plug 'junegunn/vim-slash'
 " Automatically change root directory
@@ -62,7 +61,6 @@ Plug 'honza/vim-snippets'
 " ----------------------------------------------------------------------------
 " Linters, testers
 " ----------------------------------------------------------------------------
-Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-dispatch'
 " A Vim wrapper for running tests on different granularities
 Plug 'janko-m/vim-test'
@@ -73,6 +71,8 @@ Plug 'janko-m/vim-test'
 " [f ]f next/previous file
 " [n ]n navigate conflicts in SCM
 Plug 'tpope/vim-unimpaired'
+" async linter, works only on vim8 or neovim
+Plug 'w0rp/ale'
 
 " ----------------------------------------------------------------------------
 " Vim improved
@@ -91,6 +91,10 @@ Plug 'mhinz/vim-startify'
 " Improved statusline for vim
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+if filereadable(expand("~/.vimrc.bundles.local"))
+  source ~/.vimrc.bundles.local
+endif
 
 call plug#end()
 endif
