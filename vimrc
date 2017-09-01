@@ -2,7 +2,7 @@
 " Plugins
 " ============================================================================
 if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
+ source ~/.vimrc.bundles
 endif
 
 " ============================================================================
@@ -128,6 +128,27 @@ vnoremap D y'>p
 " airline
 " ----------------------------------------------------------------------------
 let g:airline_theme='aurora'
+
+" ----------------------------------------------------------------------------
+" ale
+" ----------------------------------------------------------------------------
+let g:ale_set_loclist = 1
+let g:ale_open_list = 1
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_fixers = {
+      \   'ruby': ['rubocop'],
+      \}
+let g:ale_linters = {
+      \   'ruby': ['rubocop', 'reek', 'ruby'],
+      \}
+let g:ale_ruby_rubocop_executable = '/home/nicolas.delossantos/.rbenv/shims/rubocop'
+
+nnoremap <Leader>F :ALEFix<cr>
+
+" this mapping shadows unimpaired move up line
+nmap <silent> <e <Plug>(ale_previous_wrap)
+nmap <silent> >e <Plug>(ale_next_wrap)
+
 " ----------------------------------------------------------------------------
 " easyalign
 " ----------------------------------------------------------------------------
@@ -424,12 +445,9 @@ com! FormatJSON %!python -m json.tool
 " Ruby hash syntax conversion
 nnoremap <c-h> :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<return>
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 1
-let g:syntastic_check_on_open            = 1
-let g:syntastic_check_on_wq              = 0
-
-let g:syntastic_ruby_checkers          = ['rubocop', 'mri', 'reek']
-let g:syntastic_ruby_rubocop_exec      = '/home/nicolas.delossantos/.rbenv/shims/rubocop'
-
 nmap fs :set paste<cr>i# frozen_string_literal: true<cr><cr><esc>:set nopaste<cr>
+
+" Load local settings
+if filereadable($HOME . "/.vimrc.local")
+  source ~/.vimrc.local
+endif
