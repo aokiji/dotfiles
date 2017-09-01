@@ -253,7 +253,7 @@ nmap <Leader>' cs"'
 " ctrlp
 " ----------------------------------------------------------------------------
 nnoremap <Leader>f :CtrlP<cr>
-nnoremap gb :CtrlPBuffer<Cr>
+nnoremap <Leader>b :CtrlPBuffer<Cr>
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
