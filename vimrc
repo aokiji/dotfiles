@@ -1,6 +1,8 @@
 " ============================================================================
 " Plugins
 " ============================================================================
+let g:has_async = v:version >= 800 || has('nvim')
+
 if filereadable(expand("~/.vimrc.bundles"))
  source ~/.vimrc.bundles
 endif
@@ -133,7 +135,6 @@ let g:airline_theme='aurora'
 " ale
 " ----------------------------------------------------------------------------
 let g:ale_set_loclist = 1
-let g:ale_open_list = 1
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_fixers = {
       \   'ruby': ['rubocop'],
