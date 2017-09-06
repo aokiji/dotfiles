@@ -141,6 +141,7 @@ let g:ale_fixers = {
       \}
 let g:ale_linters = {
       \   'ruby': ['rubocop', 'reek', 'ruby'],
+      \   'javascript': ['eslint']
       \}
 let g:ale_ruby_rubocop_executable = '/home/nicolas.delossantos/.rbenv/shims/rubocop'
 
@@ -183,6 +184,11 @@ let g:mucomplete#chains = {
       \ 'ruby': ['path', 'dict'],
       \ 'sql': ['file', 'dict', 'keyn'],
       \ }
+" ----------------------------------------------------------------------------
+" vim-merginal
+" ----------------------------------------------------------------------------
+map <Leader>m :MerginalToggle<CR>
+
 " ----------------------------------------------------------------------------
 " vim-signature
 " ----------------------------------------------------------------------------

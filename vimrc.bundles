@@ -6,6 +6,8 @@ silent! if plug#begin('~/.vim/plugged')
 " ----------------------------------------------------------------------------
 " Git plugin
 Plug 'tpope/vim-fugitive'
+" Git branch managment
+Plug 'idanarye/vim-merginal'
 " A git commit browser.
 Plug 'junegunn/gv.vim'
 
