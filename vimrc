@@ -405,62 +405,6 @@ endfunction
 nnoremap <silent> gi :<c-u>call <SID>go_indent(v:count1, 1)<cr>
 nnoremap <silent> gpi :<c-u>call <SID>go_indent(v:count1, -1)<cr>
 
-
-" Generates a ruby class definition based on the current file's path
-function! GenerateRubyClassDefinition()
-  " parse file path
-  let l:path = expand("%:.:r")
-  let l:path = substitute(l:path, "lib/", "", "")
-  let l:parts = split(l:path, "/")
-
-  " extract parts
-  let l:class_name = l:parts[-1]
-  let l:module_names = l:parts[0:-2]
-
-  " generate
-  let l:indentation = 0
-  let l:output = ""
-
-  " generate - module headers
-  for m in l:module_names
-    let l:output .= repeat(" ", l:indentation) . "module " . g:Abolish.mixedcase(m) . "\n"
-    let l:indentation = l:indentation + 2
-  endfor
-
-  " generate - class
-  let l:output .= repeat(" ", l:indentation) . "class " . g:Abolish.mixedcase(l:class_name) . "\n"
-  let l:output .= repeat(" ", l:indentation) . "end\n"
-
-  " generate - module footers
-  for m in l:module_names
-    let l:indentation = l:indentation - 2
-    let l:output .= repeat(" ", l:indentation) . "end\n"
-  endfor
-
-  return l:output
-endfunction
-
-" Generates a rspec definition based on the current file's path
-function! GenerateRubySpecDefinition()
-  " parse file path
-  let l:path = expand("%:.:r")
-  let l:path = substitute(l:path, "spec/", "", "")
-  let l:parts = split(l:path, "/")
-
-  " extract parts
-  let l:class_name = l:parts[-1]
-  let l:class_name = substitute(l:class_name, "_spec", "", "")
-  let l:module_names = l:parts[1:-2]
-  call map(l:module_names, 'g:Abolish.mixedcase(v:val)')
-
-  " generate
-  let l:class_name = g:Abolish.mixedcase(l:class_name)
-  let l:output = "RSpec.describe " . join(l:module_names, "::") . "::" . l:class_name . " do"
-  let l:output .= "\nend"
-
-  return l:output
-endfunction
-
 " Format json
 com! FormatJSON %!python -m json.tool
 
