@@ -143,7 +143,9 @@ let g:ale_linters = {
       \   'ruby': ['rubocop', 'reek', 'ruby'],
       \   'javascript': ['eslint']
       \}
-let g:ale_ruby_rubocop_executable = '/home/nicolas.delossantos/.rbenv/shims/rubocop'
+" if you with to setup you own rubocop executable, uncomment and setup the
+" following line
+" let g:ale_ruby_rubocop_executable = '/home/nicolas.delossantos/.rbenv/shims/rubocop'
 
 nnoremap <Leader>F :ALEFix<cr>
 
@@ -336,12 +338,13 @@ map <Leader>t :TestFile<CR>
 map <Leader>l :TestLast<CR>
 map <Leader>a :TestSuite<CR>
 map <Leader>n :TestNearest<CR>
-let test#ruby#rspec#executable = 'bin/rspec_docker'
 " make test commands execute using dispatch.vim
 let test#strategy = "dispatch"
 
-let g:dispatch_compilers = {}
-let g:dispatch_compilers['bin/rspec_docker'] = 'rspec'
+" for a custom rspec command
+" let g:dispatch_compilers = {}
+" let g:dispatch_compilers['bin/rspec_docker'] = 'rspec'
+" let test#ruby#rspec#executable = 'bin/rspec_docker'
 
 " ============================================================================
 " AUTOCMD {{{
