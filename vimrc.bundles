@@ -31,6 +31,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/vim-slash'
 " Automatically change root directory
 Plug 'airblade/vim-rooter'
+" Browsing
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " ----------------------------------------------------------------------------
 " Edit Steroids
