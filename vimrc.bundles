@@ -33,6 +33,8 @@ Plug 'junegunn/vim-slash'
 Plug 'airblade/vim-rooter'
 " Browsing
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+" Pane navigation
+Plug 'christoomey/vim-tmux-navigator'
 
 " ----------------------------------------------------------------------------
 " Edit Steroids

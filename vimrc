@@ -41,10 +41,6 @@ vnoremap <C-Q>     <esc>
 nnoremap <Leader>q :q<cr>
 nnoremap <Leader>Q :qa!<cr>
 
-" Move current line up/down
-nnoremap <C-j> yyddp=
-nnoremap <C-k> yyddkP=
-
 " Backup files
 if isdirectory($HOME . '/.vim/backup') == 0
     :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
@@ -91,10 +87,6 @@ endif
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
-
-" <tab> / <s-tab> | Circular windows navigation
-nnoremap <tab>   <c-w>w
-nnoremap <S-tab> <c-w>W
 
 " Removing escape
 ino jj <esc>
