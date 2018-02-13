@@ -2,7 +2,6 @@
 
 # git aliases
 alias gs='git status'
-alias gco='git checkout'
 alias gv='vim +GV +"autocmd BufWipeout <buffer> qall"'
 
 # GIT + FZF
@@ -12,6 +11,20 @@ is_in_git_repo() {
 
 fzf-down() {
   fzf --height 50% "$@" --border
+}
+
+# gco - checkout git branch/tag
+gco() {
+  local tags branches target
+  tags=$(git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
+  branches=$(
+  git branch --all | grep -v HEAD             |
+    sed "s/.* //"    | sed "s#remotes/[^/]*/##" |
+    sort -u          | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
+  target=$(
+  (echo "$tags"; echo "$branches") | sed '/^$/d' |
+    fzf-down --no-hscroll --reverse --ansi +m -d "\t" -n 2 -q "$*") || return
+  git checkout $(echo "$target" | awk '{print $2}')
 }
 
 # search in status
