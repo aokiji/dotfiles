@@ -29,8 +29,6 @@ set expandtab smarttab   " use spaces instead of tabs in insert mode
 set ignorecase smartcase " ignore case in searches, unless explicit case given
 
 " Save
-inoremap <C-s>     <C-O>:update<cr>
-nnoremap <C-s>     :update<cr>
 nnoremap <leader>s :update<cr>
 nnoremap <leader>w :update<cr>
 
@@ -185,8 +183,8 @@ xmap gr <plug>XEasyClipPaste
 " ----------------------------------------------------------------------------
 " snipmate
 " ----------------------------------------------------------------------------
-:imap <c-s> <Plug>snipMateNextOrTrigger
-:smap <c-s> <Plug>snipMateNextOrTrigger
+:imap <c-b> <Plug>snipMateNextOrTrigger
+:smap <c-b> <Plug>snipMateNextOrTrigger
 
 " ----------------------------------------------------------------------------
 " NERDTree
