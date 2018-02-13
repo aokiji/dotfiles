@@ -123,8 +123,18 @@ vnoremap y y`]
 " duplicate selection
 vnoremap D y'>p
 
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  nnoremap \ :Ag<SPACE>
+
+  nnoremap K :exe 'Ag!' expand('<cword>')<cr>
+else
+  " bind K to grep word under cursor
+  nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+endif
 
 " ============================================================================
 " Plugin Settings
