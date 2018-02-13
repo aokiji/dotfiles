@@ -449,9 +449,6 @@ nnoremap <silent> gpi :<c-u>call <SID>go_indent(v:count1, -1)<cr>
 " Format json
 com! FormatJSON %!python -m json.tool
 
-" Ruby hash syntax conversion
-nnoremap <c-h> :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<return>
-
 nmap fs :set paste<cr>i# frozen_string_literal: true<cr><cr><esc>:set nopaste<cr>
 
 " Load local settings
