@@ -88,6 +88,10 @@ if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
 
+" <tab> / <s-tab> | Circular windows navigation
+nnoremap <tab>   <c-w>w
+nnoremap <S-tab> <c-w>W
+
 " Removing escape
 ino jj <esc>
 cno jj <c-c>
