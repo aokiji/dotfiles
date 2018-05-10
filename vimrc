@@ -13,6 +13,9 @@ endif
 " Don't be compatible with vi
 set nocompatible
 
+" Ease regexp use in vim
+set magic
+
 " Change leader key to <Space>
 let mapleader      = ' '
 let maplocalleader = ' '
