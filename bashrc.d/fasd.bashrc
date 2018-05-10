@@ -15,3 +15,10 @@ z() {
     dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)"
     cd "${dir}" || return 1
 }
+
+unalias v 2> /dev/null
+v() {
+  local file
+  file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)"
+    vim "${file}" || return 1
+}
