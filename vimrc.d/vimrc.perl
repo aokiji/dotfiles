@@ -10,9 +10,12 @@ let g:Perl_Ctrl_j='no'
 
 " Change leader
 let g:Perl_MapLeader  = '\'
-nunmap \
 
-augroup PerlSettings
-  autocmd!
-  autocmd FileType perl setlocal complete-=i
-augroup END
+autocmd FileType perl call SetPerlOptions()
+function SetPerlOptions()
+  nunmap \
+
+  " remove mapping giving problem
+  iunmap <c-x><c-k>
+  setlocal complete-=i
+endfunction
