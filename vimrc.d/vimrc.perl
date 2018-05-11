@@ -4,3 +4,15 @@
 " ale configuration
 let g:ale_linters['perl'] = ['perl', 'perl-critic']
 let g:ale_fixers['perl'] = ['perltidy']
+
+" Disable Ctrl-j to avoid collision with tmux config
+let g:Perl_Ctrl_j='no'
+
+" Change leader
+let g:Perl_MapLeader  = '\'
+nunmap \
+
+augroup PerlSettings
+  autocmd!
+  autocmd FileType perl setlocal complete-=i
+augroup END
