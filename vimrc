@@ -150,11 +150,9 @@ let g:airline_theme='aurora'
 " ----------------------------------------------------------------------------
 let g:ale_set_loclist = 1
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_fixers = {
-      \   'ruby': ['rubocop'],
-      \}
+
+let g:ale_fixers = {}
 let g:ale_linters = {
-      \   'ruby': ['rubocop', 'reek', 'ruby'],
       \   'javascript': ['eslint']
       \}
 " if you with to setup you own rubocop executable, uncomment and setup the
