@@ -11,6 +11,9 @@ let g:Perl_Ctrl_j='no'
 " Change leader
 let g:Perl_MapLeader  = '\'
 
+" Enable Perl::Tags, this requires module Perl::Tags
+let g:Perl_PerlTags = 'on'
+
 autocmd FileType perl call SetPerlOptions()
 function SetPerlOptions()
   nunmap \
