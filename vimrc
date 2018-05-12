@@ -312,6 +312,7 @@ nnoremap <silent> <Leader>f :Files<CR>
 nnoremap <silent> <Leader>b :Buffers<CR>
 nnoremap <silent> <Leader>L :Lines<CR>
 nnoremap <silent> <Leader>' :Marks<CR>
+nnoremap <silent> <Leader>T :Tags<CR>
 
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
