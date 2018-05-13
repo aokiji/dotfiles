@@ -181,6 +181,9 @@ nmap <silent> gr <plug>SubstituteOverMotionMap
 nmap grr <plug>SubstituteLine
 xmap gr <plug>XEasyClipPaste
 
+" Move to last line when pasting, you can go back with C-O
+let g:EasyClipAlwaysMoveCursorToEndOfPaste=1
+
 " ----------------------------------------------------------------------------
 " ultisnips
 " ----------------------------------------------------------------------------
@@ -407,6 +410,11 @@ nmap gaa ga_
 " ----------------------------------------------------------------------------
 nmap     <Leader>g :Gstatus<CR>gg<c-n>
 nnoremap <Leader>d :Gdiff<CR>
+
+" ----------------------------------------------------------------------------
+" Tagbar
+" ----------------------------------------------------------------------------
+nnoremap tb :TagbarToggle<cr>
 
 " ----------------------------------------------------------------------------
 " sonictemplate

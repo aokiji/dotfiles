@@ -30,6 +30,8 @@ Plug 'airblade/vim-rooter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " Pane navigation
 Plug 'christoomey/vim-tmux-navigator'
+" Display tags
+Plug 'majutsushi/tagbar'
 
 " ----------------------------------------------------------------------------
 " Edit Steroids
