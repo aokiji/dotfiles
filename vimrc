@@ -182,10 +182,10 @@ nmap grr <plug>SubstituteLine
 xmap gr <plug>XEasyClipPaste
 
 " ----------------------------------------------------------------------------
-" snipmate
+" ultisnips
 " ----------------------------------------------------------------------------
-:imap <c-b> <Plug>snipMateNextOrTrigger
-:smap <c-b> <Plug>snipMateNextOrTrigger
+let g:UltiSnipsExpandTrigger="<c-b>"
+inoremap <C-l> <C-o>:Snippets<cr>
 
 " ----------------------------------------------------------------------------
 " NERDTree
@@ -492,8 +492,6 @@ nnoremap <silent> gpi :<c-u>call <SID>go_indent(v:count1, -1)<cr>
 
 " Format json
 com! FormatJSON %!python -m json.tool
-
-nmap fs :set paste<cr>i# frozen_string_literal: true<cr><cr><esc>:set nopaste<cr>
 
 " Load local settings
 if filereadable($HOME . "/.vimrc.local")

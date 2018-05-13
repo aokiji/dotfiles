@@ -51,11 +51,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/tpope-vim-abolish'
 " autocomplete
 Plug 'lifepillar/vim-mucomplete'
-" snipmate dependencies
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-" snipmate engine
-Plug 'garbas/vim-snipmate'
+" snippets engine
+Plug 'SirVer/ultisnips'
 " some useful snippets
 Plug 'honza/vim-snippets'
 
