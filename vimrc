@@ -131,7 +131,7 @@ if executable('ag')
 
   nnoremap \ :Ag<SPACE>
 
-  nnoremap K :exe 'Ag!' expand('<cword>')<cr>
+  nnoremap K :exe 'Ag' expand('<cword>')<cr>
 else
   " bind K to grep word under cursor
   nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
