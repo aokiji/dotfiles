@@ -415,6 +415,7 @@ nnoremap <Leader>d :Gdiff<CR>
 " Tagbar
 " ----------------------------------------------------------------------------
 nnoremap tb :TagbarToggle<cr>
+let g:tagbar_autoclose = 1
 
 " ----------------------------------------------------------------------------
 " sonictemplate
