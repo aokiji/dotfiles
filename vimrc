@@ -201,11 +201,10 @@ nnoremap tf :NERDTreeFind<cr>
 " ----------------------------------------------------------------------------
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#chains = {
-      \ 'default': ['path', 'keyn', 'omni', 'dict'],
-      \ 'cucumber' : ['keyn', 'dict', 'line', 'uspl'],
-      \ 'gitcommit' : ['keyn', 'dict', 'uspl'],
-      \ 'ruby': ['path', 'dict'],
-      \ 'sql': ['file', 'dict', 'keyn'],
+      \ 'default': ['path', 'keyn', 'ulti', 'omni', 'dict'],
+      \ 'gitcommit' : ['ulti', 'keyn', 'dict', 'uspl'],
+      \ 'ruby': ['path', 'ulti', 'dict'],
+      \ 'sql': ['file', 'ulti', 'dict', 'keyn'],
       \ }
 " ----------------------------------------------------------------------------
 " vim-merginal
@@ -257,6 +256,18 @@ autocmd FileType ruby
       \   let b:AutoPairs[key] = g:AutoPairs[key] |
 \ endfor
 autocmd FileType ruby compiler rspec
+
+
+" auto-pairs
+let g:AutoPairsMapCR = 0
+
+" combine with mucomplete and ultisnips
+imap <Plug>OmniEnter <Plug>(MUcompleteCR)<Plug>AutoPairsReturn
+imap <CR> <Plug>OmniEnter
+
+" ultisnips
+let g:UltiSnipsExpandTrigger = "<nop>"
+imap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<Plug>OmniEnter"
 
 " ----------------------------------------------------------------------------
 " DeleteTrailingWhitespace
