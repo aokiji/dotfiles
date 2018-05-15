@@ -33,3 +33,12 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 ```
 
 Open vim and exec :PlugInstall
+
+#### Snippets
+
+You can add custom snippets via
+
+```
+ln -s $PWD/UltiSnips ~/.vim/
+
+```

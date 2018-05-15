@@ -1,0 +1,22 @@
+snippet test "start pgtap test" b
+BEGIN;
+  SELECT plan($1);
+
+  $0
+ROLLBACK;
+endsnippet
+
+snippet ht "check it has table" w
+SELECT has_table('$1');
+$0
+endsnippet
+
+snippet hc "check it has column" w
+SELECT has_column('$1', '$2');
+$0
+endsnippet
+
+snippet ok "check ok" w
+SELECT ok($1, '$2');
+$0
+endsnippet
