@@ -36,9 +36,9 @@ let g:tagbar_type_perl = {
 
 autocmd FileType perl call SetPerlOptions()
 function SetPerlOptions()
-  nunmap \
+  silent! nunmap \
 
   " remove mapping giving problem
-  iunmap <c-x><c-k>
+  silent! iunmap <c-x><c-k>
   setlocal complete-=i
 endfunction
