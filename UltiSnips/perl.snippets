@@ -1,0 +1,213 @@
+snippet metodo_privado "metodo privado" b
+#==============================================================================
+# NOMBRE
+#	_${1:nombre_metodo}
+#
+# DESCRIPCION
+# 	${2:descripcion}
+#
+# ARGUMENTOS
+# 	${3:argumentos}
+#
+# RETORNO
+# 	${4:retorno}
+#
+# USO
+#	${5:uso}
+#
+# ${6:documentacion_extra}
+#
+#==============================================================================
+sub _$1 {
+	my $self = shift();
+	my %params = validate(@_, {
+			${7:parametros}
+			});
+
+	$0
+
+	return ();
+}
+endsnippet
+
+snippet package "modulo nuevo" b
+package ${1:packagename};
+
+use 5.010001;
+use strict;
+use Moo;
+#use Moose;
+use English qw(-no_match_vars);
+use Const::Fast;
+use namespace::autoclean;
+
+=encoding iso-8859-1
+
+=head1 NAME
+
+$1 - ${2:descripcion_corta}
+
+=head1 SYNOPSIS
+
+${3:SYNOPSIS}
+
+=head1 DESCRIPTION
+
+${4:descripcion_corta}
+
+=head1 INSTANCE METHODS
+
+=cut
+
+
+# Cuidado con los tipos en Moo: https://metacpan.org/pod/Moo#has
+
+=head1 CLASS METHODS
+
+Métodos de clase estáticos que se pueden llamar sin un objeto.
+Ejemplo:
+$1::FuncionDeClase();
+
+__PACKAGE__->meta->make_immutable();
+
+=cut
+
+1;
+endsnippet
+
+snippet metodo "metodo de objeto" b
+=head2 ${1:nombre_metodo}
+
+=head3 Descripción:
+
+${2:descripcion_del_metodo}
+
+=head3 Parámetros:
+
+${3:parametros}
+
+=head3 Devuelve:
+
+${4:elemento_que_devuelve}
+
+=head3 Ejemplo:
+
+${5:ejemplo_de_uso}
+
+${6:documentacion_extra}
+
+=cut
+
+sub $1 {
+	my $self = shift();
+	my %params = validate(@_, {
+			${7:validar_parametros}
+			});
+
+	$0
+
+	return ();
+}
+endsnippet
+
+snippet documentar_excepcion "documentacion de las excepciones" b
+=head3 Excepciones
+
+=over
+
+=item $0
+
+=back
+endsnippet
+
+snippet documentar_parametros "documentacion de los parametros aceptados" b
+=over
+
+=item * ${1:nombre_parametro}:
+
+${2:descripcion_parametro}
+
+${3:mas_parametros}
+
+=back
+endsnippet
+
+snippet documentar_un_parametro "añade documentacion de un parametro" b
+=item * ${1:nombre_parametro}:
+
+${2:descripcion_parametro}
+
+${3:mas_parametros}
+endsnippet
+
+snippet script "plantilla script generico" b
+#!perl -w
+#==============================================================================
+#
+# Fichero: `!p snip.rv = snip.fn`
+#
+# Fecha: `date +%d.%m.%y`
+#
+# DESCRIPCION
+#
+#
+# EJEMPLOS
+#       `!p snip.rv = snip.fn`
+#
+# Copyright ${3:company}
+#==============================================================================
+use 5.010001;
+use strict;
+use warnings;
+use Getopt::Long::Descriptive;
+use English qw(-no_match_vars);
+
+my ( $opt, $usage ) =
+describe_options( '%c %o',
+		[${1:parametro_script},${2:descripcion_parametro_script}],
+		[],
+		[ 'help', 'Muestra la ayuda y sale' ],
+		);
+
+print( $usage->text ), exit if $opt->help;
+
+$0
+endsnippet
+
+snippet archivo_test "plantilla nuevo archivo de test" b
+#!perl -w
+
+use 5.010001;
+use strict;
+use warnings;
+use Test::Most tests => 1;
+use English qw(-no_match_vars);
+use Const::Fast;
+${1:otros_modulos}
+
+=encoding iso-8859-1
+
+=head1 NAME
+
+${2:breve_descripcion_del_archivo_de_tests}
+
+=head1 TESTS
+
+=cut
+
+BEGIN {
+	use_ok('${3:modulo_a_testear}');
+}
+endsnippet
+
+snippet caso_test "añade un nuevo caso de test"
+=head2 Test ${1:nombre_test}
+
+${2:descripcion_test}
+
+=cut
+
+{
+	$0
+}
+endsnippet
