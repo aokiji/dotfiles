@@ -31,8 +31,14 @@ let g:tagbar_type_perl = {
     \ 'x:around:1:0',
     \ 'l:aliases',
     \ 'd:pod:1:0',
+    \ 't:tasks:1:0',
   \ ],
 \ }
+
+augroup RexfileFileType
+  au!
+  autocmd BufNewFile,BufRead Rexfile  set filetype=perl
+augroup END
 
 autocmd FileType perl call SetPerlOptions()
 function SetPerlOptions()
