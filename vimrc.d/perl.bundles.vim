@@ -3,4 +3,4 @@
 
 Plug 'vim-perl/vim-perl'
 Plug 'c9s/perlomni.vim'
-Plug 'WolfgangMehner/perl-support'
+Plug 'aokiji/perl-support'
