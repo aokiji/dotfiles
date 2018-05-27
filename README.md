@@ -42,3 +42,24 @@ You can add custom snippets via
 ln -s $PWD/UltiSnips ~/.vim/
 
 ```
+
+#### Extending completion with fzf
+
+With a list_tasks commands that outputs lines in the format ID TITLE.
+You could set C-X+C-T in insert mode so that it filters from it to get
+the task id.
+
+```vim
+function! s:task_reduce(lines)
+  return split(a:lines[0])[0]
+endfunction
+
+function! FzfCompleteTask(...)
+  return fzf#vim#complete({
+        \ 'source': 'list_tasks',
+        \ 'reducer': function('s:task_reduce')
+        \ })
+endfunction
+
+inoremap <expr> <c-x><c-t> FzfCompleteTask()
+```
