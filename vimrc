@@ -258,17 +258,8 @@ autocmd FileType ruby
 autocmd FileType ruby compiler rspec
 
 
-" auto-pairs
-let g:AutoPairsMapCR = 0
-
-" combine with mucomplete and ultisnips
-imap <Plug>OmniEnter <Plug>(MUcompleteCR)<Plug>AutoPairsReturn
-imap <CR> <Plug>OmniEnter
-
-" ultisnips
-let g:UltiSnipsExpandTrigger = "<nop>"
-imap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<Plug>OmniEnter"
-
+inoremap <silent> <expr> <cr>
+      \ mucomplete#ultisnips#expand_snippet("\<cr>")
 " ----------------------------------------------------------------------------
 " DeleteTrailingWhitespace
 " ----------------------------------------------------------------------------
