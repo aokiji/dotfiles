@@ -137,13 +137,27 @@ else
   nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 endif
 
+set background=dark
+
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+" UI
+let g:onedark_color_overrides = {
+      \ "black": {"gui": "#1e1e25", "cterm": "235", "cterm16": "0" }
+      \}
+colorscheme onedark
+
 " ============================================================================
 " Plugin Settings
 " ============================================================================
 " ----------------------------------------------------------------------------
 " airline
 " ----------------------------------------------------------------------------
-let g:airline_theme='aurora'
+let g:airline_theme='onedark'
 
 " ----------------------------------------------------------------------------
 " ale
