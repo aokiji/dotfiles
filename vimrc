@@ -215,7 +215,7 @@ nnoremap tf :NERDTreeFind<cr>
 " ----------------------------------------------------------------------------
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#chains = {
-      \ 'default': ['path', 'keyn', 'ulti', 'omni', 'dict'],
+      \ 'default': ['path', 'keyn', 'ulti', 'omni' ],
       \ 'gitcommit' : ['ulti', 'keyn', 'dict', 'uspl'],
       \ 'ruby': ['path', 'ulti', 'dict'],
       \ 'sql': ['file', 'ulti', 'dict', 'keyn'],
@@ -272,8 +272,9 @@ autocmd FileType ruby
 autocmd FileType ruby compiler rspec
 
 
-inoremap <silent> <expr> <cr>
+inoremap <silent> <expr> <Plug>MyCr
       \ mucomplete#ultisnips#expand_snippet("\<cr>")
+imap <cr> <Plug>MyCr
 " ----------------------------------------------------------------------------
 " DeleteTrailingWhitespace
 " ----------------------------------------------------------------------------
@@ -484,6 +485,11 @@ command! Todo call s:todo()
 
 " Format json
 com! FormatJSON %!python -m json.tool
+
+" Load config files from .vimrc.d
+for f in split(glob('~/.vimrc.d/*.config.vim'), '\n')
+  exe 'source' f
+endfor
 
 " Load local settings
 if filereadable($HOME . "/.vimrc.local")

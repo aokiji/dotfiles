@@ -31,7 +31,12 @@ Setup plugin manager
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ln -sf $PWD/vimrc ~/.vimrc
-ln -sf $PWD/vimrc.buih ~/.vimrc
+ln -sf $PWD/vimrc.bundles ~/.vimrc.bundles
+mkdir ~/.vimrc.d/
+
+# copy specific language handlers
+ln -sf $PWD/vimrc.d/ruby.bundles.vim ~/.vimrc.d/
+ln -sf $PWD/vimrc.d/ruby.config.vim ~/.vimrc.d/
 ```
 
 Open vim and exec :PlugInstall

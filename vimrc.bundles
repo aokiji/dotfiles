@@ -101,6 +101,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'joshdick/onedark.vim'
 
+for f in split(glob('~/.vimrc.d/*.bundles.vim'), '\n')
+  exe 'source' f
+endfor
+
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
 endif
