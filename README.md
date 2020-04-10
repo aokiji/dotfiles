@@ -22,6 +22,11 @@ ln -s $PWD/bashrc.d/* ~/.bashrc.d/
 source ~/.bashrc
 ln -s $PWD/tmux.conf ~/.tmux.conf
 ```
+### Tmux
+
+```
+$> git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
 
 ### Vim
 
