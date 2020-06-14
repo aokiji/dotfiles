@@ -271,10 +271,6 @@ autocmd FileType ruby
 \ endfor
 autocmd FileType ruby compiler rspec
 
-
-inoremap <silent> <expr> <Plug>MyCr
-      \ mucomplete#ultisnips#expand_snippet("\<cr>")
-imap <cr> <Plug>MyCr
 " ----------------------------------------------------------------------------
 " DeleteTrailingWhitespace
 " ----------------------------------------------------------------------------
