@@ -1,0 +1,2 @@
+RemoteCommand bash -c "tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux \; set-option -g prefix C-b \; set -g status-bg '#ff8000' \; set -g status-fg '#fdfdfd'"
+RequestTTY Force

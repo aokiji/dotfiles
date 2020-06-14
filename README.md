@@ -55,6 +55,16 @@ ln -s $PWD/UltiSnips ~/.vim/
 
 ```
 
+### SSH
+
+Add tmux on remote execution
+
+```
+# ~/.ssh/config
+Host remote
+Include $DOTFILES_DIR/ssh/config/remote_tmux
+```
+
 #### Extending completion with fzf
 
 With a list_tasks commands that outputs lines in the format ID TITLE.
