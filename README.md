@@ -46,6 +46,23 @@ ln -sf $PWD/vimrc.d/ruby.config.vim ~/.vimrc.d/
 
 Open vim and exec :PlugInstall
 
+### VIM Perl
+
+You can setup general perl configuration in the following manner:
+
+```
+ln -sf $PWD/vimrc.d/perl.config.vim ~/.vimrc.d/
+ln -sf $PWD/vimrc.d/perl.bundles.vim ~/.vimrc.d/
+```
+
+and then :PlugInstall
+
+If you use cpanm or other packager you may consider setting de package list for perlomni
+
+```
+let g:cpan_user_defined_sources = [expand('~/.cpanm/sources/http%www.cpan.org/02packages.details.txt.gz')]
+```
+
 #### Snippets
 
 You can add custom snippets via
