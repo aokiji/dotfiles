@@ -213,5 +213,25 @@ ${2:descripcion_test}
 endsnippet
 
 snippet debug "Añade breakpoint"
+use Data::Dumper;
+use Scalar::Util;
+$Data::Dumper::Maxdepth = 2;
+$Data::Dumper::Freezer = '__FREEZER__';
+*DateTime::__FREEZER__ = sub { return "$_[0]"; };
+
 $DB::single = 1;
+endsnippet
+
+snippet snippet "Crea un snippet con utilidades generales"
+use v5.22;
+use utf8;
+use strict;
+use warnings;
+use English qw(-no_match_vars);
+
+use Meteologica::Log::Delegados::LogPantalla;
+use Meteologica::BaseDatos;
+
+my $logger = Meteologica::Log::Delegados::LogPantalla->new;
+my $bd     = Meteologica::BaseDatos::EOLICA( host => 'localhost', logger => $logger );
 endsnippet
