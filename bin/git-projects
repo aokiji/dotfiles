@@ -1,0 +1,3 @@
+#!/bin/bash
+
+fdfind -H -d 2 -t d '^.git$' | cut -d '/' -f 1

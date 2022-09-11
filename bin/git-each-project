@@ -1,0 +1,9 @@
+#!/bin/bash
+
+function __exec_git {
+  git -C "$@" | xargs -L1 echo "$1:"
+}
+
+export -f __exec_git
+
+git-projects | parallel "__exec_git '{}' $@"

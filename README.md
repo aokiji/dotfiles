@@ -19,6 +19,7 @@ mv ~/.bashrc ~/.bashrc.local
 mkdir ~/.bashrc.d
 ln -s $PWD/bashrc ~/.bashrc
 ln -s $PWD/bashrc.d/* ~/.bashrc.d/
+echo 'export PATH='$PWD'/bin:$PATH' >> ~/.bashrc.d/bin.bashrc
 source ~/.bashrc
 ln -s $PWD/tmux.conf ~/.tmux.conf
 ```
