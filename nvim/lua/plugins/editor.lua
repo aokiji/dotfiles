@@ -5,7 +5,15 @@ return {
     'nvim-telescope/telescope.nvim',
     version = '*',
     dependencies = {'nvim-lua/plenary.nvim'},
-    opts = {},
+    opts = function()
+      local actions = require('telescope.actions')
+
+      return {
+        defaults = {
+          mappings = {i = {['<C-j>'] = actions.move_selection_previous, ['<C-k>'] = actions.move_selection_next}}
+        }
+      }
+    end,
     config = function(_, opts)
       local telescope = require('telescope')
       telescope.setup(opts)
