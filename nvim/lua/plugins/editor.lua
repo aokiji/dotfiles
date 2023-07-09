@@ -10,8 +10,9 @@ return {
 
       return {
         defaults = {
-          mappings = {i = {['<C-j>'] = actions.move_selection_previous, ['<C-k>'] = actions.move_selection_next}}
-        }
+          mappings = {i = {['<C-j>'] = actions.move_selection_next, ['<C-k>'] = actions.move_selection_previous}}
+        },
+        pickers = {buffers = {ignore_current_buffer = true, sort_lastused = true}}
       }
     end,
     config = function(_, opts)
