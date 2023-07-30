@@ -16,7 +16,14 @@ return {
     }
   }, -- "gc" to comment visual regions/lines
   {'numToStr/Comment.nvim', opts = {}}, -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth', { -- Autocompletion
+  'tpope/vim-sleuth', {
+    'L3MON4D3/LuaSnip',
+    opts = {},
+    config = function(_, opts)
+      require('luasnip').setup(opts)
+      require("luasnip.loaders.from_lua").load()
+    end
+  }, { -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = {'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip'},
     opts = function()
@@ -61,15 +68,28 @@ return {
     'dense-analysis/ale',
     config = function()
       vim.g.ale_fixers = {
-        ['perl'] = 'perltidy',
+        ['perl'] = {'perltidy', 'missing_includes'},
         ['cpp'] = 'clang-format',
         ['sql'] = 'pgformatter',
         ['yaml'] = 'prettier',
-        ['lua'] = 'lua-format'
+        ['lua'] = 'lua-format',
+        ['python'] = 'yapf'
       }
       vim.g.ale_sql_pgformatter_options = '-W 10 -w 120'
       vim.g.ale_lua_lua_format_executable = vim.fn.expand('$HOME/.luarocks/bin/lua-format')
       vim.g.ale_lua_lua_format_options = '--column-limit=120 --indent-width=2'
+      vim.g.ale_linters = {['python'] = {'ruff'}}
+
+      vim.cmd [[
+        function! PerlMissingIncludes(buffer) abort
+          return {
+                \   'command': '/bin/bash -l -c "add_missing_includes_perl"'
+                \}
+        endfunction
+      ]]
+
+      vim.fn["ale#fix#registry#Add"]('missing_includes', 'PerlMissingIncludes', {'perl'}, 'missing includes for perl')
+
     end
   }, -- LSP Configuration & Plugins
   { -- Useful status updates for LSP
@@ -77,8 +97,16 @@ return {
     dependencies = {'williamboman/mason.nvim', opts = {}},
     opts = {
       servers = {
-        perlnavigator = {},
-        lua_ls = {Lua = {workspace = {checkThirdParty = false}, telemetry = {enable = false}}}
+        perlnavigator = {
+          perlnavigator = {
+            logging = true,
+            perltidyEnabled = true,
+            perlimportsLintEnabled = true,
+            perlimportsTidyEnabled = false
+          }
+        },
+        lua_ls = {Lua = {workspace = {checkThirdParty = false}, telemetry = {enable = false}}},
+        jedi_language_server = {}
       },
       --  This function gets run when an LSP connects to a particular buffer.
       on_attach = function(_, bufnr)
@@ -118,6 +146,7 @@ return {
         -- Create a command `:Format` local to the LSP buffer
         vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_) vim.lsp.buf.format() end,
                                              {desc = 'Format current buffer with LSP'})
+        nmap('<leader>f', function() vim.lsp.buf.format {async = true} end, '[F]format file')
       end
     },
     config = function(_, opts)

@@ -32,7 +32,6 @@ return {
       whichkey.setup(opts)
 
       local mappings = {
-        ['f'] = {"<cmd>Telescope find_files<cr>", "Find files"},
         ['B'] = {"<cmd>Git blame<cr>", "Git blame"},
         ['U'] = {"<cmd>GitlabURL<cr>", "Open file in Gitlab"},
         ['Q'] = {"<cmd>qa<cr>", "Quit All"},
