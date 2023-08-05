@@ -227,7 +227,7 @@ return {
     config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end
   }, -- symbols outline
   {'simrat39/symbols-outline.nvim', opts = {}}, -- running tests
-  {
+  {'kylechui/nvim-surround', opts = {}}, {
     'klen/nvim-test',
     opts = {
       termOpts = {direction = 'horizontal', height = 10},
