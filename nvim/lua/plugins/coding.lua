@@ -78,7 +78,7 @@ return {
       vim.g.ale_sql_pgformatter_options = '-W 10 -w 120'
       vim.g.ale_lua_lua_format_executable = vim.fn.expand('$HOME/.luarocks/bin/lua-format')
       vim.g.ale_lua_lua_format_options = '--column-limit=120 --indent-width=2'
-      vim.g.ale_linters = {['python'] = {'ruff'}}
+      vim.g.ale_linters = {['python'] = {'ruff'}, ['perl'] = {}}
 
       vim.cmd [[
         function! PerlMissingIncludes(buffer) abort
@@ -184,7 +184,7 @@ return {
       -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
       auto_install = false,
 
-      highlight = {enable = true},
+      highlight = {enable = true, disable = {'perl'}}, -- having trouble with perl highlight after upgrade
       indent = {enable = true, disable = {'python'}},
       incremental_selection = {
         enable = true,
