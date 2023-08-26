@@ -77,7 +77,6 @@ ln -s $PWD/UltiSnips ~/.vim/
 
 ```
 echo "vim.cmd('source $PWD/nvim/init.lua')" > ~/.config/nvim
-ln -sf $PWD/nvim/luasnippets ~/.config/nvim/
 ```
 
 ### SSH
