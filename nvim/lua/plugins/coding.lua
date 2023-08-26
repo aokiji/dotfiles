@@ -25,7 +25,7 @@ return {
     end
   }, { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    dependencies = {'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip'},
+    dependencies = {'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-buffer'},
     opts = function()
 
       -- nvim-cmp setup
@@ -60,7 +60,7 @@ return {
             end
           end, {'i', 's'})
         },
-        sources = {{name = 'nvim_lsp'}, {name = 'luasnip'}}
+        sources = {{name = 'nvim_lsp'}, {name = 'luasnip'}, {name = 'commits'}, {name = 'buffer'}}
       }
     end
   }, -- Asynchronous Lint Engine (linting and fixing)
@@ -171,7 +171,7 @@ return {
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim', -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      'williamboman/mason-lspconfig.nvim', {'j-hui/fidget.nvim', opts = {}}, -- Additional lua configuration, makes nvim stuff amazing!
+      'williamboman/mason-lspconfig.nvim', {'j-hui/fidget.nvim', opts = {}, branch = 'legacy'}, -- Additional lua configuration, makes nvim stuff amazing!
       {'folke/neodev.nvim', opts = {}}
     }
   }, { -- Highlight, edit, and navigate code

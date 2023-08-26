@@ -76,9 +76,7 @@ ln -s $PWD/UltiSnips ~/.vim/
 ### NVIM
 
 ```
-ln -sf $PWD/nvim/init.lua ~/.config/nvim/
-ln -sf $PWD/nvim/lua/plugins ~/.config/nvim/lua/
-ln -sf $PWD/nvim/lua/config ~/.config/nvim/lua/
+echo "vim.cmd('source $PWD/nvim/init.lua')" > ~/.config/nvim
 ln -sf $PWD/nvim/luasnippets ~/.config/nvim/
 ```
 

@@ -1,3 +1,5 @@
+vim.opt.rtp:append(vim.fn.expand('<sfile>:p:h'))
+
 require('config').setup()
 
 -- Install package manager
