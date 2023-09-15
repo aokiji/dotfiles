@@ -51,6 +51,13 @@ return {
           r = {"<cmd>lua require('dap').run_last()<cr>", "Debugger [r]un last"},
           e = {"<cmd>lua require('dap').repl.open()<cr>", "Debugger [e]val console"},
           v = {"<cmd>lua require('dapui').toggle()<cr>", "Debugger [v]iew toggle"}
+        },
+        G = {
+          name = "Git",
+          b = {"<cmd>Git blame<cr>", "Git blame"},
+          u = {"<cmd>GitlabURL<cr>", "Open file in Gitlab"},
+          o = {"<cmd>GitlabOpenMerge<cr>", "Open merge in Gitlab"},
+          l = {"<cmd>Git log %<cr>", "Show git log of current file"}
         }
       }
       whichkey.register(mappings, {prefix = "<leader>"})
