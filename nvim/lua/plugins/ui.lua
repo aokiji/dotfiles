@@ -52,12 +52,15 @@ return {
           e = {"<cmd>lua require('dap').repl.open()<cr>", "Debugger [e]val console"},
           v = {"<cmd>lua require('dapui').toggle()<cr>", "Debugger [v]iew toggle"}
         },
-        G = {
+        g = {
           name = "Git",
           b = {"<cmd>Git blame<cr>", "Git blame"},
+          s = {"<cmd>Git<cr>", "Git status"},
           u = {"<cmd>GitlabURL<cr>", "Open file in Gitlab"},
           o = {"<cmd>GitlabOpenMerge<cr>", "Open merge in Gitlab"},
-          l = {"<cmd>Git log %<cr>", "Show git log of current file"}
+          l = {"<cmd>Git log %<cr>", "Show git log of current file"},
+          p = {"<cmd>Git push -u origin HEAD<cr>", "Git push"},
+          P = {"<cmd>Git push --force<cr>", "Git force push"},
         }
       }
       whichkey.register(mappings, {prefix = "<leader>"})
