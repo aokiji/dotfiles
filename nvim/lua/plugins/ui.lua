@@ -3,9 +3,10 @@ return {
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
-    main = "ibl",
-    opts = {indent = { char = '┊' }}
-  }, { -- Theme inspired by Atom
+    opts = {},
+    tag = 'v2.20.8' -- forced as version 3 breaks
+  },
+  { -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
     config = function() vim.cmd.colorscheme 'onedark' end
