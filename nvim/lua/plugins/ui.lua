@@ -3,7 +3,8 @@ return {
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
-    opts = {char = '┊', show_trailing_blankline_indent = false}
+    main = "ibl",
+    opts = {indent = { char = '┊' }}
   }, { -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,

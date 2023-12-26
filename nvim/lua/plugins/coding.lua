@@ -73,7 +73,7 @@ return {
         ['sql'] = 'pgformatter',
         ['yaml'] = 'prettier',
         ['lua'] = 'lua-format',
-        ['python'] = 'yapf'
+        ['python'] = 'yapf',
       }
       vim.g.ale_sql_pgformatter_options = '-W 10 -w 120'
       vim.g.ale_lua_lua_format_executable = vim.fn.expand('$HOME/.luarocks/bin/lua-format')
@@ -106,7 +106,7 @@ return {
           }
         },
         lua_ls = {Lua = {workspace = {checkThirdParty = false}, telemetry = {enable = false}}},
-        jedi_language_server = {}
+        jedi_language_server = {},
       },
       --  This function gets run when an LSP connects to a particular buffer.
       on_attach = function(_, bufnr)
