@@ -73,12 +73,12 @@ return {
         ['sql'] = 'pgformatter',
         ['yaml'] = 'prettier',
         ['lua'] = 'lua-format',
-        ['python'] = 'yapf',
+        ['python'] = 'yapf'
       }
       vim.g.ale_sql_pgformatter_options = '-W 10 -w 120'
       vim.g.ale_lua_lua_format_executable = vim.fn.expand('$HOME/.luarocks/bin/lua-format')
       vim.g.ale_lua_lua_format_options = '--column-limit=120 --indent-width=2'
-      vim.g.ale_linters = {['python'] = {'ruff'}, ['perl'] = {}}
+      vim.g.ale_linters = {['python'] = {}, ['perl'] = {}}
 
       vim.cmd [[
         function! PerlMissingIncludes(buffer) abort
@@ -107,6 +107,7 @@ return {
         },
         lua_ls = {Lua = {workspace = {checkThirdParty = false}, telemetry = {enable = false}}},
         jedi_language_server = {},
+        ruff_lsp = {init_options = {settings = {path = {'/opt/pyenv/shims/ruff'}}}}
       },
       --  This function gets run when an LSP connects to a particular buffer.
       on_attach = function(_, bufnr)
@@ -163,6 +164,10 @@ return {
             on_attach = opts.on_attach,
             settings = opts.servers[server_name]
           }
+        end,
+        ['ruff_lsp'] = function()
+          local lspconfig = require('lspconfig')
+          lspconfig.ruff_lsp.setup(opts.servers.ruff_lsp)
         end
       }
     end
