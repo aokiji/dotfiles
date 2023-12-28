@@ -98,16 +98,20 @@ return {
     opts = {
       servers = {
         perlnavigator = {
-          perlnavigator = {
-            logging = true,
-            perltidyEnabled = true,
-            perlimportsLintEnabled = true,
-            perlimportsTidyEnabled = false
+          settings = {
+            perlnavigator = {
+              logging = true,
+              perltidyEnabled = true,
+              perlimportsLintEnabled = true,
+              perlimportsTidyEnabled = false
+            }
           }
         },
-        lua_ls = {Lua = {workspace = {checkThirdParty = false}, telemetry = {enable = false}}},
-        jedi_language_server = {},
-        ruff_lsp = {init_options = {settings = {path = {'/opt/pyenv/shims/ruff'}}}}
+        lua_ls = {settings = {Lua = {workspace = {checkThirdParty = false}, telemetry = {enable = false}}}},
+        jedi_language_server = {init_options = {workspace = {environmentPath = '/opt/pyenv/shims/python'}}},
+        ruff_lsp = {
+          init_options = {settings = {path = {'/opt/pyenv/shims/ruff'}, interpreter = {'/opt/pyenv/shims/python'}}}
+        }
       },
       --  This function gets run when an LSP connects to a particular buffer.
       on_attach = function(_, bufnr)
@@ -159,15 +163,12 @@ return {
       mason_lspconfig.setup {ensure_installed = vim.tbl_keys(opts.servers)}
       mason_lspconfig.setup_handlers {
         function(server_name)
-          require('lspconfig')[server_name].setup {
-            capabilities = capabilities,
-            on_attach = opts.on_attach,
-            settings = opts.servers[server_name]
-          }
-        end,
-        ['ruff_lsp'] = function()
-          local lspconfig = require('lspconfig')
-          lspconfig.ruff_lsp.setup(opts.servers.ruff_lsp)
+          local server_config = {capabilities = capabilities, on_attach = opts.on_attach}
+          local server_opts = opts.servers[server_name]
+          if (server_opts ~= nil) then
+            for k, v in pairs(opts.servers[server_name]) do server_config[k] = v end
+          end
+          require('lspconfig')[server_name].setup(server_config)
         end
       }
     end
