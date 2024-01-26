@@ -15,3 +15,12 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
     vim.api.nvim_buf_set_option(buf, "tabstop", 2)
   end
 })
+
+-- set pg files filetype to sql
+vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
+  pattern = '*.pg',
+  callback = function()
+    local buf = vim.api.nvim_get_current_buf()
+    vim.api.nvim_buf_set_option(buf, "filetype", "sql")
+  end
+})
