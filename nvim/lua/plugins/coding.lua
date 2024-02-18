@@ -62,6 +62,12 @@ return {
         },
         sources = {{name = 'nvim_lsp'}, {name = 'luasnip'}, {name = 'commits'}, {name = 'buffer'}}
       }
+
+      cmp.setup.filetype({'sql', 'mysql', 'plsql'}, {
+        sources = cmp.config.sources({
+          {name = 'vim-dadbod-completion'}
+        })
+      })
     end
   }, -- Asynchronous Lint Engine (linting and fixing)
   {
