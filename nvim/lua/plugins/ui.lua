@@ -63,6 +63,11 @@ return {
           l = {"<cmd>Git log %<cr>", "Show git log of current file"},
           p = {"<cmd>Git push -u origin HEAD<cr>", "Git push"},
           P = {"<cmd>Git push --force<cr>", "Git force push"},
+        },
+        o = {
+          name = "Open",
+          r = {"<cmd>RedmineOpenTask<cr>", "Open Redmine Task"},
+          g = {"<cmd>GitlabURL<cr>", "Open file in Gitlab"},
         }
       }
       whichkey.register(mappings, {prefix = "<leader>"})
