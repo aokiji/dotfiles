@@ -4,15 +4,15 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     version = '*',
-    dependencies = {'nvim-lua/plenary.nvim'},
+    dependencies = { 'nvim-lua/plenary.nvim' },
     opts = function()
       local actions = require('telescope.actions')
 
       return {
         defaults = {
-          mappings = {i = {['<C-j>'] = actions.move_selection_next, ['<C-k>'] = actions.move_selection_previous}}
+          mappings = { i = { ['<C-j>'] = actions.move_selection_next, ['<C-k>'] = actions.move_selection_previous } }
         },
-        pickers = {buffers = {ignore_current_buffer = true, sort_lastused = true}}
+        pickers = { buffers = { ignore_current_buffer = true, sort_lastused = true } }
       }
     end,
     config = function(_, opts)
@@ -20,14 +20,14 @@ return {
       telescope.setup(opts)
 
       local builtin = require('telescope.builtin')
-      local nmap = function(mapping, action, desc) vim.keymap.set('n', mapping, action, {desc = desc}) end
+      local nmap = function(mapping, action, desc) vim.keymap.set('n', mapping, action, { desc = desc }) end
 
       nmap('<leader>?', builtin.oldfiles, '[?] Find recently opened files')
       nmap('<leader><space>', builtin.buffers, '[ ] Find existing buffers')
       nmap('<leader>/', function()
         -- You can pass additional configuration to telescope to change theme, layout, etc.
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {winblend = 10, previewer = false})
-      end, {desc = '[/] Fuzzily search in current buffer'})
+        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown { winblend = 10, previewer = false })
+      end, { desc = '[/] Fuzzily search in current buffer' })
 
       nmap('<leader>sf', builtin.find_files, '[S]earch [F]iles')
       nmap('<leader>sh', builtin.help_tags, '[S]earch [H]elp')
@@ -42,6 +42,32 @@ return {
       nmap(']d', vim.diagnostic.goto_next, "Go to next diagnostic message")
       nmap('<leader>e', vim.diagnostic.open_float, "Open floating diagnostic message")
       nmap('<leader>q', vim.diagnostic.setloclist, "Open diagnostics list")
+
+      local redmine_issues_picker = function(opts)
+        local pickers = require "telescope.pickers"
+        local finders = require "telescope.finders"
+        local conf = require("telescope.config").values
+        local actions = require('telescope.actions')
+        local action_state = require "telescope.actions.state"
+
+        opts = opts or {}
+        pickers.new(opts, {
+          prompt_title = 'Redmine Issues',
+          finder = finders.new_oneshot_job({ "redmine_issues" }, opts),
+          sorter = conf.generic_sorter(opts),
+          attach_mappings = function()
+            actions.select_default:replace(function(prompt_bufnr)
+              actions.close(prompt_bufnr)
+              local selection = action_state.get_selected_entry()
+              local line = selection[1]
+              local issue_id = line:match("^([^\t]+)")
+              vim.api.nvim_put({ issue_id }, "", false, true)
+            end)
+            return true
+          end,
+        }):find()
+      end
+      nmap('<leader>ri', redmine_issues_picker, 'Open redmine issues list')
     end
   }, -- Fuzzy Finder Algorithm which requires local dependencies to be built.
   -- Only load if `make` is available. Make sure you have the system
@@ -55,13 +81,13 @@ return {
   }, -- file explorer
   {
     'nvim-tree/nvim-tree.lua',
-    requires = {'nvim-tree/nvim-web-devicons'},
+    requires = { 'nvim-tree/nvim-web-devicons' },
     config = function() require("nvim-tree").setup {} end
   }, -- tmux navigation
   {
     'alexghergh/nvim-tmux-navigation',
     config = function()
-      require'nvim-tmux-navigation'.setup {
+      require 'nvim-tmux-navigation'.setup {
         disable_when_zoomed = true, -- defaults to false
         keybindings = {
           left = "<C-h>",
