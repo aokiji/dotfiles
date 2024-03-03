@@ -12,7 +12,20 @@ return {
         defaults = {
           mappings = { i = { ['<C-j>'] = actions.move_selection_next, ['<C-k>'] = actions.move_selection_previous } }
         },
-        pickers = { buffers = { ignore_current_buffer = true, sort_lastused = true } }
+        pickers = {
+          buffers = { ignore_current_buffer = true, sort_lastused = true },
+          git_status = {
+            mappings = {
+              i = {
+                ["<cr>"] = require('telescope.actions').git_staging_toggle,
+                ["<C-c>"] = function(prompt_bufnr)
+                  actions.close(prompt_bufnr)
+                  vim.cmd.Git()
+                end
+              }
+            }
+          }
+        }
       }
     end,
     config = function(_, opts)
@@ -29,6 +42,7 @@ return {
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown { winblend = 10, previewer = false })
       end, { desc = '[/] Fuzzily search in current buffer' })
 
+      nmap('<leader>ss', builtin.builtin, 'Telescope')
       nmap('<leader>sf', builtin.find_files, '[S]earch [F]iles')
       nmap('<leader>sh', builtin.help_tags, '[S]earch [H]elp')
       nmap('<leader>st', builtin.tags, '[S]earch [T]ags')
@@ -36,6 +50,11 @@ return {
       nmap('<leader>sw', builtin.grep_string, '[S]earch current [W]ord')
       nmap('<leader>sg', builtin.live_grep, '[S]earch by [G]rep')
       nmap('<leader>sd', builtin.diagnostics, '[S]earch [D]iagnostics')
+
+
+      -- Git keymaps
+      nmap('<leader>gS', builtin.git_status, '[G]it [S]tatus picker')
+      nmap('<leader>gB', builtin.git_branches, '[G]it [B]ranches picker')
 
       -- Diagnostic keymaps
       nmap('[d', vim.diagnostic.goto_prev, "Go to previous diagnostic message")
@@ -68,7 +87,8 @@ return {
               local selection = action_state.get_selected_entry()
               local line = selection[1]
               local issue_id = line:match("^([^\t]+)")
-              vim.fn.system(string.format('open https://redmine.intranet.meteologica.com/issues/"%s" &> /dev/null', issue_id))
+              vim.fn.system(string.format('open https://redmine.intranet.meteologica.com/issues/"%s" &> /dev/null',
+                issue_id))
             end)
             return true
           end,

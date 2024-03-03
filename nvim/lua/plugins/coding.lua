@@ -105,15 +105,9 @@ return {
             }
           }
         },
-        lua_ls = { settings = { Lua = { workspace = { checkThirdParty = false }, telemetry = { enable = false } } } },
+        lua_ls = { settings = { Lua = { diagnostics = { globals = { 'vim' } }, workspace = { checkThirdParty = false }, telemetry = { enable = false } } } },
         jedi_language_server = { init_options = { workspace = { environmentPath = '/opt/pyenv/shims/python' } } },
-        pyright = {
-          settings = {
-            python = {
-              analysis = { autoSearchPaths = true, diagnosticMode = "openFilesOnly", useLibraryCodeForTypes = true, typeCheckingMode = "strict" }
-            }
-          }
-        },
+        pylyzer = { settings = {} },
         ruff_lsp = {
           init_options = { settings = { path = { '/opt/pyenv/shims/ruff' }, interpreter = { '/opt/pyenv/shims/python' } } }
         }
