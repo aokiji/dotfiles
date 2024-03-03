@@ -53,6 +53,7 @@ return {
         opts = opts or {}
         pickers.new(opts, {
           prompt_title = 'Redmine Issues',
+          results_title = 'Ctrl+o to open issue in browser',
           finder = finders.new_oneshot_job({ "redmine_issues" }, opts),
           sorter = conf.generic_sorter(opts),
           attach_mappings = function()
@@ -62,6 +63,12 @@ return {
               local line = selection[1]
               local issue_id = line:match("^([^\t]+)")
               vim.api.nvim_put({ issue_id }, "", false, true)
+            end)
+            vim.keymap.set({ "i", "n" }, "<c-o>", function()
+              local selection = action_state.get_selected_entry()
+              local line = selection[1]
+              local issue_id = line:match("^([^\t]+)")
+              vim.fn.system(string.format('open https://redmine.intranet.meteologica.com/issues/"%s" &> /dev/null', issue_id))
             end)
             return true
           end,
