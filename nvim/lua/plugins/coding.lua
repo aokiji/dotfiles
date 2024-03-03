@@ -283,5 +283,6 @@ return {
         for language, configuration in pairs(opts.configurations) do dap.configurations[language] = configuration end
       end
     end
-  }, { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" }, opts = {} }
+  }, { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" }, opts = {} }, { 'ludovicchabant/vim-gutentags' }
+
 }
