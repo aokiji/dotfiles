@@ -1,4 +1,12 @@
 return {
+  {
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require('project_nvim').setup()
+      require('telescope').load_extension('projects')
+      vim.keymap.set('n', '<leader>sp', require'telescope'.extensions.projects.projects, { desc = '[Search] [P]rojets' })
+    end
+  },
   -- Git related plugins
   'tpope/vim-fugitive', 'tpope/vim-rhubarb',
 
@@ -14,7 +22,7 @@ return {
         changedelete = { text = '~' }
       }
     }
-  },                                              -- "gc" to comment visual regions/lines
+  },                                        -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim',         opts = {} }, -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth', {
   'L3MON4D3/LuaSnip',
