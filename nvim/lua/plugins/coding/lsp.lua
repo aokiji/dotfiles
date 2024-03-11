@@ -87,13 +87,31 @@ return {
     'nvimtools/none-ls.nvim',
     config = function()
       local null_ls = require('null-ls')
+
+      local helpers = require("null-ls.helpers")
+      local methods = require("null-ls.methods")
+
+      local FORMATTING = methods.internal.FORMATTING
+
+      local add_missing_perl_includes = helpers.make_builtin({
+        name = "add_missing_includes_perl",
+        method = FORMATTING,
+        filetypes = { "perl", "pm" },
+        generator_opts = {
+          command = "add_missing_includes_perl",
+          to_stdin = true,
+        },
+        factory = helpers.formatter_factory,
+      })
+
       local sources = {
         null_ls.builtins.formatting.pg_format.with({
           extra_filetypes = { 'pg' },
           extra_args = { '-W', '10', '-w', '120' }
         }),
         null_ls.builtins.formatting.prettier,
-        null_ls.builtins.formatting.clang_format
+        null_ls.builtins.formatting.clang_format,
+        add_missing_perl_includes
       }
 
       null_ls.setup({ sources = sources, on_attach = on_lsp_attach })

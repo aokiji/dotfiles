@@ -73,31 +73,8 @@ return {
     cmp.setup.filetype({ 'sql', 'mysql', 'plsql' },
       { sources = cmp.config.sources({ { name = 'vim-dadbod-completion' } }) })
   end
-}, -- Asynchronous Lint Engine (linting and fixing)
-  {
-    'dense-analysis/ale',
-    config = function()
-      vim.g.ale_fixers = {
-        ['perl'] = { 'perltidy', 'missing_includes' },
-        ['cpp'] = {},
-        ['sql'] = {},
-        ['yaml'] = {},
-        ['python'] = {}
-      }
-      vim.g.ale_linters = { ['python'] = {}, ['perl'] = {} }
-
-      vim.cmd [[
-        function! PerlMissingIncludes(buffer) abort
-          return {
-                \   'command': '/bin/bash -l -c "add_missing_includes_perl"'
-                \}
-        endfunction
-      ]]
-
-      vim.fn["ale#fix#registry#Add"]('missing_includes', 'PerlMissingIncludes', { 'perl' }, 'missing includes for perl')
-    end
-  }, -- LSP Configuration & Plugins
-  {  -- Highlight, edit, and navigate code
+},
+  { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
     opts = {
@@ -204,6 +181,6 @@ return {
         for language, configuration in pairs(opts.configurations) do dap.configurations[language] = configuration end
       end
     end
-  }, { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" }, opts = {} }, { 'ludovicchabant/vim-gutentags' },
+  }, { "rcarriga/nvim-dap-ui",  requires = { "mfussenegger/nvim-dap" }, opts = {} }, { 'ludovicchabant/vim-gutentags' },
   { import = 'plugins.coding.lsp' }
 }
