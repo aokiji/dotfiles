@@ -1,5 +1,3 @@
-local lsp = require('plugins.coding.lsp')
-
 return {
   {
     "ahmedkhalf/project.nvim",
@@ -208,5 +206,5 @@ return {
       end
     end
   }, { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" }, opts = {} }, { 'ludovicchabant/vim-gutentags' },
-  lsp
+  { import = 'plugins.coding.lsp' }
 }
