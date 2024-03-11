@@ -79,7 +79,7 @@ return {
     config = function()
       vim.g.ale_fixers = {
         ['perl'] = { 'perltidy', 'missing_includes' },
-        ['cpp'] = 'clang-format',
+        ['cpp'] = {},
         ['sql'] = {},
         ['yaml'] = {},
         ['python'] = {}

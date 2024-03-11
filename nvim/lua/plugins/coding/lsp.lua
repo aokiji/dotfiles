@@ -92,7 +92,8 @@ return {
           extra_filetypes = { 'pg' },
           extra_args = { '-W', '10', '-w', '120' }
         }),
-        null_ls.builtins.formatting.prettier
+        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.clang_format
       }
 
       null_ls.setup({ sources = sources, on_attach = on_lsp_attach })
