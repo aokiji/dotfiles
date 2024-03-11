@@ -80,11 +80,10 @@ return {
       vim.g.ale_fixers = {
         ['perl'] = { 'perltidy', 'missing_includes' },
         ['cpp'] = 'clang-format',
-        ['sql'] = 'pgformatter',
-        ['yaml'] = 'prettier',
-        ['python'] = 'yapf'
+        ['sql'] = {},
+        ['yaml'] = {},
+        ['python'] = {}
       }
-      vim.g.ale_sql_pgformatter_options = '-W 10 -w 120'
       vim.g.ale_linters = { ['python'] = {}, ['perl'] = {} }
 
       vim.cmd [[
