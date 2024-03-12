@@ -52,7 +52,8 @@ return {
         pylyzer = { settings = {} },
         ruff_lsp = {
           init_options = { settings = { path = { '/opt/pyenv/shims/ruff' }, interpreter = { '/opt/pyenv/shims/python' } } }
-        }
+        },
+        clangd = {}
       },
       --  This function gets run when an LSP connects to a particular buffer.
       on_attach = on_lsp_attach
@@ -110,7 +111,6 @@ return {
           extra_args = { '-W', '10', '-w', '120' }
         }),
         null_ls.builtins.formatting.prettier,
-        null_ls.builtins.formatting.clang_format,
         add_missing_perl_includes
       }
 
