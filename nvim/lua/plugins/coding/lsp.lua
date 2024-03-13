@@ -54,7 +54,25 @@ return {
           init_options = { settings = { path = { '/opt/pyenv/shims/ruff' }, interpreter = { '/opt/pyenv/shims/python' } } }
         },
         clangd = {},
-        sqlls = { settings = {} }
+        sqlls = {
+          cmd = { "sql-language-server", "up", "--method", "stdio", '-d' },
+          root_dir = function() return vim.loop.cwd() end,
+          settings = {
+            sqlLanguageServer = {
+              connections = {
+                {
+                  name = "local-connection",
+                  adapter = "postgres",
+                  host = "localhost",
+                  port = 5432,
+                  user = "eolica",
+                  database = "eolica",
+                }
+              },
+              lint = { rules = {} }
+            }
+          }
+        }
       },
       --  This function gets run when an LSP connects to a particular buffer.
       on_attach = on_lsp_attach
