@@ -47,7 +47,7 @@ return {
             }
           }
         },
-        lua_ls = { settings = { Lua = { diagnostics = { globals = { 'vim' } }, workspace = { checkThirdParty = false }, telemetry = { enable = false } } } },
+        lua_ls = { settings = {} },
         jedi_language_server = { init_options = { workspace = { environmentPath = '/opt/pyenv/shims/python' } } },
         pylyzer = { settings = {} },
         ruff_lsp = {
