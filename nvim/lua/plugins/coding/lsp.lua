@@ -53,7 +53,8 @@ return {
         ruff_lsp = {
           init_options = { settings = { path = { '/opt/pyenv/shims/ruff' }, interpreter = { '/opt/pyenv/shims/python' } } }
         },
-        clangd = {}
+        clangd = {},
+        sqlls = { settings = {} }
       },
       --  This function gets run when an LSP connects to a particular buffer.
       on_attach = on_lsp_attach
