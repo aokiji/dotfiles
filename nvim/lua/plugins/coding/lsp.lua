@@ -55,7 +55,7 @@ return {
         },
         clangd = {},
         sqlls = {
-          cmd = { "sql-language-server", "up", "--method", "stdio", '-d' },
+          -- cmd = { "sql-language-server", "up", "--method", "stdio", '-d' },
           root_dir = function() return vim.loop.cwd() end,
           settings = {
             sqlLanguageServer = {
