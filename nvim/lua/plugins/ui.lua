@@ -73,10 +73,6 @@ return {
     config = function() require 'alpha'.setup(require 'alpha.themes.startify'.config) end
   },
   {
-    -- notification manager
-    'rcarriga/nvim-notify'
-  },
-  {
     'folke/trouble.nvim',
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {},
