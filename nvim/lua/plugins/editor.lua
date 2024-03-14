@@ -117,7 +117,8 @@ return {
   {
     'nvim-tree/nvim-tree.lua',
     requires = { 'nvim-tree/nvim-web-devicons' },
-    config = function() require("nvim-tree").setup {} end
+    cmd = { 'NvimTreeToggle', 'NvimTreeFindFile', 'NvimTreeFocus' },
+    opts = {}
   }, -- tmux navigation
   {
     'alexghergh/nvim-tmux-navigation',
