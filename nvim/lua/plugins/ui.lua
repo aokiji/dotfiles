@@ -73,6 +73,22 @@ return {
     config = function() require 'alpha'.setup(require 'alpha.themes.startify'.config) end
   },
   {
+    -- notification manager
+    'rcarriga/nvim-notify',
+    init = function()
+      vim.notify = require("notify")
+    end,
+    keys = {
+      {
+        "<leader>un",
+        function()
+          require("notify").dismiss({ silent = true, pending = true })
+        end,
+        desc = "Dismiss all Notifications",
+      },
+    },
+  },
+  {
     'folke/trouble.nvim',
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {},
