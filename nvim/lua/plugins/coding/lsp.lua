@@ -35,6 +35,7 @@ return {
   { -- Useful status updates for LSP
     'williamboman/mason-lspconfig.nvim',
     dependencies = { 'williamboman/mason.nvim', opts = {} },
+    event = 'VeryLazy',
     opts = {
       servers = {
         perlnavigator = {
@@ -96,6 +97,7 @@ return {
   },
   {
     'neovim/nvim-lspconfig',
+    event = 'VeryLazy',
     dependencies = {
       { 'folke/neodev.nvim', opts = {} },
       'williamboman/mason.nvim',
@@ -105,6 +107,7 @@ return {
   },
   {
     'nvimtools/none-ls.nvim',
+    event = 'VeryLazy',
     config = function()
       local null_ls = require('null-ls')
 

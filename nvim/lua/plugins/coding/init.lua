@@ -58,10 +58,12 @@ return {
     'L3MON4D3/LuaSnip',
     dependencies = {
       "rafamadriz/friendly-snippets",
+      event = 'VeryLazy',
       config = function()
         require("luasnip.loaders.from_vscode").lazy_load()
       end
     },
+    event = 'VeryLazy',
     opts = {},
     config = function(_, opts)
       require('luasnip').setup(opts)
@@ -72,6 +74,7 @@ return {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-buffer' },
+    event = 'VeryLazy',
     opts = function()
       -- nvim-cmp setup
       local cmp = require 'cmp'
