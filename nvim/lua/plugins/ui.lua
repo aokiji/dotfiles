@@ -37,7 +37,6 @@ return {
           s = { "<cmd>NvimTreeFindFile<cr>", "Select file in browser" },
           f = { "<cmd>NvimTreeFocus<cr>", "Focus on browser" }
         },
-        a = { name = "ALE", f = { "<cmd>ALEFix<cr>", "ALE Fix" } },
         t = { name = 'Test', f = { "<cmd>TestFile<cr>", "[T]est [F]ile" }, l = { "<cmd>TestLast<cr>", "[T]est [L]ast" } },
         d = {
           name = "Debugger",
@@ -47,21 +46,13 @@ return {
           e = { "<cmd>lua require('dap').repl.open()<cr>", "Debugger [e]val console" },
           v = { "<cmd>lua require('dapui').toggle()<cr>", "Debugger [v]iew toggle" }
         },
-        g = {
-          name = "Git",
-          b = { "<cmd>Git blame<cr>", "Git blame" },
-          s = { "<cmd>Git<cr>", "Git status" },
-          u = { "<cmd>GitlabURL<cr>", "Open file in Gitlab" },
-          o = { "<cmd>GitlabOpenMerge<cr>", "Open merge in Gitlab" },
-          l = { "<cmd>Git log %<cr>", "Show git log of current file" },
-          p = { "<cmd>Git push -u origin HEAD<cr>", "Git push" },
-          P = { "<cmd>Git push --force<cr>", "Git force push" },
-        },
+        g = { name = "Git", },
         o = {
           name = "Open",
           r = { "<cmd>RedmineOpenTask<cr>", "Open Redmine Task" },
           g = { "<cmd>GitlabURL<cr>", "Open file in Gitlab" },
-        }
+        },
+        x = { name = "Trouble" }
       }
       whichkey.register(mappings, { prefix = "<leader>" })
     end
