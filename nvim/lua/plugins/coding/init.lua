@@ -209,7 +209,22 @@ return {
       if (opts.configurations ~= nil) then
         for language, configuration in pairs(opts.configurations) do dap.configurations[language] = configuration end
       end
-    end
-  }, { "rcarriga/nvim-dap-ui",  requires = { "mfussenegger/nvim-dap" }, opts = {} }, { 'ludovicchabant/vim-gutentags' },
+    end,
+    keys = {
+      { '<leader>dc', "<cmd>lua require('dap').continue()<cr>",          desc = "Debugger [c]ontinue" },
+      { '<leader>db', "<cmd>lua require('dap').toggle_breakpoint()<cr>", desc = "Debugger toggle [b]reakpoint" },
+      { '<leader>dr', "<cmd>lua require('dap').run_last()<cr>",          desc = "Debugger [r]un last" },
+      { '<leader>de', "<cmd>lua require('dap').repl.open()<cr>",         desc = "Debugger [e]val console" },
+    }
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    requires = { "mfussenegger/nvim-dap" },
+    opts = {},
+    keys = {
+      { '<leader>dv', "<cmd>lua require('dapui').toggle()<cr>", desc = "Debugger [v]iew toggle" }
+    }
+  },
+  { 'ludovicchabant/vim-gutentags' },
   { import = 'plugins.coding.lsp' }
 }

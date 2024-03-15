@@ -31,14 +31,7 @@ return {
         ['O'] = { "<cmd>SymbolsOutline<cr>", "Symbols Outline Toggle" },
         b = { name = "File Browser", },
         t = { name = 'Test', f = { "<cmd>TestFile<cr>", "[T]est [F]ile" }, l = { "<cmd>TestLast<cr>", "[T]est [L]ast" } },
-        d = {
-          name = "Debugger",
-          c = { "<cmd>lua require('dap').continue()<cr>", "Debugger [c]ontinue" },
-          b = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", "Debugger toggle [b]reakpoint" },
-          r = { "<cmd>lua require('dap').run_last()<cr>", "Debugger [r]un last" },
-          e = { "<cmd>lua require('dap').repl.open()<cr>", "Debugger [e]val console" },
-          v = { "<cmd>lua require('dapui').toggle()<cr>", "Debugger [v]iew toggle" }
-        },
+        d = { name = "Debugger", },
         g = { name = "Git", },
         o = {
           name = "Open",
