@@ -118,6 +118,11 @@ return {
     'nvim-tree/nvim-tree.lua',
     requires = { 'nvim-tree/nvim-web-devicons' },
     cmd = { 'NvimTreeToggle', 'NvimTreeFindFile', 'NvimTreeFocus' },
+    keys = {
+      { '<leader>bt', "<cmd>NvimTreeToggle<cr>",   desc = "Browser Toggle" },
+      { '<leader>bs', "<cmd>NvimTreeFindFile<cr>", desc = "Select file in browser" },
+      { '<leader>bf', "<cmd>NvimTreeFocus<cr>",    desc = "Focus on browser" }
+    },
     opts = {}
   }, -- tmux navigation
   {

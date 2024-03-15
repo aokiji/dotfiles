@@ -13,11 +13,13 @@ return {
     cmd = { 'Git' },
     keys = {
       { '<leader>gb', "<cmd>Git blame<cr>",               desc = "Git blame" },
+      { '<leader>B',  "<cmd>Git blame<cr>",               desc = "Git blame" },
       { '<leader>gs', "<cmd>Git<cr>",                     desc = "Git status" },
       { '<leader>gl', "<cmd>Git log %<cr>",               desc = "Show git log of current file" },
       { '<leader>gp', "<cmd>Git push -u origin HEAD<cr>", desc = "Git push" },
       { '<leader>gP', "<cmd>Git push --force<cr>",        desc = "Git force push" },
       { '<leader>gu', "<cmd>GitlabURL<cr>",               desc = "Open file in Gitlab" },
+      { '<leader>U',  "<cmd>GitlabURL<cr>",               desc = "Open file in Gitlab" },
       { '<leader>go', "<cmd>GitlabOpenMerge<cr>",         desc = "Open merge in Gitlab" },
     }
   },

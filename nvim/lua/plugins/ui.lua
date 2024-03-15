@@ -27,16 +27,9 @@ return {
       whichkey.setup(opts)
 
       local mappings = {
-        ['B'] = { "<cmd>Git blame<cr>", "Git blame" },
-        ['U'] = { "<cmd>GitlabURL<cr>", "Open file in Gitlab" },
-        ['Q'] = { "<cmd>qa<cr>", "Quit All" },
+        ['Q'] = { "<cmd>qa!<cr>", "Quit All" },
         ['O'] = { "<cmd>SymbolsOutline<cr>", "Symbols Outline Toggle" },
-        b = {
-          name = "Browser",
-          t = { "<cmd>NvimTreeToggle<cr>", "Browser Toggle" },
-          s = { "<cmd>NvimTreeFindFile<cr>", "Select file in browser" },
-          f = { "<cmd>NvimTreeFocus<cr>", "Focus on browser" }
-        },
+        b = { name = "File Browser", },
         t = { name = 'Test', f = { "<cmd>TestFile<cr>", "[T]est [F]ile" }, l = { "<cmd>TestLast<cr>", "[T]est [L]ast" } },
         d = {
           name = "Debugger",
