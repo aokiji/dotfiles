@@ -22,56 +22,68 @@ return {
         changedelete = { text = '~' }
       }
     }
-  },                                              -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',         opts = {} }, -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth', {
-  'L3MON4D3/LuaSnip',
-  opts = {},
-  config = function(_, opts)
-    require('luasnip').setup(opts)
-    require("luasnip.loaders.from_lua").load()
-  end
-}, { -- Autocompletion
-  'hrsh7th/nvim-cmp',
-  dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-buffer' },
-  opts = function()
-    -- nvim-cmp setup
-    local cmp = require 'cmp'
-    local luasnip = require 'luasnip'
+  }, -- "gc" to comment visual regions/lines
+  {
+    'numToStr/Comment.nvim', opts = {}
+  },
+  {
+    -- handling paired characters in various filetypes
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {}
+  },
+  -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-sleuth',
+  {
+    -- Snippets engine
+    'L3MON4D3/LuaSnip',
+    opts = {},
+    config = function(_, opts)
+      require('luasnip').setup(opts)
+      require("luasnip.loaders.from_lua").load()
+    end
+  },
+  {
+    -- Autocompletion
+    'hrsh7th/nvim-cmp',
+    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-buffer' },
+    opts = function()
+      -- nvim-cmp setup
+      local cmp = require 'cmp'
+      local luasnip = require 'luasnip'
 
-    luasnip.config.setup {}
+      luasnip.config.setup {}
 
-    cmp.setup {
-      snippet = { expand = function(args) luasnip.lsp_expand(args.body) end },
-      mapping = cmp.mapping.preset.insert {
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete {},
-        ['<CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
-        ['<Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          else
-            fallback()
-          end
-        end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { 'i', 's' })
-      },
-      sources = { { name = 'nvim_lsp' }, { name = 'luasnip' }, { name = 'commits' }, { name = 'buffer' } }
-    }
-
-  end
-},
+      cmp.setup {
+        snippet = { expand = function(args) luasnip.lsp_expand(args.body) end },
+        mapping = cmp.mapping.preset.insert {
+          ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping.complete {},
+          ['<CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' })
+        },
+        sources = { { name = 'nvim_lsp' }, { name = 'luasnip' }, { name = 'commits' }, { name = 'buffer' } }
+      }
+    end
+  },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
@@ -82,7 +94,7 @@ return {
       -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
       auto_install = false,
 
-      highlight = { enable = true, disable = { 'perl' } }, -- having trouble with perl highlight after upgrade
+      highlight = { enable = true },
       indent = { enable = true, disable = { 'python' } },
       incremental_selection = {
         enable = true,
