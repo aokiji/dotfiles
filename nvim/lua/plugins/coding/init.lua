@@ -56,6 +56,12 @@ return {
   {
     -- Snippets engine
     'L3MON4D3/LuaSnip',
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      config = function()
+        require("luasnip.loaders.from_vscode").lazy_load()
+      end
+    },
     opts = {},
     config = function(_, opts)
       require('luasnip').setup(opts)
@@ -156,26 +162,31 @@ return {
     config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end
   },                                              -- symbols outline
   { 'simrat39/symbols-outline.nvim', opts = {} }, -- running tests
-  { 'kylechui/nvim-surround',        opts = {} }, {
-  'klen/nvim-test',
-  opts = {
-    termOpts = { direction = 'horizontal', height = 10 },
-    runners = {
-      perl = 'nvim-test-perl-runner', -- custom
-      cs = "nvim-test.runners.dotnet",
-      go = "nvim-test.runners.go-test",
-      haskell = "nvim-test.runners.hspec",
-      javascriptreact = "nvim-test.runners.jest",
-      javascript = "nvim-test.runners.jest",
-      lua = "nvim-test.runners.busted",
-      python = "nvim-test.runners.pytest",
-      ruby = "nvim-test.runners.rspec",
-      rust = "nvim-test.runners.cargo-test",
-      typescript = "nvim-test.runners.jest",
-      typescriptreact = "nvim-test.runners.jest"
-    }
-  }
-}, -- debugger adapters (dap)
+  { 'kylechui/nvim-surround',        opts = {} },
+  {
+    'klen/nvim-test',
+    opts = {
+      termOpts = { direction = 'horizontal', height = 10 },
+      runners = {
+        perl = 'nvim-test-perl-runner', -- custom
+        cs = "nvim-test.runners.dotnet",
+        go = "nvim-test.runners.go-test",
+        haskell = "nvim-test.runners.hspec",
+        javascriptreact = "nvim-test.runners.jest",
+        javascript = "nvim-test.runners.jest",
+        lua = "nvim-test.runners.busted",
+        python = "nvim-test.runners.pytest",
+        ruby = "nvim-test.runners.rspec",
+        rust = "nvim-test.runners.cargo-test",
+        typescript = "nvim-test.runners.jest",
+        typescriptreact = "nvim-test.runners.jest"
+      }
+    },
+    keys = {
+      { '<leader>tf', "<cmd>TestFile<cr>", desc = "[T]est [F]ile" },
+      { '<leader>tl', "<cmd>TestLast<cr>", desc = "[T]est [L]ast" }
+    },
+  }, -- debugger adapters (dap)
   {
     'mfussenegger/nvim-dap',
     opts = {
