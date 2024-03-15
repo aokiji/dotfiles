@@ -92,17 +92,13 @@ return {
     'folke/trouble.nvim',
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {},
-    config = function(opts)
-      require('trouble').setup(opts)
-
-      local nmap = function(mapping, action, desc) vim.keymap.set('n', mapping, action, { desc = desc }) end
-      nmap("<leader>xx", function() require("trouble").toggle() end, 'Toggle Trouble')
-      nmap("<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end,
-        'Trouble Workspace Diagnostics')
-      nmap("<leader>xd", function() require("trouble").toggle("document_diagnostics") end, 'Trouble Document Diagnostics')
-      nmap("<leader>xq", function() require("trouble").toggle("quickfix") end, 'Trouble Quickfix')
-      nmap("<leader>xl", function() require("trouble").toggle("loclist") end, 'Trouble Loclist')
-      nmap("gR", function() require("trouble").toggle("lsp_references") end, 'Trouble Lsp References')
-    end
+    keys = {
+      { "<leader>xx", function() require("trouble").toggle() end,                        desc = 'Toggle Trouble' },
+      { "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end, desc = 'Trouble Workspace Diagnostics' },
+      { "<leader>xd", function() require("trouble").toggle("document_diagnostics") end,  desc = 'Trouble Document Diagnostics' },
+      { "<leader>xq", function() require("trouble").toggle("quickfix") end,              desc = 'Trouble Quickfix' },
+      { "<leader>xl", function() require("trouble").toggle("loclist") end,               desc = 'Trouble Loclist' },
+      { "gR",         function() require("trouble").toggle("lsp_references") end,        desc = 'Trouble Lsp References' }
+    }
   }
 }
