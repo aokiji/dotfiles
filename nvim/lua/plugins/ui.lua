@@ -33,11 +33,9 @@ return {
         t = { name = 'Test', f = { "<cmd>TestFile<cr>", "[T]est [F]ile" }, l = { "<cmd>TestLast<cr>", "[T]est [L]ast" } },
         d = { name = "Debugger", },
         g = { name = "Git", },
-        o = {
-          name = "Open",
-          r = { "<cmd>RedmineOpenTask<cr>", "Open Redmine Task" },
-          g = { "<cmd>GitlabURL<cr>", "Open file in Gitlab" },
-        },
+        l = { name = "LSP" },
+        r = { name = "Redmine", o = { "<cmd>RedmineOpenTask<cr>", "Open Redmine Task" }, },
+        s = { name = "Search" },
         x = { name = "Trouble" }
       }
       whichkey.register(mappings, { prefix = "<leader>" })
