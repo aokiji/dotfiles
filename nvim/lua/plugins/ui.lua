@@ -75,5 +75,10 @@ return {
       { "<leader>xl", function() require("trouble").toggle("loclist") end,               desc = 'Trouble Loclist' },
       { "gR",         function() require("trouble").toggle("lsp_references") end,        desc = 'Trouble Lsp References' }
     }
+  },
+  -- better vim.ui.select and vim.ui.input
+  {
+    "stevearc/dressing.nvim",
+    opts = {}
   }
 }
