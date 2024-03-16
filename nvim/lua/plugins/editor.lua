@@ -58,17 +58,15 @@ return {
       nmap('<leader>sw', builtin.grep_string, '[S]earch current [W]ord')
       nmap('<leader>sg', builtin.live_grep, '[S]earch by [G]rep')
       nmap('<leader>sd', builtin.diagnostics, '[S]earch [D]iagnostics')
+      nmap('<leader>sj', builtin.jumplist, '[S]earch [J]umplist')
+      nmap('<leader>so', builtin.oldfiles, '[S]earch [O]ldfiles')
+      nmap('<leader>sq', builtin.quickfix, '[S]earch [Q]uickfix')
+      nmap('<leader>sr', builtin.registers, '[S]earch [R]egisters')
 
 
       -- Git keymaps
       nmap('<leader>gS', builtin.git_status, '[G]it [S]tatus picker')
       nmap('<leader>gB', builtin.git_branches, '[G]it [B]ranches picker')
-
-      -- Diagnostic keymaps
-      nmap('[d', vim.diagnostic.goto_prev, "Go to previous diagnostic message")
-      nmap(']d', vim.diagnostic.goto_next, "Go to next diagnostic message")
-      nmap('<leader>e', vim.diagnostic.open_float, "Open floating diagnostic message")
-      nmap('<leader>q', vim.diagnostic.setloclist, "Open diagnostics list")
 
       local redmine_issues_picker = function(opts)
         local pickers = require "telescope.pickers"
