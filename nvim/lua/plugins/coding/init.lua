@@ -73,7 +73,13 @@ return {
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
-    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-buffer' },
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',     -- complete with lsp
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip', -- complete snippets
+      'hrsh7th/cmp-buffer',       -- complete with buffer content
+      'hrsh7th/cmp-path'          -- complete with filesystem paths
+    },
     event = 'VeryLazy',
     opts = function()
       -- nvim-cmp setup
@@ -108,7 +114,13 @@ return {
             end
           end, { 'i', 's' })
         },
-        sources = { { name = 'nvim_lsp' }, { name = 'luasnip' }, { name = 'commits' }, { name = 'buffer' } }
+        sources = {
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'commits' },
+          { name = 'path' },
+          { name = 'buffer' }
+        }
       }
     end
   },
