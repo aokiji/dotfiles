@@ -35,7 +35,6 @@ return {
   { -- Useful status updates for LSP
     'williamboman/mason-lspconfig.nvim',
     dependencies = { 'williamboman/mason.nvim', opts = {} },
-    event = 'VeryLazy',
     opts = {
       servers = {
         perlnavigator = {
