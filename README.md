@@ -6,22 +6,17 @@ Install dependencies
 
 For fedora
 ```
-sudo dnf install tmux vim fasd
-# install bash-git-prompt
-cd ~
-git clone https://github.com/magicmonty/bash-git-prompt.git .bash-git-prompt --depth=1
+sudo apt install tmux vim fasd
+curl -sS https://starship.rs/install.sh | sh
 ```
 
 ## Configuration
 
 ```
-mv ~/.bashrc ~/.bashrc.local
-mkdir ~/.bashrc.d
-ln -s $PWD/bashrc ~/.bashrc
-ln -s $PWD/bashrc.d/* ~/.bashrc.d/
-echo 'export PATH='$PWD'/bin:$PATH' >> ~/.bashrc.d/bin.bashrc
+echo "source $PWD/bashrc" >> ~/.bashrc
 source ~/.bashrc
-ln -s $PWD/tmux.conf ~/.tmux.conf
+
+echo "source $PWD/tmux.conf" >> ~/.tmux.conf
 ```
 ### Tmux
 

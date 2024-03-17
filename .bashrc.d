@@ -1,1 +1,0 @@
-/home/nicolas.delossantos/workspace/dotfiles/bashrc.d/
