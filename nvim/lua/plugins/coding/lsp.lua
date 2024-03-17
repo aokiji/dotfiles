@@ -133,6 +133,7 @@ return {
           extra_args = { '-W', '10', '-w', '120' }
         }),
         null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.shfmt,
         add_missing_perl_includes
       }
 

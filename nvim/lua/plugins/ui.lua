@@ -27,6 +27,7 @@ return {
       whichkey.setup(opts)
 
       local mappings = {
+        ['q'] = { "<cmd>q<cr>", "Quit" },
         ['Q'] = { "<cmd>qa!<cr>", "Quit All" },
         ['O'] = { "<cmd>SymbolsOutline<cr>", "Symbols Outline Toggle" },
         b = { name = "File Browser", },

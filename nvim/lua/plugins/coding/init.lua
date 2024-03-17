@@ -1,11 +1,15 @@
 return {
   {
     "ahmedkhalf/project.nvim",
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+    event = 'VeryLazy',
     config = function()
       require('project_nvim').setup()
       require('telescope').load_extension('projects')
-      vim.keymap.set('n', '<leader>sp', require 'telescope'.extensions.projects.projects, { desc = '[Search] [P]rojets' })
-    end
+    end,
+    keys = {
+      { "<leader>sp", "<Cmd>Telescope projects<CR>", desc = "[S]earch [P]rojects" },
+    },
   },
   -- Git related plugins
   {
