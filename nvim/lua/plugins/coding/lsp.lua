@@ -34,7 +34,7 @@ end
 return {
   { -- Useful status updates for LSP
     'williamboman/mason-lspconfig.nvim',
-    dependencies = { 'williamboman/mason.nvim', opts = {} },
+    dependencies = { { 'williamboman/mason.nvim', opts = {} }, 'nanotee/sqls.nvim' },
     opts = {
       servers = {
         perlnavigator = {
@@ -54,25 +54,53 @@ return {
           init_options = { settings = { path = { '/opt/pyenv/shims/ruff' }, interpreter = { '/opt/pyenv/shims/python' } } }
         },
         clangd = {},
-        sqlls = {
-          -- cmd = { "sql-language-server", "up", "--method", "stdio", '-d' },
-          root_dir = function() return vim.loop.cwd() end,
-          settings = {
-            sqlLanguageServer = {
-              connections = {
-                {
-                  name = "local-connection",
-                  adapter = "postgres",
-                  host = "localhost",
-                  port = 5432,
-                  user = "eolica",
-                  database = "eolica",
-                }
-              },
-              lint = { rules = {} }
+        gopls = {
+          root_dir = function(fname)
+            local util = require 'lspconfig.util'
+            -- see: https://github.com/neovim/nvim-lspconfig/issues/804
+            local mod_cache = vim.trim(vim.fn.system 'go env GOMODCACHE')
+            if fname:sub(1, #mod_cache) == mod_cache then
+              local clients = vim.lsp.get_active_clients { name = 'gopls' }
+              if #clients > 0 then
+                return clients[#clients].config.root_dir
+              end
+            end
+            return util.root_pattern 'go.work' (fname) or util.root_pattern('go.mod', '.git')(fname)
+          end,
+        },
+        sqls = {
+          cmd = { vim.fn.expand('~/workspace/sqls/sqls'), '-l', '/tmp/sqls.log' },
+          init_options = {
+            connectionConfig = {
+              alias = 'pg_local',
+              driver = 'postgresql',
+              dataSourceName = 'postgres://eolica@localhost:5432/eolica'
             }
-          }
+          },
+          on_attach = function(client, bufnr)
+            on_lsp_attach(client, bufnr)
+            require('sqls').on_attach(client, bufnr)
+          end
         }
+        -- sqlls = {
+        --   -- cmd = { "sql-language-server", "up", "--method", "stdio", '-d' },
+        --   root_dir = function() return vim.loop.cwd() end,
+        --   settings = {
+        --     sqlLanguageServer = {
+        --       connections = {
+        --         {
+        --           name = "local-connection",
+        --           adapter = "postgres",
+        --           host = "localhost",
+        --           port = 5432,
+        --           user = "eolica",
+        --           database = "eolica",
+        --         }
+        --       },
+        --       lint = { rules = {} }
+        --     }
+        --   }
+        -- }
       },
       --  This function gets run when an LSP connects to a particular buffer.
       on_attach = on_lsp_attach
