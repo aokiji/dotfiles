@@ -79,6 +79,8 @@ return {
           },
           on_attach = function(client, bufnr)
             on_lsp_attach(client, bufnr)
+
+            vim.keymap.set('n', '<leader>ce', '<cmd>SqlsExecuteQuery<cr>', { buffer = bufnr, desc = '[E]xecute Query' })
             require('sqls').on_attach(client, bufnr)
           end
         }
