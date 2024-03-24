@@ -17,6 +17,7 @@ local on_lsp_attach = function(_, bufnr)
 
   nmap('<leader>ld', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<leader>ls', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<leader>ll', '<cmd>LspLog<cr>', 'Open [L]sp [L]og')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -84,25 +85,6 @@ return {
             require('sqls').on_attach(client, bufnr)
           end
         }
-        -- sqlls = {
-        --   -- cmd = { "sql-language-server", "up", "--method", "stdio", '-d' },
-        --   root_dir = function() return vim.loop.cwd() end,
-        --   settings = {
-        --     sqlLanguageServer = {
-        --       connections = {
-        --         {
-        --           name = "local-connection",
-        --           adapter = "postgres",
-        --           host = "localhost",
-        --           port = 5432,
-        --           user = "eolica",
-        --           database = "eolica",
-        --         }
-        --       },
-        --       lint = { rules = {} }
-        --     }
-        --   }
-        -- }
       },
       --  This function gets run when an LSP connects to a particular buffer.
       on_attach = on_lsp_attach
@@ -122,6 +104,9 @@ return {
           require('lspconfig')[server_name].setup(server_config)
         end
       }
+
+      -- uncomment the following line to see debug information from lsp 
+      -- vim.lsp.set_log_level('debug')
     end
   },
   {
