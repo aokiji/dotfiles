@@ -105,7 +105,7 @@ return {
         end
       }
 
-      -- uncomment the following line to see debug information from lsp 
+      -- uncomment the following line to see debug information from lsp
       -- vim.lsp.set_log_level('debug')
     end
   },
@@ -113,10 +113,10 @@ return {
     'neovim/nvim-lspconfig',
     event = 'VeryLazy',
     dependencies = {
-      { 'folke/neodev.nvim', opts = {} },
+      { 'folke/neodev.nvim', opts = { library = { plugins = { "nvim-dap-ui" }, types = true } } },
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-      { 'j-hui/fidget.nvim', opts = {}, branch = 'legacy' } -- Additional lua configuration, makes nvim stuff amazing!
+      { 'j-hui/fidget.nvim', opts = {},                                                         branch = 'legacy' } -- Additional lua configuration, makes nvim stuff amazing!
     }
   },
   {

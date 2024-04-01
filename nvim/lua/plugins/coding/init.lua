@@ -208,6 +208,34 @@ return {
   }, -- debugger adapters (dap)
   {
     'mfussenegger/nvim-dap',
+    dependencies = {
+      'leoluz/nvim-dap-go',
+      opts = {
+        -- delve configurations
+        delve = {
+          path = vim.fn.expand("~/go/bin/dlv"),
+        },
+        dap_configurations = {
+          {
+            name = 'Debug test (Arguments)',
+            type = 'go',
+            mode = 'test',
+            request = 'launch',
+            program = './${relativeFileDirname}',
+            args = function() -- select single test giving args for ex: -test.run MyTest/SingleCase
+              return coroutine.create(function(dap_run_co)
+                local args = {}
+                vim.ui.input({ prompt = "Args: " }, function(input)
+                  args = vim.split(input or "", " ")
+                  coroutine.resume(dap_run_co, args)
+                end)
+              end)
+            end
+          }
+        }
+      },
+      ft = 'go'
+    },
     opts = {
       adapters = { perlsp = { type = 'server', host = '127.0.0.1', port = '27011' } },
       configurations = {
@@ -221,7 +249,7 @@ return {
             stopOnEntry = false,
             cwd = "${workspaceFolder}"
           }
-        }
+        },
       }
     },
     config = function(_, opts)
@@ -249,6 +277,7 @@ return {
   },
   {
     "rcarriga/nvim-dap-ui",
+    dependencies = { "nvim-neotest/nvim-nio" },
     requires = { "mfussenegger/nvim-dap" },
     opts = {},
     keys = {
