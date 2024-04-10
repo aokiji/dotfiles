@@ -179,7 +179,12 @@ return {
       }
     },
     config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end
-  },                                              -- symbols outline
+  }, -- symbols outline
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    opts = { mode = 'topline' },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' }
+  },
   { 'simrat39/symbols-outline.nvim', opts = {} }, -- running tests
   { 'kylechui/nvim-surround',        opts = {} },
   {
