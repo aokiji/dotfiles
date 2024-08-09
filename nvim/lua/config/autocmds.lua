@@ -24,3 +24,12 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
     vim.api.nvim_buf_set_option(buf, "filetype", "sql")
   end
 })
+
+-- set Jenkinsfile filetype to groovy
+vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
+  pattern = '*.Jenkinsfile',
+  callback = function()
+    local buf = vim.api.nvim_get_current_buf()
+    vim.api.nvim_buf_set_option(buf, "filetype", "groovy")
+  end
+})
