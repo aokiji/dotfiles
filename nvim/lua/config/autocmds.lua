@@ -31,5 +31,8 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
   callback = function()
     local buf = vim.api.nvim_get_current_buf()
     vim.api.nvim_buf_set_option(buf, "filetype", "groovy")
+    vim.api.nvim_buf_set_option(buf, "expandtab", true)
+    vim.api.nvim_buf_set_option(buf, "shiftwidth", 4)
+    vim.api.nvim_buf_set_option(buf, "tabstop", 4)
   end
 })
