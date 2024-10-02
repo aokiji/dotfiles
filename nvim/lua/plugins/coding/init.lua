@@ -2,14 +2,14 @@ return {
   {
     "ahmedkhalf/project.nvim",
     dependencies = { 'nvim-telescope/telescope.nvim' },
-    event = 'VeryLazy',
-    config = function()
-      require('project_nvim').setup()
+    opts = {
+      manual_mode = false,
+      silent_chdir = false
+    },
+    config = function(_, opts)
+      require('project_nvim').setup(opts)
       require('telescope').load_extension('projects')
     end,
-    keys = {
-      { "<leader>sp", "<Cmd>Telescope projects<CR>", desc = "[S]earch [P]rojects" },
-    },
   },
   -- Git related plugins
   {
