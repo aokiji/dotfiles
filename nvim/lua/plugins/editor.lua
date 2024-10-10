@@ -7,7 +7,7 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = function()
       local actions = require('telescope.actions')
-      local trouble = require("trouble.providers.telescope")
+      local trouble = require("trouble.sources.telescope")
 
       return {
         defaults = {
@@ -15,9 +15,9 @@ return {
             i = {
               ['<C-j>'] = actions.move_selection_next,
               ['<C-k>'] = actions.move_selection_previous,
-              ["<c-t>"] = trouble.smart_open_with_trouble
+              ["<c-t>"] = trouble.open
             },
-            n = { ["<c-t>"] = trouble.smart_open_with_trouble },
+            n = { ["<c-t>"] = trouble.open },
           }
         },
         pickers = {
