@@ -27,19 +27,20 @@ return {
       whichkey.setup(opts)
 
       local mappings = {
-        ['q'] = { "<cmd>q<cr>", "Quit" },
-        ['Q'] = { "<cmd>qa!<cr>", "Quit All" },
-        ['O'] = { "<cmd>SymbolsOutline<cr>", "Symbols Outline Toggle" },
-        b = { name = "File Browser", },
-        t = { name = 'Test' },
-        d = { name = "Debugger" },
-        g = { name = "Git", },
-        l = { name = "LSP" },
-        r = { name = "Redmine", o = { "<cmd>RedmineOpenTask<cr>", "Open Redmine Task" }, },
-        s = { name = "Search" },
-        x = { name = "Trouble" }
+        { "<leader>O",  "<cmd>SymbolsOutline<cr>",  desc = "Symbols Outline Toggle" },
+        { "<leader>Q",  "<cmd>qa!<cr>",             desc = "Quit All" },
+        { "<leader>b",  group = "File Browser" },
+        { "<leader>d",  group = "Debugger" },
+        { "<leader>g",  group = "Git" },
+        { "<leader>l",  group = "LSP" },
+        { "<leader>q",  "<cmd>q<cr>",               desc = "Quit" },
+        { "<leader>r",  group = "Redmine" },
+        { "<leader>ro", "<cmd>RedmineOpenTask<cr>", desc = "Open Redmine Task" },
+        { "<leader>s",  group = "Search" },
+        { "<leader>t",  group = "Test" },
+        { "<leader>x",  group = "Trouble" },
       }
-      whichkey.register(mappings, { prefix = "<leader>" })
+      whichkey.add(mappings)
     end
   }, -- Present a dashboard on start up
   {
