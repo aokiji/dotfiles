@@ -43,18 +43,19 @@ return {
             perlnavigator = {
               logging = true,
               perltidyEnabled = true,
-              perlimportsLintEnabled = true,
+              perlimportsLintEnabled = false,
               perlimportsTidyEnabled = false
             }
           }
         },
         lua_ls = { settings = {} },
         jedi_language_server = { init_options = { workspace = { environmentPath = '/opt/pyenv/shims/python' } } },
-        pylyzer = { settings = {} },
         ruff_lsp = {
           init_options = { settings = { path = { '/opt/pyenv/shims/ruff' }, interpreter = { '/opt/pyenv/shims/python' } } }
         },
-        clangd = {},
+        clangd = {
+          root_dir = function(_) end
+        },
         gopls = {
           root_dir = function(fname)
             local util = require 'lspconfig.util'
@@ -77,6 +78,11 @@ return {
               driver = 'postgresql',
               dataSourceName = 'postgres://eolica@localhost:5432/eolica'
             }
+            -- connectionConfig = {
+            --   alias = 'pg_local_test',
+            --   driver = 'postgresql',
+            --   dataSourceName = 'postgres://example_user:example_password@localhost:15432/example_db'
+            -- }
           },
           on_attach = function(client, bufnr)
             on_lsp_attach(client, bufnr)
@@ -84,6 +90,15 @@ return {
             vim.keymap.set('n', '<leader>ce', '<cmd>SqlsExecuteQuery<cr>', { buffer = bufnr, desc = '[E]xecute Query' })
             require('sqls').on_attach(client, bufnr)
           end
+        },
+        pyright = {
+          -- settings = {
+          --   python = {
+          --     analysis = {
+          --       -- include = { 'src'}
+          --     }
+          --   }
+          -- }
         }
       },
       --  This function gets run when an LSP connects to a particular buffer.
@@ -117,7 +132,13 @@ return {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       { 'j-hui/fidget.nvim', opts = {},                                                         branch = 'legacy' } -- Additional lua configuration, makes nvim stuff amazing!
-    }
+    },
+    config = function()
+      -- require'lspconfig'.postgres_lsp.setup{
+      --   cmd = {'pglsp'},
+      --   init_options = { db_connection_string = 'postgres://eolica@localhost:5432/eolica' }
+      -- }
+    end
   },
   {
     'nvimtools/none-ls.nvim',
