@@ -10,7 +10,10 @@ function source.new()
     {label = 'test', documentation = 'Adding or changing tests', kind = itemKind},
     {label = 'style', documentation = 'Style changes on the code', kind = itemKind},
     {label = 'revert', documentation = 'Undo a previous commit', kind = itemKind},
-    {label = 'enh', documentation = 'Code improvemente that doesnt add new feaures or fixes bug', kind = itemKind}
+    {label = 'enh', documentation = 'Code improvemente that doesnt add new feaures or fixes bug', kind = itemKind},
+    {label = 'doc', documentation = 'Update documentation', kind = itemKind},
+    {label = 'chore', documentation = 'Repetitive common tasks', kind = itemKind},
+    {label = 'audit', documentation = 'Code audit and diagnostics', kind = itemKind}
   }
 
   return setmetatable({}, {__index = source})
