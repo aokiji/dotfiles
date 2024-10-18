@@ -62,6 +62,7 @@ return {
       nmap('<leader>so', builtin.oldfiles, '[S]earch [O]ldfiles')
       nmap('<leader>sq', builtin.quickfix, '[S]earch [Q]uickfix')
       nmap('<leader>sr', builtin.registers, '[S]earch [R]egisters')
+      nmap('<leader>sp', require'telescope'.extensions.projects.projects, '[S]earch [P]rojects')
 
 
       -- Git keymaps
