@@ -99,6 +99,15 @@ return {
           --     }
           --   }
           -- }
+        },
+        yamlls = {
+          settings = {
+            yaml = {
+              schemas = {
+                kubernetes = "k8s-*",
+              }
+            }
+          }
         }
       },
       --  This function gets run when an LSP connects to a particular buffer.
