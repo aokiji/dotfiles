@@ -68,7 +68,7 @@ return {
   {
     'folke/trouble.nvim',
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = { follow = false },
+    opts = { auto_preview = false },
     keys = {
       {
         "<leader>xx",
