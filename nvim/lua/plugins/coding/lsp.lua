@@ -50,8 +50,8 @@ return {
         },
         lua_ls = { settings = {} },
         jedi_language_server = { init_options = { workspace = { environmentPath = '/opt/pyenv/shims/python' } } },
-        ruff_lsp = {
-          init_options = { settings = { path = { '/opt/pyenv/shims/ruff' }, interpreter = { '/opt/pyenv/shims/python' } } }
+        ruff = {
+          cmd = {'/opt/pyenv/shims/ruff', 'server'}
         },
         clangd = {
           root_dir = function(_) end
