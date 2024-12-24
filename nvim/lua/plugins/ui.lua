@@ -107,5 +107,12 @@ return {
   {
     "stevearc/dressing.nvim",
     opts = {}
-  }
+  },
+  -- markdown render
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+    opts = {},
+    ft = 'markdown'
+  },
 }
