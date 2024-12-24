@@ -12,3 +12,9 @@ vim.filetype.add({
     [".*%.pg"] = "sql"
   }
 })
+
+vim.filetype.add({
+  pattern = {
+    [".*%.sls"] = "sls"
+  }
+})
