@@ -18,3 +18,9 @@ vim.filetype.add({
     [".*%.sls"] = "sls"
   }
 })
+
+vim.filetype.add({
+  pattern = {
+    [".*%.Jenkinsfile"] = "groovy"
+  }
+})
