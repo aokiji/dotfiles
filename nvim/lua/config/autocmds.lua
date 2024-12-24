@@ -16,15 +16,6 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
   end
 })
 
--- set pg files filetype to sql
-vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
-  pattern = '*.pg',
-  callback = function()
-    local buf = vim.api.nvim_get_current_buf()
-    vim.api.nvim_buf_set_option(buf, "filetype", "sql")
-  end
-})
-
 -- set Jenkinsfile filetype to groovy
 vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
   pattern = '*.Jenkinsfile',

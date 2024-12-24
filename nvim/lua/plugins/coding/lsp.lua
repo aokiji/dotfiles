@@ -59,6 +59,12 @@ return {
         cmake = {
 
         },
+        dockerls = {
+
+        },
+        docker_compose_language_service = {
+
+        },
         gopls = {
           root_dir = function(fname)
             local util = require 'lspconfig.util'
