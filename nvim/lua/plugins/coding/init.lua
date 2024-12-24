@@ -35,6 +35,7 @@ return {
 
   { -- Adds Git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+    dependencies = { 'folke/which-key.nvim' },
     opts = {
       -- See `:help gitsigns.txt`
       signs = {
@@ -46,45 +47,53 @@ return {
       },
       on_attach = function(bufnr)
         local gitsigns = require('gitsigns')
-        local function map(mode, l, r, opts)
-          opts = opts or {}
-          opts.buffer = bufnr
-          vim.keymap.set(mode, l, r, opts)
-        end
-        -- Navigation
-        map('n', ']c', function()
-          if vim.wo.diff then
-            vim.cmd.normal({ ']c', bang = true })
-          else
-            gitsigns.nav_hunk('next')
-          end
-        end)
+        local wk = require('which-key')
+        wk.add({
+          { '<leader>h',  group = 'hunk' },
+          { '<leader>hs', gitsigns.stage_hunk,                                desc = 'stage hunk' },
+          { '<leader>hr', gitsigns.reset_hunk,                                desc = 'reset hunk' },
+          { '<leader>hS', gitsigns.stage_buffer,                              desc = 'stage buffer' },
+          { '<leader>hu', gitsigns.undo_stage_hunk,                           desc = 'undo stage buffer' },
+          { '<leader>hR', gitsigns.reset_buffer,                              desc = 'reset buffer' },
+          { '<leader>hp', gitsigns.preview_hunk,                              desc = 'preview hunk' },
+          { '<leader>hb', function() gitsigns.blame_line { full = true } end, desc = 'blame line' },
+          { '<leader>tb', gitsigns.toggle_current_line_blame,                 desc = 'toggle blame' },
+          { '<leader>hd', gitsigns.diffthis,                                  desc = 'diff this' },
+          { '<leader>hD', function() gitsigns.diffthis('~') end,              desc = 'diff previous' },
+          { '<leader>td', gitsigns.toggle_deleted,                            desc = 'toggle deleted' },
 
-        map('n', '[c', function()
-          if vim.wo.diff then
-            vim.cmd.normal({ '[c', bang = true })
-          else
-            gitsigns.nav_hunk('prev')
-          end
-        end)
+          -- Navigation
+          {
+            ']h',
+            function()
+              if vim.wo.diff then
+                vim.cmd.normal({ ']c', bang = true })
+              else
+                gitsigns.nav_hunk('next')
+              end
+            end,
+            desc = 'Next hunk'
+          },
 
-        -- Actions
-        map('n', '<leader>hs', gitsigns.stage_hunk)
-        map('n', '<leader>hr', gitsigns.reset_hunk)
-        map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
-        map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
-        map('n', '<leader>hS', gitsigns.stage_buffer)
-        map('n', '<leader>hu', gitsigns.undo_stage_hunk)
-        map('n', '<leader>hR', gitsigns.reset_buffer)
-        map('n', '<leader>hp', gitsigns.preview_hunk)
-        map('n', '<leader>hb', function() gitsigns.blame_line { full = true } end)
-        map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
-        map('n', '<leader>hd', gitsigns.diffthis)
-        map('n', '<leader>hD', function() gitsigns.diffthis('~') end)
-        map('n', '<leader>td', gitsigns.toggle_deleted)
+          {
+            '[h',
+            function()
+              if vim.wo.diff then
+                vim.cmd.normal({ '[c', bang = true })
+              else
+                gitsigns.nav_hunk('prev')
+              end
+            end,
+            desc = 'Previous hunk'
+          }
+        }, {
+          mode = 'v',
+          { '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end, desc = 'stage hunk' },
+          { '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end, desc = 'reset hunk' },
+        })
 
         -- Text object
-        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+        vim.keymap.set({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { buffer = bufnr })
       end
     }
   }, -- "gc" to comment visual regions/lines
