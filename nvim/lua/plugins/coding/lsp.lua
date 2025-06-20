@@ -49,9 +49,9 @@ return {
           }
         },
         lua_ls = { settings = {} },
-        jedi_language_server = { init_options = { workspace = { environmentPath = '/opt/pyenv/shims/python' } } },
+        jedi_language_server = { init_options = { workspace = { environmentPath = '/home/nicolas.delossantos/.local/bin/python' } } },
         ruff = {
-          cmd = { '/opt/pyenv/shims/ruff', 'server' }
+          cmd = { '/opt/uv/cpython-3.13.3-linux-x86_64-gnu/bin/ruff', 'server' }
         },
         clangd = {
           root_dir = function(_) end
@@ -128,15 +128,12 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
+      for server_name, server_opts in pairs(opts.servers) do
+        local server_config = { capabilities = capabilities, on_attach = opts.on_attach }
+        if (server_opts ~= nil) then for k, v in pairs(opts.servers[server_name]) do server_config[k] = v end end
+        vim.lsp.config(server_name, server_config)
+      end
       mason_lspconfig.setup { ensure_installed = vim.tbl_keys(opts.servers) }
-      mason_lspconfig.setup_handlers {
-        function(server_name)
-          local server_config = { capabilities = capabilities, on_attach = opts.on_attach }
-          local server_opts = opts.servers[server_name]
-          if (server_opts ~= nil) then for k, v in pairs(opts.servers[server_name]) do server_config[k] = v end end
-          require('lspconfig')[server_name].setup(server_config)
-        end
-      }
 
       -- uncomment the following line to see debug information from lsp
       -- vim.lsp.set_log_level('debug')
