@@ -54,6 +54,7 @@ return {
           cmd = { '/opt/uv/cpython-3.13.3-linux-x86_64-gnu/bin/ruff', 'server' }
         },
         clangd = {
+          root_markers = { 'CMakeLists.txt', '.clangd', '.clang-tidy', '.clang-format', 'compile_commands.json', 'compile_flags.txt', 'configure.ac', '.git' }
         },
         cmake = {
 
