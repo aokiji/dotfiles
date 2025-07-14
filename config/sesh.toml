@@ -1,0 +1,18 @@
+[default_session]
+# startup_command = "nvim -c ':Telescope find_files'"
+
+[[session]]
+name = "pgcli calibracion"
+path = "~/workspace/sql"
+startup_command = "pgcli -D eolica_calibracion"
+
+[[session]]
+name = "sesh config"
+path = "~/workspace"
+startup_command = "nvim -c ':e ~/.config/sesh/sesh.toml' "
+preview_command = "batcat --color=always ~/.config/sesh/sesh.toml"
+
+[[session]]
+name = "k9s prod"
+path = "~/workspace/kubernetes-services"
+startup_command = "k9s --context=user-dyo-context"

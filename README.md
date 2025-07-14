@@ -23,6 +23,7 @@ echo "source $PWD/tmux.conf" >> ~/.tmux.conf
 ```
 $> git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 $> go install github.com/joshmedeski/sesh/v2@latest
+$> mkdir -p ~/.config/sesh && touch ~/.config/sesh/sesh.toml
 ```
 
 ### NVIM
