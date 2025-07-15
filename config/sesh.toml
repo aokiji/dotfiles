@@ -7,10 +7,14 @@ path = "~/workspace/sql"
 startup_command = "pgcli -D eolica_calibracion"
 
 [[session]]
+name = "ssh to host"
+startup_command = "read -p 'Indica el host: ' ; ssh $REPLY"
+
+[[session]]
 name = "sesh config"
-path = "~/workspace"
-startup_command = "nvim -c ':e ~/.config/sesh/sesh.toml' "
-preview_command = "batcat --color=always ~/.config/sesh/sesh.toml"
+path = "~/workspace/dotfiles"
+startup_command = "nvim -c ':e config/sesh.toml' "
+preview_command = "batcat --color=always config/sesh.toml"
 
 [[session]]
 name = "k9s prod"
