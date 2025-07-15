@@ -2,9 +2,10 @@
 # startup_command = "nvim -c ':Telescope find_files'"
 
 [[session]]
-name = "pgcli calibracion"
+name = "pgcli"
 path = "~/workspace/sql"
-startup_command = "pgcli -D eolica_calibracion"
+startup_command = '''perl -lne 'print if /^\[alias_dsn\]/../\[(?!alias_dsn)/' ~/.config/pgcli/config | grep = | cut -d= -f 1 | fzf | xargs -roI ARG sh -c "tmux rename 'pgcli ARG'; pgcli -D ARG"'''
+
 
 [[session]]
 name = "ssh to host"
