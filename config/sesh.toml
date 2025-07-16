@@ -6,7 +6,6 @@ name = "pgcli"
 path = "~/workspace/sql"
 startup_command = '''perl -lne 'print if /^\[alias_dsn\]/../\[(?!alias_dsn)/' ~/.config/pgcli/config | grep = | cut -d= -f 1 | fzf | xargs -roI ARG sh -c "tmux rename 'pgcli ARG'; pgcli -D ARG"'''
 
-
 [[session]]
 name = "ssh to host"
 startup_command = "read -p 'Indica el host: ' ; ssh $REPLY"
@@ -16,6 +15,12 @@ name = "sesh config"
 path = "~/workspace/dotfiles"
 startup_command = "nvim -c ':e config/sesh.toml' "
 preview_command = "batcat --color=always config/sesh.toml"
+
+[[session]]
+name = "tmux config"
+path = "~/workspace/dotfiles"
+startup_command = "nvim -c ':e tmux.conf' "
+preview_command = "batcat --color=always tmux.conf"
 
 [[session]]
 name = "k9s prod"
