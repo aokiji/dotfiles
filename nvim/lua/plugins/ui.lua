@@ -35,7 +35,7 @@ return {
         { "<leader>l",  group = "LSP" },
         { "<leader>q",  "<cmd>q<cr>",               desc = "Quit" },
         { "<leader>r",  group = "Redmine" },
-        { "<leader>ro", "<cmd>RedmineOpenTask<cr>", desc = "Open Redmine Task" },
+        { "<leader>gr", "<cmd>RedmineOpenTask<cr>", desc = "Open Redmine Task" },
         { "<leader>s",  group = "Search" },
         { "<leader>t",  group = "Test" },
         { "<leader>x",  group = "Trouble" },
