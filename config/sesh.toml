@@ -27,3 +27,8 @@ preview_command = "batcat --color=always tmux.conf"
 name = "k9s prod"
 path = "~/workspace/kubernetes-services"
 startup_command = "k9s --context=user-dyo-context"
+
+[[session]]
+name = "k9s staging"
+path = "~/workspace/kubernetes-services"
+startup_command = "k9s --context=user-dyo-staging-context"
