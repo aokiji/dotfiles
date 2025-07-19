@@ -8,8 +8,8 @@ path = "~/workspace/sql"
 startup_command = '''perl -lne 'print if /^\[alias_dsn\]/../\[(?!alias_dsn)/' ~/.config/pgcli/config | grep = | cut -d= -f 1 | fzf | xargs -roI ARG sh -c "tmux rename 'pgcli ARG'; pgcli -D ARG"'''
 
 [[session]]
-name = "ssh to host"
-startup_command = "read -p 'Indica el host: ' ; ssh $REPLY"
+name = "ssh to eolo/portatil/cal"
+startup_command = "read -p 'Indica el host: ' ; tmux rename \"ssh $REPLY\"; ssh $REPLY"
 
 [[session]]
 name = "sesh config"
