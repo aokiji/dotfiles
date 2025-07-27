@@ -1,5 +1,31 @@
 return {
-
+  {
+    'echasnovski/mini.pick',
+    version = '*',
+    config = function(_, opts)
+      require('mini.pick').setup(opts)
+    end,
+    opts = function()
+      local win_config = function()
+        local height = math.floor(0.618 * vim.o.lines)
+        local width = math.floor(0.618 * vim.o.columns)
+        return {
+          anchor = 'NW', height = height, width = width,
+          row = math.floor(0.5 * (vim.o.lines - height)),
+          col = math.floor(0.5 * (vim.o.columns - width)),
+        }
+      end
+      return {
+        window = { config = win_config }
+      }
+    end,
+    keys = {
+      { '<leader>pf', '<cmd>Pick files<cr>', desc = "Pick a file" },
+      { '<leader>pg', '<cmd>Pick grep_live<cr>', desc = "Pick from grep" },
+      { '<leader>ph', '<cmd>Pick help<cr>', desc = "Pick from help" },
+      { '<leader>pb', '<cmd>Pick buffers<cr>', desc = "Pick from buffers" },
+    },
+  },
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
