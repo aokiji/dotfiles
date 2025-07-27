@@ -2,9 +2,6 @@ return {
   {
     'echasnovski/mini.pick',
     version = '*',
-    config = function(_, opts)
-      require('mini.pick').setup(opts)
-    end,
     opts = function()
       local win_config = function()
         local height = math.floor(0.618 * vim.o.lines)
@@ -25,6 +22,7 @@ return {
       { '<leader>ph', '<cmd>Pick help<cr>', desc = "Pick from help" },
       { '<leader>pb', '<cmd>Pick buffers<cr>', desc = "Pick from buffers" },
     },
+    cmd = 'Pick'
   },
   -- Fuzzy Finder (files, lsp, etc)
   {

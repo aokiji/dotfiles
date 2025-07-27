@@ -1,6 +1,5 @@
 [default_session]
-# startup_command = "nvim -c ':Telescope find_files'"
-startup_command = 'nvim'
+startup_command = "nvim -c ':Pick files'"
 
 [[session]]
 name = "pgcli"
