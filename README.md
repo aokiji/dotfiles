@@ -4,9 +4,10 @@
 
 Install dependencies
 
-For fedora
+For ubuntu
 ```
-sudo apt install tmux vim fasd
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt install tmux vim fzf
 curl -sS https://starship.rs/install.sh | sh
 ```
 
