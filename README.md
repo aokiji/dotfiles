@@ -6,8 +6,8 @@ Install dependencies
 
 For ubuntu
 ```
-sudo add-apt-repository ppa:neovim-ppa/stable
-sudo apt install tmux vim fzf
+snap install nvim --classic
+sudo apt install tmux vim fzf universal-ctags gpaste-2 parallel
 curl -sS https://starship.rs/install.sh | sh
 ```
 
