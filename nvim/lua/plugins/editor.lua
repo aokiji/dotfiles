@@ -7,20 +7,27 @@ return {
         local height = math.floor(0.618 * vim.o.lines)
         local width = math.floor(0.618 * vim.o.columns)
         return {
-          anchor = 'NW', height = height, width = width,
+          anchor = 'NW',
+          height = height,
+          width = width,
           row = math.floor(0.5 * (vim.o.lines - height)),
           col = math.floor(0.5 * (vim.o.columns - width)),
         }
       end
       return {
-        window = { config = win_config }
+        window = { config = win_config },
+        mappings = {
+          move_down  = '<C-j>',
+          move_start = '<C-g>',
+          move_up    = '<C-k>',
+        }
       }
     end,
     keys = {
-      { '<leader>pf', '<cmd>Pick files<cr>', desc = "Pick a file" },
+      { '<leader>pf', '<cmd>Pick files<cr>',     desc = "Pick a file" },
       { '<leader>pg', '<cmd>Pick grep_live<cr>', desc = "Pick from grep" },
-      { '<leader>ph', '<cmd>Pick help<cr>', desc = "Pick from help" },
-      { '<leader>pb', '<cmd>Pick buffers<cr>', desc = "Pick from buffers" },
+      { '<leader>ph', '<cmd>Pick help<cr>',      desc = "Pick from help" },
+      { '<leader>pb', '<cmd>Pick buffers<cr>',   desc = "Pick from buffers" },
     },
     cmd = 'Pick'
   },
