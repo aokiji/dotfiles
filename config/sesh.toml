@@ -31,3 +31,8 @@ startup_command = "k9s --context=user-dyo-context"
 name = "k9s staging"
 path = "~/workspace/kubernetes-services"
 startup_command = "k9s --context=user-dyo-staging-context"
+
+[[session]]
+name = "tareas desde query"
+path = "~/workspace/devops-toolbox"
+startup_command = "__atuin_history tareas_desde_query"
