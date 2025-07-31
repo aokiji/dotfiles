@@ -1,4 +1,5 @@
-vim.opt.rtp:append(vim.fn.expand('<sfile>:p:h'))
+local project_path = vim.fn.expand('<sfile>:p:h')
+vim.opt.rtp:append(project_path)
 
 require('config').setup()
 
@@ -19,7 +20,8 @@ require('lazy').setup('plugins', {
     rtp = {
       reset = false
     }
-  }
+  },
+  lockfile = project_path .. "/lazy-lock.json"
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
