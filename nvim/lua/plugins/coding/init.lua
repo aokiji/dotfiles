@@ -344,5 +344,19 @@ return {
     }
   },
   { 'ludovicchabant/vim-gutentags' },
+  {
+    "cuducos/yaml.nvim",
+    ft = { "yaml" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim",
+    },
+    command = { 'YAMLTelescope', 'YAMLView' },
+    keys = {
+      { '<leader>sy', "<cmd>YAMLTelescope<cr>", desc = "Search in yaml" },
+      { '<leader>ys', "<cmd>YAMLTelescope<cr>", desc = "Search in yaml" },
+      { '<leader>yv', "<cmd>YAMLView<cr>",      desc = "Show yaml path of current line" }
+    }
+  },
   { import = 'plugins.coding.lsp' }
 }
