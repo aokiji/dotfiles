@@ -8,3 +8,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", {expr = true, silent = tru
 
 -- quick exit from insert mode
 vim.keymap.set('i', 'jj', '<esc>')
+
+-- jump to next command
+vim.keymap.set('n', ']c', '/^❯<CR>', {desc="jump next command"})
+vim.keymap.set('n', '[c', '?^❯<CR>', {desc="jump previous command"})
