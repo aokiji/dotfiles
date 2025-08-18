@@ -36,3 +36,8 @@ startup_command = "k9s --context=user-dyo-staging-context"
 name = "tareas desde query"
 path = "~/workspace/devops-toolbox"
 startup_command = "__atuin_history tareas_desde_query"
+
+[[session]]
+name = "command"
+path = "~/workspace"
+disable_startup_command = true
