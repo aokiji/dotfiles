@@ -14,7 +14,7 @@ return {
   -- Git related plugins
   {
     'tpope/vim-fugitive',
-    cmd = { 'Git' },
+    cmd = { 'Git', 'GMove' },
     keys = {
       { '<leader>gb', "<cmd>Git blame<cr>",                  desc = "Git blame" },
       { '<leader>B',  "<cmd>Git blame<cr>",                  desc = "Git blame" },
@@ -25,6 +25,14 @@ return {
       { '<leader>gu', "<cmd>GitlabURL<cr>",                  desc = "Open file in Gitlab" },
       { '<leader>U',  "<cmd>GitlabURL<cr>",                  desc = "Open file in Gitlab" },
       { '<leader>go', "<cmd>GitlabOpenMerge<cr>",            desc = "Open merge in Gitlab" },
+      {
+        '<leader>gh',
+        function()
+          local head = vim.api.nvim_call_function("FugitiveHead", {})
+          vim.fn.setreg('+', head)
+        end,
+        desc = "Copy branch to clipboard"
+      },
     }
   },
   {
