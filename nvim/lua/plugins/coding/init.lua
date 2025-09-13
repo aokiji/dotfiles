@@ -58,17 +58,16 @@ return {
         local wk = require('which-key')
         wk.add({
           { '<leader>h',  group = 'hunk' },
-          { '<leader>hs', gitsigns.stage_hunk,                                desc = 'stage hunk' },
+          { '<leader>hs', gitsigns.stage_hunk,                                desc = 'stage/unstage hunk' },
           { '<leader>hr', gitsigns.reset_hunk,                                desc = 'reset hunk' },
           { '<leader>hS', gitsigns.stage_buffer,                              desc = 'stage buffer' },
-          { '<leader>hu', gitsigns.undo_stage_hunk,                           desc = 'undo stage buffer' },
           { '<leader>hR', gitsigns.reset_buffer,                              desc = 'reset buffer' },
           { '<leader>hp', gitsigns.preview_hunk,                              desc = 'preview hunk' },
           { '<leader>hb', function() gitsigns.blame_line { full = true } end, desc = 'blame line' },
           { '<leader>tb', gitsigns.toggle_current_line_blame,                 desc = 'toggle blame' },
           { '<leader>hd', gitsigns.diffthis,                                  desc = 'diff this' },
           { '<leader>hD', function() gitsigns.diffthis('~') end,              desc = 'diff previous' },
-          { '<leader>td', gitsigns.toggle_deleted,                            desc = 'toggle deleted' },
+          { '<leader>td', gitsigns.preview_hunk_inline,                       desc = 'toggle deleted' },
 
           -- Navigation
           {
@@ -180,7 +179,7 @@ return {
           { name = 'commits' },
           { name = 'path' },
           { name = 'buffer' },
-          { name = 'lazydev', group_index = 0 },  -- set group index to 0 to skip loading LuaLS completions
+          { name = 'lazydev', group_index = 0 }, -- set group index to 0 to skip loading LuaLS completions
         }
       }
     end
