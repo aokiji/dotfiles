@@ -24,10 +24,11 @@ return {
       }
     end,
     keys = {
-      { '<leader>pf', '<cmd>Pick files<cr>',     desc = "Pick a file" },
-      { '<leader>pg', '<cmd>Pick grep_live<cr>', desc = "Pick from grep" },
-      { '<leader>ph', '<cmd>Pick help<cr>',      desc = "Pick from help" },
-      { '<leader>pb', '<cmd>Pick buffers<cr>',   desc = "Pick from buffers" },
+      { '<leader>pf', '<cmd>Pick files<cr>',                   desc = "Pick a file" },
+      { '<leader>pg', '<cmd>Pick grep_live<cr>',               desc = "Pick from grep" },
+      { '<leader>ph', '<cmd>Pick help<cr>',                    desc = "Pick from help" },
+      { '<leader>pb', '<cmd>Pick buffers<cr>',                 desc = "Pick from buffers" },
+      { '<leader>pw', "<cmd>:Pick grep pattern='<cword>'<cr>", desc = "Pick from buffers" },
     },
     cmd = 'Pick'
   },
