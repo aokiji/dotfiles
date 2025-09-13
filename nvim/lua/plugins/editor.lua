@@ -31,6 +31,25 @@ return {
     },
     cmd = 'Pick'
   },
+  {
+    'nvim-mini/mini.extra',
+    version = false,
+    keys = function()
+      local pickers = require('mini.extra').pickers
+      return {
+        { '<leader>pB', pickers.git_branches,                                              desc = "Pick a git branch" },
+        { '<leader>pd', pickers.diagnostic,                                                desc = "Pick from diagnostics" },
+        { '<leader>pc', pickers.git_hunks,                                                 desc = "Pick from git hunks" },
+        { '<leader>pL', pickers.buf_lines,                                                 desc = "Pick from buffer lines" },
+        { '<leader>pq', function() return pickers.list({ scope = 'quickfix' }) end,        desc = "Pick from quickfix" },
+        { '<leader>pj', function() return pickers.list({ scope = 'jump' }) end,            desc = "Pick from jumplist" },
+        { '<leader>ps', function() return pickers.lsp({ scope = 'document_symbol' }) end,  desc = "Pick from LSP document symbol" },
+        { '<leader>pS', function() return pickers.lsp({ scope = 'workspace_symbol' }) end, desc = "Pick from LSP workspace symbol" },
+        { '<leader>pr', pickers.registers,                                                 desc = "Pick from registers" },
+        { '<leader>pt', pickers.treesitter,                                                desc = "Pick from treesitter" },
+      }
+    end
+  },
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
