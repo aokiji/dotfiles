@@ -104,9 +104,6 @@ return {
         vim.keymap.set({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { buffer = bufnr })
       end
     }
-  }, -- "gc" to comment visual regions/lines
-  {
-    'numToStr/Comment.nvim', opts = {}
   },
   {
     -- handling paired characters in various filetypes
