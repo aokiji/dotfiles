@@ -10,5 +10,5 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", {expr = true, silent = tru
 vim.keymap.set('i', 'jj', '<esc>')
 
 -- jump to next command
-vim.keymap.set('n', ']c', '/^❯<CR>', {desc="jump next command"})
-vim.keymap.set('n', '[c', '?^❯<CR>', {desc="jump previous command"})
+vim.keymap.set({'n', 'v'}, ']c', '/^❯<CR>', {desc="jump next command"})
+vim.keymap.set({'n', 'v'}, '[c', '?^❯<CR>', {desc="jump previous command"})
