@@ -113,7 +113,9 @@ return {
           settings = {
             yaml = {
               schemas = {
-                kubernetes = "k8s-*",
+                ["https://json.schemastore.org/kustomization.json"] = "**/kustomization.yml",
+                ["https://raw.githubusercontent.com/KevinNitroG/argocd-json-schema/refs/heads/main/schemas/v3.0.12/standalone/all.json"] = { "**/argocd/**/*.yml", "**/application.yml", "**/application-staging.yml", "**/application-production.yml" },
+                kubernetes = { "**/kubernetes/*.yml", "**/production/*.yml", "**/staging/*.yml", "**/base/*.yml" },
               }
             }
           }
@@ -157,7 +159,7 @@ return {
     dependencies = {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-      { 'j-hui/fidget.nvim', opts = {},                                                         branch = 'legacy' } -- Additional lua configuration, makes nvim stuff amazing!
+      { 'j-hui/fidget.nvim', opts = {}, branch = 'legacy' } -- Additional lua configuration, makes nvim stuff amazing!
     },
     config = function()
       -- require'lspconfig'.postgres_lsp.setup{
