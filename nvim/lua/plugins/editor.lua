@@ -26,8 +26,6 @@ return {
     keys = function(plugin)
       -- usar readtags para listar las etiquetas
       local function pick_ctags()
-        local MiniPick = require('mini/pick')
-
         --- @type __pick_builtin_opts
         local source_config = {
           source = {
@@ -76,7 +74,7 @@ return {
   },
   {
     'nvim-mini/mini.extra',
-    version = false,
+    version = '*',
     keys = function()
       local pickers = require('mini.extra').pickers
       return {
@@ -207,16 +205,17 @@ return {
     cond = function() return vim.fn.executable 'make' == 1 end
   }, -- file explorer
   {
-    'nvim-tree/nvim-tree.lua',
-    requires = { 'nvim-tree/nvim-web-devicons' },
-    cmd = { 'NvimTreeToggle', 'NvimTreeFindFile', 'NvimTreeFocus' },
-    keys = {
-      { '<leader>bt', "<cmd>NvimTreeToggle<cr>",   desc = "Browser Toggle" },
-      { '<leader>bs', "<cmd>NvimTreeFindFile<cr>", desc = "Select file in browser" },
-      { '<leader>bf', "<cmd>NvimTreeFocus<cr>",    desc = "Focus on browser" }
-    },
-    opts = {}
-  }, -- tmux navigation
+    'nvim-mini/mini.files',
+    version = '*',
+    keys = function()
+      local MiniFiles = require('mini/files')
+      return {
+        { '<leader>bo', MiniFiles.open,                                              desc = "Open File Browser" },
+        { '<leader>bs', function() MiniFiles.open(vim.api.nvim_buf_get_name(0)) end, desc = "Open Current File in Browser" }
+      }
+    end,
+  },
+  -- tmux navigation
   {
     'alexghergh/nvim-tmux-navigation',
     config = function()
