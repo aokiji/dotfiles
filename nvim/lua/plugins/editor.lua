@@ -23,13 +23,55 @@ return {
         }
       }
     end,
-    keys = {
-      { '<leader>pf', '<cmd>Pick files<cr>',                   desc = "Pick a file" },
-      { '<leader>pg', '<cmd>Pick grep_live<cr>',               desc = "Pick from grep" },
-      { '<leader>ph', '<cmd>Pick help<cr>',                    desc = "Pick from help" },
-      { '<leader>pb', '<cmd>Pick buffers<cr>',                 desc = "Pick from buffers" },
-      { '<leader>pw', "<cmd>:Pick grep pattern='<cword>'<cr>", desc = "Pick from buffers" },
-    },
+    keys = function(plugin)
+      -- usar readtags para listar las etiquetas
+      local function pick_ctags()
+        local MiniPick = require('mini/pick')
+
+        --- @type __pick_builtin_opts
+        local source_config = {
+          source = {
+            choose = function(item)
+              local fname = item.fname
+              local ex_cmd = item.ex_cmd
+              if fname and ex_cmd then
+                vim.api.nvim_win_call(
+                  MiniPick.get_picker_state().windows.target,
+                  function()
+                    vim.cmd('edit ' .. fname)
+                    vim.cmd(ex_cmd)
+                  end
+                )
+              end
+            end
+          }
+        }
+        local config = vim.tbl_deep_extend('force', source_config, plugin.opts())
+
+        MiniPick.builtin.cli({
+          command = { 'readtags', '-l' },
+          postprocess = function(items)
+            return vim.tbl_map(function(line)
+              local fields = vim.split(line, "\t")
+              local tag, fname, ex_cmd = fields[1], fields[2], fields[3]
+              return {
+                text = string.format("%-30s %s", tag, fname or ""),
+                fname = fname,
+                ex_cmd = ex_cmd
+              }
+            end, items)
+          end,
+        }, config)
+      end
+      return {
+        { '<leader>pf', '<cmd>Pick files<cr>',                   desc = "Pick a file" },
+        { '<leader>pg', '<cmd>Pick grep_live<cr>',               desc = "Pick from grep" },
+        { '<leader>ph', '<cmd>Pick help<cr>',                    desc = "Pick from help" },
+        { '<leader>pb', '<cmd>Pick buffers<cr>',                 desc = "Pick from buffers" },
+        { '<leader>pw', "<cmd>:Pick grep pattern='<cword>'<cr>", desc = "Pick from buffers" },
+        { '<leader>pt', pick_ctags,                              desc = "Pick from ctags" }
+      }
+    end,
     cmd = 'Pick'
   },
   {
@@ -47,7 +89,7 @@ return {
         { '<leader>ps', function() return pickers.lsp({ scope = 'document_symbol' }) end,  desc = "Pick from LSP document symbol" },
         { '<leader>pS', function() return pickers.lsp({ scope = 'workspace_symbol' }) end, desc = "Pick from LSP workspace symbol" },
         { '<leader>pr', pickers.registers,                                                 desc = "Pick from registers" },
-        { '<leader>pt', pickers.treesitter,                                                desc = "Pick from treesitter" },
+        { '<leader>pT', pickers.treesitter,                                                desc = "Pick from treesitter" },
       }
     end
   },
