@@ -1,2 +1,2 @@
-silent! nnoremap <silent> m :GitlabOpenMerge<CR>
-silent! nnoremap <silent> c :GitlabOpenCommit<CR>
+silent! nnoremap <buffer> <silent> m :GitlabOpenMerge<CR>
+silent! nnoremap <buffer> <silent> c :GitlabOpenCommit<CR>
