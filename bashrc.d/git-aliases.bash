@@ -3,6 +3,7 @@
 # git aliases
 alias gs='git status'
 alias gv='vim +GV +"autocmd BufWipeout <buffer> qall"'
+alias gcb='git checkout -b'
 
 # GIT + FZF
 is_in_git_repo() {
