@@ -49,10 +49,6 @@ return {
           }
         },
         lua_ls = { settings = {} },
-        jedi_language_server = { init_options = { workspace = { environmentPath = '/home/nicolas.delossantos/.local/bin/python' } } },
-        ruff = {
-          cmd = { '/opt/uv/cpython-3.13.3-linux-x86_64-gnu/bin/ruff', 'server' }
-        },
         clangd = {
           root_markers = { 'CMakeLists.txt', '.clangd', '.clang-tidy', '.clang-format', 'compile_commands.json', 'compile_flags.txt', 'configure.ac', '.git' }
         },
@@ -131,11 +127,14 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
+      vim.lsp.config('*', {capabilities = capabilities})
+
       for server_name, server_opts in pairs(opts.servers) do
-        local server_config = { capabilities = capabilities, on_attach = opts.on_attach }
+        local server_config = { on_attach = opts.on_attach }
         if (server_opts ~= nil) then for k, v in pairs(opts.servers[server_name]) do server_config[k] = v end end
         vim.lsp.config(server_name, server_config)
       end
+      vim.lsp.enable({'jedi_language_server', 'ruff'})
       mason_lspconfig.setup { ensure_installed = vim.tbl_keys(opts.servers) }
 
       -- uncomment the following line to see debug information from lsp
