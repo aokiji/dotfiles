@@ -37,30 +37,9 @@ return {
     'williamboman/mason-lspconfig.nvim',
     dependencies = { { 'williamboman/mason.nvim', opts = {} }, 'nanotee/sqls.nvim' },
     opts = {
+      ensure_installed = { 'perlnavigator', 'cmake', 'dockerls', 'docker_compose_language_service', 'pyright', 'clangd', 'yamlls' },
       servers = {
-        perlnavigator = {
-          settings = {
-            perlnavigator = {
-              logging = true,
-              perltidyEnabled = true,
-              perlimportsLintEnabled = false,
-              perlimportsTidyEnabled = false
-            }
-          }
-        },
         lua_ls = { settings = {} },
-        clangd = {
-          root_markers = { 'CMakeLists.txt', '.clangd', '.clang-tidy', '.clang-format', 'compile_commands.json', 'compile_flags.txt', 'configure.ac', '.git' }
-        },
-        cmake = {
-
-        },
-        dockerls = {
-
-        },
-        docker_compose_language_service = {
-
-        },
         gopls = {
           root_dir = function(fname)
             local util = require 'lspconfig.util'
@@ -95,26 +74,6 @@ return {
             vim.keymap.set('n', '<leader>ce', '<cmd>SqlsExecuteQuery<cr>', { buffer = bufnr, desc = '[E]xecute Query' })
             require('sqls').on_attach(client, bufnr)
           end
-        },
-        pyright = {
-          -- settings = {
-          --   python = {
-          --     analysis = {
-          --       -- include = { 'src'}
-          --     }
-          --   }
-          -- }
-        },
-        yamlls = {
-          settings = {
-            yaml = {
-              schemas = {
-                ["https://json.schemastore.org/kustomization.json"] = "**/kustomization.yml",
-                ["https://raw.githubusercontent.com/KevinNitroG/argocd-json-schema/refs/heads/main/schemas/v3.0.12/standalone/all.json"] = { "**/argocd/**/*.yml", "**/application.yml", "**/application-staging.yml", "**/application-production.yml" },
-                kubernetes = { "**/kubernetes/*.yml", "**/production/*.yml", "**/staging/*.yml", "**/base/*.yml" },
-              }
-            }
-          }
         }
       },
       --  This function gets run when an LSP connects to a particular buffer.
@@ -127,15 +86,16 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-      vim.lsp.config('*', {capabilities = capabilities})
+      vim.lsp.config('*', { capabilities = capabilities })
 
       for server_name, server_opts in pairs(opts.servers) do
         local server_config = { on_attach = opts.on_attach }
         if (server_opts ~= nil) then for k, v in pairs(opts.servers[server_name]) do server_config[k] = v end end
         vim.lsp.config(server_name, server_config)
       end
-      vim.lsp.enable({'jedi_language_server', 'ruff'})
-      mason_lspconfig.setup { ensure_installed = vim.tbl_keys(opts.servers) }
+      vim.lsp.enable({ 'jedi_language_server', 'ruff' })
+      local ensure_installed = vim.tbl_extend('force', vim.tbl_keys(opts.servers), opts.ensure_installed)
+      mason_lspconfig.setup { ensure_installed = ensure_installed }
 
       -- uncomment the following line to see debug information from lsp
       -- vim.lsp.set_log_level('debug')
