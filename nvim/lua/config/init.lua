@@ -6,6 +6,7 @@ function M.setup()
   require('config.autocmds')
   require('config.filetypes')
   require('config.user_commands')
+  require('config.lsp')
 end
 
 return M

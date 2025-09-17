@@ -182,6 +182,15 @@ return {
           { name = 'lazydev', group_index = 0 }, -- set group index to 0 to skip loading LuaLS completions
         }
       }
+    end,
+    config = function(opts)
+      require('cmp').setup(opts)
+
+      -- cmp nvim has additional lsp capabilities
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+      vim.lsp.config('*', { capabilities = capabilities })
     end
   },
   { -- Highlight, edit, and navigate code
