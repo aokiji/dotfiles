@@ -66,7 +66,7 @@ return {
         add_missing_perl_includes
       }
 
-      null_ls.setup({ sources = sources, on_attach = on_lsp_attach })
+      null_ls.setup({ sources = sources })
     end
   }
 }
