@@ -38,4 +38,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 vim.lsp.config('*', { capabilities = capabilities })
+-- vim.lsp.log.set_level 'trace'
 vim.lsp.enable({ 'jedi_language_server', 'ruff' })

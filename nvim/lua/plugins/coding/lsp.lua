@@ -1,10 +1,12 @@
-
 return {
   { -- Useful status updates for LSP
     'williamboman/mason-lspconfig.nvim',
     dependencies = { { 'williamboman/mason.nvim', opts = {} }, 'nanotee/sqls.nvim' },
     opts = {
-      ensure_installed = { 'perlnavigator', 'cmake', 'dockerls', 'docker_compose_language_service', 'pyright', 'clangd', 'yamlls', 'lua_ls' },
+      ensure_installed = {
+        'perlnavigator', 'cmake', 'dockerls', 'docker_compose_language_service', 'pyright', 'clangd',
+        'yamlls', 'lua_ls', 'postgres_lsp', 'groovyls', 'sqruff'
+      },
     },
   },
   {
@@ -26,12 +28,6 @@ return {
       'williamboman/mason-lspconfig.nvim',
       { 'j-hui/fidget.nvim', opts = {}, branch = 'legacy' } -- Additional lua configuration, makes nvim stuff amazing!
     },
-    config = function()
-      -- require'lspconfig'.postgres_lsp.setup{
-      --   cmd = {'pglsp'},
-      --   init_options = { db_connection_string = 'postgres://eolica@localhost:5432/eolica' }
-      -- }
-    end
   },
   {
     'nvimtools/none-ls.nvim',
@@ -56,10 +52,6 @@ return {
       })
 
       local sources = {
-        null_ls.builtins.formatting.pg_format.with({
-          extra_filetypes = { 'pg' },
-          extra_args = { '-W', '10', '-w', '120' }
-        }),
         null_ls.builtins.formatting.prettier,
         null_ls.builtins.formatting.shfmt,
         null_ls.builtins.diagnostics.saltlint,
