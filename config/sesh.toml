@@ -25,12 +25,12 @@ preview_command = "batcat --color=always tmux.conf"
 [[session]]
 name = "k9s prod"
 path = "~/workspace/kubernetes-services"
-startup_command = "k9s --context=user-dyo-context"
+startup_command = "k9s --context=oidc-production-context"
 
 [[session]]
 name = "k9s staging"
 path = "~/workspace/kubernetes-services"
-startup_command = "k9s --context=user-dyo-staging-context"
+startup_command = "k9s --context=oidc-staging-context"
 
 [[session]]
 name = "tareas desde query"
