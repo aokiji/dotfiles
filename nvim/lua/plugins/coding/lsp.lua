@@ -1,7 +1,7 @@
 return {
   { -- Useful status updates for LSP
     'williamboman/mason-lspconfig.nvim',
-    dependencies = { { 'williamboman/mason.nvim', opts = {} }, 'nanotee/sqls.nvim' },
+    dependencies = { { 'williamboman/mason.nvim', opts = {} }, 'neovim/nvim-lspconfig' },
     opts = {
       ensure_installed = {
         'perlnavigator', 'cmake', 'dockerls', 'docker_compose_language_service', 'pyright', 'clangd',
