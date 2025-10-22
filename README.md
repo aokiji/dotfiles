@@ -31,6 +31,7 @@ $> mkdir -p ~/.config/sesh && touch ~/.config/sesh/sesh.toml
 
 ```
 echo "vim.cmd('source $PWD/nvim/init.lua')" > ~/.config/nvim
+echo "vim.cmd('vim.g.redmine_url="https://REDMINE_URL"')" > ~/.config/nvim
 ```
 
 ### SSH

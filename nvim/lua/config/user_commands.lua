@@ -14,9 +14,9 @@ end, { nargs = 0 })
 vim.api.nvim_create_user_command('RedmineOpenTask', function()
   local issue_string = vim.fn.expand('<cword>')
   local issue = tonumber(issue_string)
-  if issue ~= nil then
-    vim.fn.system(string.format('open "https://redmine.intranet.meteologica.com/issues/%d" &> /dev/null',
-      issue))
+  if issue ~= nil and vim.g.redmine_url ~= nil then
+    vim.fn.system(string.format('open "%s/issues/%d" &> /dev/null',
+      vim.g.redmine_url, issue))
   else
     print(string.format('Invalid issue "%s", expected number', issue_string))
   end
