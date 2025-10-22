@@ -62,12 +62,13 @@ return {
         }, config)
       end
       return {
-        { '<leader>pf', '<cmd>Pick files<cr>',                   desc = "Pick a file" },
-        { '<leader>pg', '<cmd>Pick grep_live<cr>',               desc = "Pick from grep" },
-        { '<leader>ph', '<cmd>Pick help<cr>',                    desc = "Pick from help" },
-        { '<leader>pb', '<cmd>Pick buffers<cr>',                 desc = "Pick from buffers" },
-        { '<leader>pw', "<cmd>:Pick grep pattern='<cword>'<cr>", desc = "Pick from buffers" },
-        { '<leader>pt', pick_ctags,                              desc = "Pick from ctags" }
+        { '<leader>pf',       '<cmd>Pick files<cr>',                   desc = "Pick a file" },
+        { '<leader>pg',       '<cmd>Pick grep_live<cr>',               desc = "Pick from grep" },
+        { '<leader>ph',       '<cmd>Pick help<cr>',                    desc = "Pick from help" },
+        { '<leader>pb',       '<cmd>Pick buffers<cr>',                 desc = "Pick from buffers" },
+        { '<leader><leader>', '<cmd>Pick buffers<cr>',                 desc = "Pick from buffers" },
+        { '<leader>pw',       "<cmd>:Pick grep pattern='<cword>'<cr>", desc = "Pick from buffers" },
+        { '<leader>pt',       pick_ctags,                              desc = "Pick from ctags" }
       }
     end,
     cmd = 'Pick'
@@ -135,7 +136,6 @@ return {
       local nmap = function(mapping, action, desc) vim.keymap.set('n', mapping, action, { desc = desc }) end
 
       nmap('<leader>?', builtin.oldfiles, '[?] Find recently opened files')
-      nmap('<leader><space>', builtin.buffers, '[ ] Find existing buffers')
       nmap('<leader>/', function()
         -- You can pass additional configuration to telescope to change theme, layout, etc.
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown { winblend = 10, previewer = false })
@@ -159,40 +159,6 @@ return {
       -- Git keymaps
       nmap('<leader>gS', builtin.git_status, '[G]it [S]tatus picker')
       nmap('<leader>gB', builtin.git_branches, '[G]it [B]ranches picker')
-
-      local redmine_issues_picker = function(opts)
-        local pickers = require "telescope.pickers"
-        local finders = require "telescope.finders"
-        local conf = require("telescope.config").values
-        local actions = require('telescope.actions')
-        local action_state = require "telescope.actions.state"
-
-        opts = opts or {}
-        pickers.new(opts, {
-          prompt_title = 'Redmine Issues',
-          results_title = 'Ctrl+o to open issue in browser',
-          finder = finders.new_oneshot_job({ "redmine_issues" }, opts),
-          sorter = conf.generic_sorter(opts),
-          attach_mappings = function()
-            actions.select_default:replace(function(prompt_bufnr)
-              actions.close(prompt_bufnr)
-              local selection = action_state.get_selected_entry()
-              local line = selection[1]
-              local issue_id = line:match("^([^\t]+)")
-              vim.api.nvim_put({ issue_id }, "", false, true)
-            end)
-            vim.keymap.set({ "i", "n" }, "<c-o>", function()
-              local selection = action_state.get_selected_entry()
-              local line = selection[1]
-              local issue_id = line:match("^([^\t]+)")
-              vim.fn.system(string.format('open https://redmine.intranet.meteologica.com/issues/"%s" &> /dev/null',
-                issue_id))
-            end)
-            return true
-          end,
-        }):find()
-      end
-      nmap('<leader>ri', redmine_issues_picker, 'Open redmine issues list')
     end
   }, -- Fuzzy Finder Algorithm which requires local dependencies to be built.
   -- Only load if `make` is available. Make sure you have the system
@@ -240,8 +206,8 @@ return {
       for k, v in pairs(opts) do
         leap.opts[k] = v
       end
-      vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
-      vim.keymap.set('n',             'S', '<Plug>(leap-from-window)')
+      vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap)')
+      vim.keymap.set('n', 'S', '<Plug>(leap-from-window)')
     end,
   }
 }
