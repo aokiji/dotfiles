@@ -54,7 +54,9 @@ return {
       local sources = {
         null_ls.builtins.formatting.prettier,
         null_ls.builtins.formatting.shfmt,
-        null_ls.builtins.diagnostics.saltlint,
+        null_ls.builtins.diagnostics.saltlint.with({
+          command = vim.fn.expand("~/.venv/tools/bin/salt-lint")
+        }),
         add_missing_perl_includes
       }
 
