@@ -67,7 +67,7 @@ return {
         { '<leader>ph',       '<cmd>Pick help<cr>',                    desc = "Pick from help" },
         { '<leader>pb',       '<cmd>Pick buffers<cr>',                 desc = "Pick from buffers" },
         { '<leader><leader>', '<cmd>Pick buffers<cr>',                 desc = "Pick from buffers" },
-        { '<leader>pw',       "<cmd>:Pick grep pattern='<cword>'<cr>", desc = "Pick from buffers" },
+        { '<leader>pw',       "<cmd>:Pick grep pattern='<cword>'<cr>", desc = "Pick from current word" },
         { '<leader>pt',       pick_ctags,                              desc = "Pick from ctags" }
       }
     end,

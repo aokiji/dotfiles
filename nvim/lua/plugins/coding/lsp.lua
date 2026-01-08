@@ -4,7 +4,7 @@ return {
     dependencies = { { 'williamboman/mason.nvim', opts = {} }, 'neovim/nvim-lspconfig' },
     opts = {
       ensure_installed = {
-        'perlnavigator', 'cmake', 'dockerls', 'docker_compose_language_service', 'pyright', 'clangd',
+        'perlnavigator', 'dockerls', 'docker_compose_language_service', 'pyright', 'clangd',
         'yamlls', 'lua_ls', 'postgres_lsp', 'groovyls', 'sqruff'
       },
     },
