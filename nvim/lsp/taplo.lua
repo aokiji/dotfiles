@@ -1,0 +1,8 @@
+return {
+  settings = {
+    evenBetterToml = {
+      schema = {
+      }
+    }
+  }
+}
