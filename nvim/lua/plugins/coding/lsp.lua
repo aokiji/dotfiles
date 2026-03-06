@@ -5,7 +5,7 @@ return {
     opts = {
       ensure_installed = {
         'perlnavigator', 'dockerls', 'docker_compose_language_service', 'pyright', 'clangd',
-        'yamlls', 'lua_ls', 'postgres_lsp', 'groovyls', 'sqruff'
+        'yamlls', 'lua_ls', 'postgres_lsp', 'groovyls', 'sqruff', 'taplo'
       },
     },
   },
