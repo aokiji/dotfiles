@@ -1,4 +1,11 @@
+#:schema https://starship.rs/config-schema.json
 palette = "catppuccin_mocha"
+
+[directory]
+truncate_to_repo = false
+
+[directory.substitutions]
+'~/workspace' = '🔨'
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
