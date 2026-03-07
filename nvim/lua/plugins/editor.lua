@@ -62,33 +62,50 @@ return {
         }, config)
       end
       return {
-        { '<leader>pf',       '<cmd>Pick files<cr>',                   desc = "Pick a file" },
-        { '<leader>pg',       '<cmd>Pick grep_live<cr>',               desc = "Pick from grep" },
-        { '<leader>ph',       '<cmd>Pick help<cr>',                    desc = "Pick from help" },
-        { '<leader>pb',       '<cmd>Pick buffers<cr>',                 desc = "Pick from buffers" },
-        { '<leader><leader>', '<cmd>Pick buffers<cr>',                 desc = "Pick from buffers" },
-        { '<leader>pw',       "<cmd>:Pick grep pattern='<cword>'<cr>", desc = "Pick from current word" },
-        { '<leader>pt',       pick_ctags,                              desc = "Pick from ctags" }
+        { '<leader>pf', '<cmd>Pick files<cr>',                   desc = "Pick a file" },
+        { '<leader>pg', '<cmd>Pick grep_live<cr>',               desc = "Pick from grep" },
+        { '<leader>ph', '<cmd>Pick help<cr>',                    desc = "Pick from help" },
+        { '<leader>pb', '<cmd>Pick buffers<cr>',                 desc = "Pick from buffers" },
+        { '<leader>pw', "<cmd>:Pick grep pattern='<cword>'<cr>", desc = "Pick from current word" },
+        { '<leader>pt', pick_ctags,                              desc = "Pick from ctags" }
       }
     end,
     cmd = 'Pick'
+  },
+  {
+    'nvim-mini/mini.visits',
+    version = '*',
+    opts = {}
   },
   {
     'nvim-mini/mini.extra',
     version = '*',
     keys = function()
       local pickers = require('mini.extra').pickers
+
+      local mini_extra = require('mini.extra')
+      local pick_visit_paths = function()
+        local current_path = vim.fn.expand('%:p')
+        mini_extra.pickers.visit_paths({
+          filter = function(path_data)
+            -- Compara la ruta del elemento con la ruta absoluta del buffer actual
+            return path_data.path ~= current_path
+          end
+        })
+      end
       return {
-        { '<leader>pB', pickers.git_branches,                                              desc = "Pick a git branch" },
-        { '<leader>pd', pickers.diagnostic,                                                desc = "Pick from diagnostics" },
-        { '<leader>pc', pickers.git_hunks,                                                 desc = "Pick from git hunks" },
-        { '<leader>pL', pickers.buf_lines,                                                 desc = "Pick from buffer lines" },
-        { '<leader>pq', function() return pickers.list({ scope = 'quickfix' }) end,        desc = "Pick from quickfix" },
-        { '<leader>pj', function() return pickers.list({ scope = 'jump' }) end,            desc = "Pick from jumplist" },
-        { '<leader>ps', function() return pickers.lsp({ scope = 'document_symbol' }) end,  desc = "Pick from LSP document symbol" },
-        { '<leader>pS', function() return pickers.lsp({ scope = 'workspace_symbol' }) end, desc = "Pick from LSP workspace symbol" },
-        { '<leader>pr', pickers.registers,                                                 desc = "Pick from registers" },
-        { '<leader>pT', pickers.treesitter,                                                desc = "Pick from treesitter" },
+        { '<leader>pB',       pickers.git_branches,                                              desc = "Pick a git branch" },
+        { '<leader>pd',       pickers.diagnostic,                                                desc = "Pick from diagnostics" },
+        { '<leader>pc',       pickers.git_hunks,                                                 desc = "Pick from git hunks" },
+        { '<leader>pL',       pickers.buf_lines,                                                 desc = "Pick from buffer lines" },
+        { '<leader>pq',       function() return pickers.list({ scope = 'quickfix' }) end,        desc = "Pick from quickfix" },
+        { '<leader>pj',       function() return pickers.list({ scope = 'jump' }) end,            desc = "Pick from jumplist" },
+        { '<leader>ps',       function() return pickers.lsp({ scope = 'document_symbol' }) end,  desc = "Pick from LSP document symbol" },
+        { '<leader>pS',       function() return pickers.lsp({ scope = 'workspace_symbol' }) end, desc = "Pick from LSP workspace symbol" },
+        { '<leader>pr',       pickers.registers,                                                 desc = "Pick from registers" },
+        { '<leader>pT',       pickers.treesitter,                                                desc = "Pick from treesitter" },
+        { '<leader>pv',       pick_visit_paths,                                                  desc = "Pick from visit paths" },
+        { '<leader><leader>', pick_visit_paths,                                                  desc = "Pick from visit paths" },
       }
     end
   },
