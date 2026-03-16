@@ -84,13 +84,11 @@ return {
       local pickers = require('mini.extra').pickers
 
       local mini_extra = require('mini.extra')
+      local mini_visits = require('mini.visits')
+      local sort_recent = mini_visits.gen_sort.default({ recency_weight = 1 })
       local pick_visit_paths = function()
-        local current_path = vim.fn.expand('%:p')
         mini_extra.pickers.visit_paths({
-          filter = function(path_data)
-            -- Compara la ruta del elemento con la ruta absoluta del buffer actual
-            return path_data.path ~= current_path
-          end
+          sort = sort_recent
         })
       end
       return {
