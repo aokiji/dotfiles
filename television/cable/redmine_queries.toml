@@ -1,0 +1,18 @@
+[metadata]
+name = "redmine_queries"
+description = "Select redmine queries"
+requirements = ["redmine_queries"]
+
+[source]
+command = "redmine_queries"
+display = "{split:\\t:1}"
+output = "{split:\\t:0}"
+
+[keybindings]
+shortcut = "f4"
+ctrl-o = "actions:search_issues"
+
+[actions.search_issues]
+description = "search issues"
+command = "tv -s 'redmine_issues {split:\\t:0}' redmine_issues"
+mode = "execute"

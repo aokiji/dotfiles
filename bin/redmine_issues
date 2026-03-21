@@ -10,7 +10,21 @@ if [ -z "$QUERY_ID" ]; then
 	requests=("$REDMINE_BASE_URL/projects/devopssprints/issues.json")
 fi
 
+CACHE_FILE="/tmp/cache_redmine_issues_$QUERY_ID"
+CACHE_TTL_SECONDS=3600
+
+if [ -f "$CACHE_FILE" ]; then
+    LAST_MOD=$(stat -c %Y "$CACHE_FILE")
+    NOW=$(date +%s)
+    DIFF=$((NOW - LAST_MOD))
+
+    if [ "$DIFF" -lt "$CACHE_TTL_SECONDS" ]; then
+        cat "$CACHE_FILE"
+        exit 0
+    fi
+fi
+
 requests=(${requests[@]} "$REDMINE_BASE_URL/issues.json?query_id=$QUERY_ID&limit=100&offset=0")
 
 curl -s --parallel -H "X-Redmine-API-Key: $(cat ~/.config/redmine/api_key)" "${requests[@]}" |
-	jq -r '.issues[] | [.id, .assigned_to.name, .status.name, .updated_on, .subject, "'$REDMINE_BASE_URL'/issues/\(.id)"] | join("\t")'
+	jq -r '.issues[] | [.id, .assigned_to.name, .status.name, .updated_on, .subject, "'$REDMINE_BASE_URL'/issues/\(.id)"] | join("\t")' | tee "$CACHE_FILE"
