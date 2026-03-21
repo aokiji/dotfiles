@@ -1,0 +1,16 @@
+[metadata]
+name = "redmine_issues"
+description = "Select redmine issues"
+requirements = ["redmine_issues"]
+
+[source]
+command = "redmine_issues"
+display = "{split:\\t:0} {split:\\t:1|pad:20: :left} {split:\\t:2|pad:10: :left} {split:\\t:3} {split:\\t:4}"
+
+[keybindings]
+shortcut = "f5"
+ctrl-o = "actions:open"
+
+[actions.open]
+description = "open issue in browser"
+command = "open '{split:\\t:5}'"

@@ -18,6 +18,8 @@ echo "source $PWD/bashrc" >> ~/.bashrc
 source ~/.bashrc
 
 echo "source $PWD/tmux.conf" >> ~/.tmux.conf
+
+mkdir -p ~/.config/redmine && echo "https://REDMINE_URL" >> ~/.config/redmine/url
 ```
 ### Tmux
 
@@ -31,7 +33,6 @@ $> mkdir -p ~/.config/sesh && touch ~/.config/sesh/sesh.toml
 
 ```
 echo "vim.cmd('source $PWD/nvim/init.lua')" > ~/.config/nvim/init.lua
-echo "vim.cmd('vim.g.redmine_url="https://REDMINE_URL"')" >> ~/.config/nvim/init.lua
 ```
 
 ### SSH

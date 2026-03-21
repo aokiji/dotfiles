@@ -14,6 +14,15 @@ end, { nargs = 0 })
 vim.api.nvim_create_user_command('RedmineOpenTask', function()
   local issue_string = vim.fn.expand('<cword>')
   local issue = tonumber(issue_string)
+  if vim.g.redmine_url == nil then
+    local file = io.open(vim.fn.expand("~/.config/redmine/url"), "r")
+    if file then
+      vim.g.redmine_url = file:read("a")
+      file.close()
+    else
+      vim.notify("No se pudo leer el fichero de configuracion de la url del redmine", vim.log.levels.WARN)
+    end
+  end
   if issue ~= nil and vim.g.redmine_url ~= nil then
     vim.fn.system(string.format('open "%s/issues/%d" &> /dev/null',
       vim.g.redmine_url, issue))

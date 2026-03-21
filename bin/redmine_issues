@@ -1,0 +1,16 @@
+#!/bin/bash
+
+REDMINE_BASE_URL=$(cat ~/.config/redmine/url)
+
+requests=()
+
+QUERY_ID=$1
+if [ -z "$QUERY_ID" ]; then
+	QUERY_ID=1645 # Tareas Equipo
+	requests=("$REDMINE_BASE_URL/projects/devopssprints/issues.json")
+fi
+
+requests=(${requests[@]} "$REDMINE_BASE_URL/issues.json?query_id=$QUERY_ID&limit=100&offset=0")
+
+curl -s --parallel -H "X-Redmine-API-Key: $(cat ~/.config/redmine/api_key)" "${requests[@]}" |
+	jq -r '.issues[] | [.id, .assigned_to.name, .status.name, .updated_on, .subject, "'$REDMINE_BASE_URL'/issues/\(.id)"] | join("\t")'
