@@ -43,3 +43,9 @@ Add tmux on remote execution
 Host remote
 Include $DOTFILES_DIR/ssh/config/remote_tmux
 ```
+
+### television
+
+~~~
+curl -fsSL https://alexpasmantier.github.io/television/install.sh | bash
+~~~
