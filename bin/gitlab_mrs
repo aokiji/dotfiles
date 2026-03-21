@@ -1,0 +1,18 @@
+#!/bin/bash
+
+CACHE_FILE="/tmp/cache_gitlab_mrs"
+CACHE_TTL_SECONDS=300
+
+if [ -f "$CACHE_FILE" ]; then
+    LAST_MOD=$(stat -c %Y "$CACHE_FILE")
+    NOW=$(date +%s)
+    DIFF=$((NOW - LAST_MOD))
+
+    if [ "$DIFF" -lt "$CACHE_TTL_SECONDS" ]; then
+        exec cat "$CACHE_FILE"
+    fi
+fi
+
+gitlab -g nico -o json merge-request list --state opened --scope all \
+	| jq -r '.[] | [.state, .created_at, .updated_at, .author.name, .assignees[0].name, .title, .web_url] | join("\t")' \
+	| tee "$CACHE_FILE"

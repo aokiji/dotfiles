@@ -10,6 +10,7 @@ output = "{split:\\t:0}"
 
 [keybindings]
 shortcut = "f4"
+enter = "actions:search_issues"
 ctrl-o = "actions:search_issues"
 
 [actions.search_issues]

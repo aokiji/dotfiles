@@ -11,6 +11,7 @@ output = "{split:\\t:0}"
 [keybindings]
 shortcut = "f5"
 ctrl-o = "actions:open"
+enter = "actions:open"
 
 [actions.open]
 description = "open issue in browser"

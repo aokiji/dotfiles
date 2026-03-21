@@ -1,0 +1,17 @@
+[metadata]
+name = "gitlab_mrs"
+description = "Select redmine issues"
+requirements = ["gitlab_mrs"]
+
+[source]
+command = "gitlab_mrs"
+display = "{split:\\t:0|pad:10: :left} {split:\\t:1|split:T:0} {split:\\t:2|split:T:0} {split:\\t:3|pad:20: :left} {split:\\t:4|pad:20: :left}   {split:\\t:5}"
+output = "{split:\\t:0}"
+
+[keybindings]
+ctrl-o = "actions:open"
+enter = "actions:open"
+
+[actions.open]
+description = "open issue in browser"
+command = "open '{split:\\t:6}'"
