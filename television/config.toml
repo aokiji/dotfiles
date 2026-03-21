@@ -154,7 +154,7 @@ ctrl-f = "cycle_previews"
 # --------------
 ctrl-y = "copy_entry_to_clipboard"
 ctrl-r = "reload_source"
-ctrl-s = "cycle_sources"
+ctrl-b = "cycle_sources"
 
 # UI Features
 # ----------

@@ -1,6 +1,8 @@
 #!/bin/bash
 
-CACHE_FILE="/tmp/cache_gitlab_mrs"
+SCOPE=${1-all}
+
+CACHE_FILE="/tmp/cache_gitlab_mrs_$SCOPE"
 CACHE_TTL_SECONDS=300
 
 if [ -f "$CACHE_FILE" ]; then
@@ -13,6 +15,6 @@ if [ -f "$CACHE_FILE" ]; then
     fi
 fi
 
-gitlab -g nico -o json merge-request list --state opened --scope all \
+gitlab -g nico -o json merge-request list --state opened --scope $SCOPE \
 	| jq -r '.[] | [.state, .created_at, .updated_at, .author.name, .assignees[0].name, .title, .web_url] | join("\t")' \
 	| tee "$CACHE_FILE"
