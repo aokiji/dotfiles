@@ -1,0 +1,21 @@
+[metadata]
+name = "pgcli"
+description = "Connect to database through pgcli"
+requirements = ["perl", "grep", "cut"]
+
+[source]
+command = "perl -lne 'print if /^\\[alias_dsn\\]/../\\[(?!alias_dsn)/' ~/.config/pgcli/config | grep ="
+display = "{split:=:0|pad:40: :left} {split:=:1}"
+
+[keybindings]
+enter = "actions:connect"
+
+[actions.connect]
+description = "Start pgcli in database"
+command = "pgcli -D {split:=:0}"
+mode = "execute"
+
+[actions.connect_and_rename_tmux_session]
+description = "Start pgcli in database and rename tmux session"
+command = "tmux rename 'pgcli {split:=:0}'; pgcli -D {split:=:0}"
+mode = "execute"
