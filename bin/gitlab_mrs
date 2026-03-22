@@ -16,5 +16,5 @@ if [ -f "$CACHE_FILE" ]; then
 fi
 
 gitlab -g nico -o json merge-request list --state opened --scope $SCOPE \
-	| jq -r '.[] | [.state, .created_at, .updated_at, .author.name, .assignees[0].name, .title, .web_url] | join("\t")' \
+	| jq -r '.[] | [.state, .created_at, .updated_at, .author.name, .assignees[0].name, .title, .web_url, .references.full] | join("\t")' \
 	| tee "$CACHE_FILE"
