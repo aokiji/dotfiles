@@ -1,0 +1,20 @@
+[metadata]
+name = "ssh_server"
+description = "A channel to select hosts to connect via ssh"
+requirements = ["yq"]
+
+[source]
+command = "yq -r -o p '.[].targets[]' ~/workspace/kubernetes-services/monitoring/prometheus/production/targets/*.yml"
+
+[keybindings]
+enter = "actions:connect"
+
+[actions.connect]
+description = "SSH into the selected server"
+command = "ssh '{}'"
+mode = "execute"
+
+[actions.connect_and_rename_tmux_session]
+description = "SSH into the selected server"
+command = "tmux rename 'ssh {split:.:0}'; ssh '{}'"
+mode = "execute"
