@@ -127,10 +127,8 @@ ctrl-c = "quit"
 # Navigation and selection
 # -----------------------
 down = "select_next_entry"
-ctrl-n = "select_next_entry"
 ctrl-j = "select_next_entry"
 up = "select_prev_entry"
-ctrl-p = "select_prev_entry"
 ctrl-k = "select_prev_entry"
 
 # History navigation
@@ -148,13 +146,13 @@ enter = "confirm_selection"
 # --------------------
 pagedown = "scroll_preview_half_page_down"
 pageup = "scroll_preview_half_page_up"
-ctrl-f = "cycle_previews"
+ctrl-p = "cycle_previews"
 
 # Data operations
 # --------------
 ctrl-y = "copy_entry_to_clipboard"
 ctrl-r = "reload_source"
-ctrl-b = "cycle_sources"
+ctrl-n = "cycle_sources"
 
 # UI Features
 # ----------
