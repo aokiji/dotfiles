@@ -1,20 +1,37 @@
 #!/bin/bash
 
-SCOPE=${1-all}
+function _get_gitlab_mrs_list_by_scope_and_state() {
+	SCOPE=$1
+	STATE=$2
 
-CACHE_FILE="/tmp/cache_gitlab_mrs_$SCOPE"
-CACHE_TTL_SECONDS=300
+	CACHE_FILE="/tmp/cache_gitlab_mrs_$SCOPE"
+	CACHE_TTL_SECONDS=300
 
-if [ -f "$CACHE_FILE" ]; then
-    LAST_MOD=$(stat -c %Y "$CACHE_FILE")
-    NOW=$(date +%s)
-    DIFF=$((NOW - LAST_MOD))
+	if [ -f "$CACHE_FILE" ]; then
+		LAST_MOD=$(stat -c %Y "$CACHE_FILE")
+		NOW=$(date +%s)
+		DIFF=$((NOW - LAST_MOD))
 
-    if [ "$DIFF" -lt "$CACHE_TTL_SECONDS" ]; then
-        exec cat "$CACHE_FILE"
-    fi
-fi
+		if [ "$DIFF" -lt "$CACHE_TTL_SECONDS" ]; then
+			exec cat "$CACHE_FILE"
+		fi
+	fi
 
-gitlab -g nico -o json merge-request list --state opened --scope $SCOPE \
-	| jq -r '.[] | [.state, .created_at, .updated_at, .author.name, .assignees[0].name, .title, .web_url, .references.full] | join("\t")' \
-	| tee "$CACHE_FILE"
+	if [ -n "$STATE" ]; then
+		EXTRA_ARGS="--state $STATE"
+	fi
+
+	gitlab -g nico -o json merge-request list --scope $SCOPE $EXTRA_ARGS |
+		jq -r '.[] | [.state, .created_at, .updated_at, .author.name, .assignees[0].name, .title, .web_url, .references.full] | join("\t")' |
+		tee "$CACHE_FILE"
+}
+
+export -f _get_gitlab_mrs_list_by_scope_and_state
+
+SCOPES=("all" "assigned_to_me" "created_by_me")
+STATES=("opened" "closed")
+
+parallel --colsep ' ' \
+	_get_gitlab_mrs_list_by_scope_and_state {1} {2} \
+	::: "${SCOPES[@]}" \
+	::: "${STATES[@]}" | sort -u
