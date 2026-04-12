@@ -7,7 +7,7 @@ Install dependencies
 For ubuntu
 ```
 snap install nvim --classic
-sudo apt install tmux vim fzf universal-ctags gpaste-2 parallel
+sudo apt install tmux fzf universal-ctags gpaste-2 parallel
 curl -sS https://starship.rs/install.sh | sh
 ```
 
