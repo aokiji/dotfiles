@@ -73,3 +73,7 @@ gr() {
     --preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%cd %h%d %s" {1} | head -200' |
     cut -d$'\t' -f1
 }
+
+alias gwt='git worktree'
+alias gwls='git worktree list'
+alias gwa='git worktree add'
