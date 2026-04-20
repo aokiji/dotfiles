@@ -22,6 +22,7 @@ return {
       { '<leader>gl', "<cmd>Git log %<cr>",                  desc = "Show git log of current file" },
       { '<leader>gp', "<cmd>Git -p push -u origin HEAD<cr>", desc = "Git push" },
       { '<leader>gP', "<cmd>Git -p push --force<cr>",        desc = "Git force push" },
+      { '<leader>gd', "<cmd>Git pull<cr>",                   desc = "Git force pull" },
       { '<leader>gu', "<cmd>GitlabURL<cr>",                  desc = "Open file in Gitlab" },
       { '<leader>U',  "<cmd>GitlabURL<cr>",                  desc = "Open file in Gitlab" },
       { '<leader>go', "<cmd>GitlabOpenMerge<cr>",            desc = "Open merge in Gitlab" },
