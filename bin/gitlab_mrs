@@ -28,8 +28,39 @@ function _get_gitlab_mrs_list_by_scope_and_state() {
 
 export -f _get_gitlab_mrs_list_by_scope_and_state
 
-SCOPES=("all" "assigned_to_me" "created_by_me")
-STATES=("opened" "closed")
+DEFAULT_SCOPES=("all" "assigned_to_me" "created_by_me")
+DEFAULT_STATES=("opened" "closed")
+
+STATES=(${DEFAULT_STATES[@]})
+SCOPES=(${DEFAULT_SCOPES[@]})
+
+while [[ -n "$1" ]]; do
+	case "$1" in
+	-t|--scopes)
+		shift
+		scopes_str=$1
+		shift
+		IFS=',' read -r -a SCOPES <<< "$scopes_str"
+		;;
+	-s|--states)
+		shift
+		states_str=$1
+		shift
+		IFS=',' read -r -a STATES <<< "$states_str"
+		;;
+	-h|--help)
+
+		echo -e "gitlab_mrs -h|--help -t|--scopes [SCOPES] -s|--states [STATES]\n\n" 1>&2
+		echo "SCOPES: unidos por , dentro del conjunto: [${DEFAULT_SCOPES[@]}]" 1>&2
+		echo "STATES: unidos por , dentro del conjunto: [${DEFAULT_STATES[@]}]" 1>&2
+		exit 0
+		;;
+	*)
+		echo "Opcion '$1' no reconocida" 1>&2
+		exit 1
+		;;
+	esac
+done
 
 parallel --colsep ' ' \
 	_get_gitlab_mrs_list_by_scope_and_state {1} {2} \
