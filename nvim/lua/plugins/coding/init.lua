@@ -294,8 +294,8 @@ return {
       }
     },
     keys = {
-      { '<leader>tf', "<cmd>TestFile<cr>", desc = "[T]est [F]ile" },
-      { '<leader>tl', "<cmd>TestLast<cr>", desc = "[T]est [L]ast" }
+      { '<leader>Tf', "<cmd>TestFile<cr>", desc = "[T]est [F]ile" },
+      { '<leader>Tl', "<cmd>TestLast<cr>", desc = "[T]est [L]ast" }
     },
   }, -- debugger adapters (dap)
   {
