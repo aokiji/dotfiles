@@ -36,9 +36,17 @@ vim.api.nvim_create_user_command('GitWorktreeAdd', function()
   vim.ui.input({ prompt = 'Introduce un nombre para la rama:' }, function(input)
     if input ~= nil then
       local parts = vim.split(input, "/", { trimempty = true })
-      local worktree = parts[#parts]:gsub(" ", "_")
-      vim.system({ "git", "worktree", "add", "-B", input, "../" .. worktree })
-      vim.notify("Creado worktree en ../" .. worktree)
+      local worktree_name = parts[#parts]:gsub(" ", "_")
+      local worktree = "../" .. worktree_name
+
+      vim.system({ "git", "worktree", "add", "-B", input, worktree }):wait()
+      vim.notify("Creado worktree en " .. worktree)
+      vim.api.nvim_set_current_dir(worktree)
+
+      local tmux_session = vim.env.TMUX
+      if tmux_session then
+        vim.system({ "tmux", "rename-session", worktree_name })
+      end
     end
   end)
 end, { nargs = 0 })
