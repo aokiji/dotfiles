@@ -34,4 +34,4 @@ STATES=("opened" "closed")
 parallel --colsep ' ' \
 	_get_gitlab_mrs_list_by_scope_and_state {1} {2} \
 	::: "${SCOPES[@]}" \
-	::: "${STATES[@]}" | sort -u
+	::: "${STATES[@]}" | sort -u -k 3 -r
