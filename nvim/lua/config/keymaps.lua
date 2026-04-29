@@ -12,3 +12,6 @@ vim.keymap.set('i', 'jj', '<esc>')
 -- jump to next command
 vim.keymap.set({'n', 'v'}, ']c', '/^❯<CR>', {desc="jump next command"})
 vim.keymap.set({'n', 'v'}, '[c', '?^❯<CR>', {desc="jump previous command"})
+
+-- git worktree add
+vim.keymap.set({'n', 'v'}, '<leader>ga', vim.cmd.GitWorktreeAdd, {desc="Git Worktree Add"})

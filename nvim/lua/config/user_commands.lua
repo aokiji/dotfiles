@@ -30,3 +30,15 @@ vim.api.nvim_create_user_command('RedmineOpenTask', function()
     print(string.format('Invalid issue "%s", expected number', issue_string))
   end
 end, { nargs = 0 })
+
+
+vim.api.nvim_create_user_command('GitWorktreeAdd', function()
+  vim.ui.input({ prompt = 'Introduce un nombre para la rama:' }, function(input)
+    if input ~= nil then
+      local parts = vim.split(input, "/", { trimempty = true })
+      local worktree = parts[#parts]:gsub(" ", "_")
+      vim.system({ "git", "worktree", "add", "-B", input, "../" .. worktree })
+      vim.notify("Creado worktree en ../" .. worktree)
+    end
+  end)
+end, { nargs = 0 })
