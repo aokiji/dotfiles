@@ -162,6 +162,13 @@ return {
                 end
               end
             }
+          },
+          ["gitlab_mrs"] = {
+            keybinding = "<leader>tm",
+            handlers = {
+              ["<CR>"] = h.insert_at_cursor,
+              ["<C-y>"] = h.copy_to_clipboard
+            }
           }
         },
         global_keybindings = {
