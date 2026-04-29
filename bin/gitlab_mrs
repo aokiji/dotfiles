@@ -4,7 +4,7 @@ function _get_gitlab_mrs_list_by_scope_and_state() {
 	SCOPE=$1
 	STATE=$2
 
-	CACHE_FILE="/tmp/cache_gitlab_mrs_$SCOPE"
+	CACHE_FILE="/tmp/cache_gitlab_mrs_${SCOPE}_${STATE}"
 	CACHE_TTL_SECONDS=300
 
 	if [ -f "$CACHE_FILE" ]; then
