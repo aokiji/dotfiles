@@ -148,6 +148,26 @@ return {
 
       luasnip.config.setup {}
 
+      local expand_or_next = function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        elseif luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        else
+          fallback()
+        end
+      end
+
+      local expand_or_previous = function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        else
+          fallback()
+        end
+      end
+
       cmp.setup {
         snippet = { expand = function(args) luasnip.lsp_expand(args.body) end },
         mapping = cmp.mapping.preset.insert {
@@ -156,24 +176,11 @@ return {
           ['<C-Space>'] = cmp.mapping.complete {},
           ['<C-e>'] = cmp.mapping.abort(),
           ['<CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
-          ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
-          ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { 'i', 's' })
+          ['<C-l>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
+          ['<Tab>'] = cmp.mapping(expand_or_next, { 'i', 's' }),
+          ['<C-j>'] = cmp.mapping(expand_or_next, { 'i', 's' }),
+          ['<S-Tab>'] = cmp.mapping(expand_or_previous, { 'i', 's' }),
+          ['<C-k>'] = cmp.mapping(expand_or_previous, { 'i', 's' })
         },
         sources = {
           { name = 'nvim_lsp' },
