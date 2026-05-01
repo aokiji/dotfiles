@@ -125,6 +125,7 @@ return {
     },
     event = 'VeryLazy',
     opts = {},
+    build = "make install_jsregexp",
     config = function(_, opts)
       require('luasnip').setup(opts)
       require("luasnip.loaders.from_lua").load()
@@ -279,8 +280,16 @@ return {
     opts = { mode = 'topline' },
     dependencies = { 'nvim-treesitter/nvim-treesitter' }
   },
-  { 'simrat39/symbols-outline.nvim', opts = {} }, -- running tests
-  { 'kylechui/nvim-surround',        opts = {} },
+  {
+    'hedyhli/outline.nvim',
+    lazy = true,
+    cmd = 'Outline',
+    keys = {
+      { "<leader>o", "<cmd>Outline<cr>", desc = "Symbols Outline Toggle" },
+    },
+    opts = {}
+  },
+  { 'kylechui/nvim-surround',      opts = {} },
   {
     'klen/nvim-test',
     opts = {

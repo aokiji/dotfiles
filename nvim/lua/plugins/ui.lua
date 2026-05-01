@@ -6,7 +6,7 @@ return {
     -- See `:help indent_blankline.txt`
     opts = {},
   },
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000, config = function() vim.cmd.colorscheme 'catppuccin-mocha' end },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000, init = function() vim.cmd.colorscheme 'catppuccin-mocha' end },
   -- { -- Theme inspired by Atom
   --   'navarasu/onedark.nvim',
   --   priority = 1000,
@@ -27,7 +27,6 @@ return {
       whichkey.setup(opts)
 
       local mappings = {
-        { "<leader>O",  "<cmd>SymbolsOutline<cr>",  desc = "Symbols Outline Toggle" },
         { "<leader>Q",  "<cmd>qa!<cr>",             desc = "Quit All" },
         { "<leader>b",  group = "File Browser" },
         { "<leader>d",  group = "Debugger" },
