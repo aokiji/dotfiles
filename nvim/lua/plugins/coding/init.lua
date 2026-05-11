@@ -1,16 +1,4 @@
 return {
-  {
-    "ahmedkhalf/project.nvim",
-    dependencies = { 'nvim-telescope/telescope.nvim' },
-    opts = {
-      manual_mode = false,
-      silent_chdir = false
-    },
-    config = function(_, opts)
-      require('project_nvim').setup(opts)
-      require('telescope').load_extension('projects')
-    end,
-  },
   -- Git related plugins
   {
     'tpope/vim-fugitive',
