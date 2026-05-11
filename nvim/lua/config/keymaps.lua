@@ -15,3 +15,7 @@ vim.keymap.set({'n', 'v'}, '[c', '?^❯<CR>', {desc="jump previous command"})
 
 -- git worktree add
 vim.keymap.set({'n', 'v'}, '<leader>ga', vim.cmd.GitWorktreeAdd, {desc="Git Worktree Add"})
+
+-- copy file paths
+vim.keymap.set({'n', 'v'}, '<leader>cp', vim.cmd.CopyRelativePath, {desc="Copy Relative File Path"})
+vim.keymap.set({'n', 'v'}, '<leader>cP', vim.cmd.CopyAbsolutePath, {desc="Copy Absolute File Path"})

@@ -50,3 +50,17 @@ vim.api.nvim_create_user_command('GitWorktreeAdd', function()
     end
   end)
 end, { nargs = 0 })
+
+-- Copiar la ruta absoluta al portapapeles del sistema
+vim.api.nvim_create_user_command('CopyAbsolutePath', function()
+  local path = vim.fn.expand('%:p')
+  vim.fn.setreg('+', path)
+  vim.notify("Ruta copiada: " .. path)
+end, {})
+
+
+vim.api.nvim_create_user_command('CopyRelativePath', function()
+  local path = vim.fn.expand('%:.')
+  vim.fn.setreg('+', path)
+  vim.notify("Ruta copiada: " .. path)
+end, {})
