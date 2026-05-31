@@ -1,0 +1,48 @@
+#!/bin/bash
+
+PROJECT_DIR=$(git rev-parse --show-toplevel 2>/dev/null || echo ".")
+DIR_ID=$(stat -c "%D_%i" $PROJECT_DIR)
+
+CACHE_FILE="/tmp/cache_tree_sitter_tags_$DIR_ID"
+CACHE_TTL_SECONDS=120
+
+while [ -n "$1" ]; do
+	case $1 in
+	--reload | -r)
+		RELOAD=1
+		shift
+		;;
+	esac
+done
+
+if [ "$RELOAD" != "1" -a -s "$CACHE_FILE" ]; then
+	LAST_MOD=$(stat -c %Y "$CACHE_FILE")
+	NOW=$(date +%s)
+	DIFF=$((NOW - LAST_MOD))
+
+	if [ "$DIFF" -lt "$CACHE_TTL_SECONDS" ]; then
+		cat "$CACHE_FILE"
+		exit 0
+	fi
+fi
+
+fd -e py -e pm -e pl -e cpp -e hpp -e h |
+	tree-sitter tags --paths /dev/stdin |
+	perl -ne '
+        chomp; # Quitamos el salto de línea al final de cada lectura
+        
+        # 1. Si la línea empieza con cualquier carácter que NO sea espacio (^\S), es un archivo
+        if (/^\S/) {
+            $current_file = $_;
+        } 
+        # 2. Si la línea empieza con espacios (^\s+), es un tag
+        elsif (/^\s+([^|]+?)\s*\|\s*(\S+?)\s*(\S+)\s*\(\s*(\d+)\s*,/) {
+            my $tag = $1;
+            my $obj_type = $2;
+            my $node_type = $3;
+            my $line = $4 + 1;
+            
+            print "$tag\t$obj_type\t$node_type\t$current_file\t$line\n";
+        }
+    ' |
+	tee $CACHE_FILE
