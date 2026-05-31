@@ -80,11 +80,6 @@ return {
         desc = "Buffer Diagnostics (Trouble)",
       },
       {
-        "<leader>xs",
-        vim.diagnostic.open_float,
-        desc = "Buffer Diagnostics (Trouble)",
-      },
-      {
         "<leader>cs",
         "<cmd>Trouble symbols toggle focus=false<cr>",
         desc = "Symbols (Trouble)",

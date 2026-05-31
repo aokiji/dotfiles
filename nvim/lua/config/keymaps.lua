@@ -20,4 +20,5 @@ vim.keymap.set({ 'n', 'v' }, '<leader>ga', vim.cmd.GitWorktreeAdd, { desc = "Git
 vim.keymap.set({ 'n', 'v' }, '<leader>cp', vim.cmd.CopyRelativePath, { desc = "Copy Relative File Path" })
 vim.keymap.set({ 'n', 'v' }, '<leader>cP', vim.cmd.CopyAbsolutePath, { desc = "Copy Absolute File Path" })
 
-vim.keymap.set({ 'n' }, '<leader><leader>', "<C-^>", { desc = "Back to previous buffer" })
+vim.keymap.set({ 'n', 'v' }, '<leader><leader>', "<C-^>", { desc = "Back to previous buffer" })
+vim.keymap.set({ 'n', 'v' }, '<leader>xs', vim.diagnostic.open_float, { desc = "Buffer Diagnostics" })
