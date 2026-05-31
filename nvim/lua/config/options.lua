@@ -42,3 +42,6 @@ vim.o.termguicolors = true
 
 -- Keep some lines above and below cursor
 vim.o.scrolloff = 15
+
+-- Por defecto es 4000ms (4 segundos), lo cual es muy lento.
+vim.opt.updatetime = 300
