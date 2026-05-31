@@ -11,8 +11,13 @@ output = "{split:\\t:0}"
 [keybindings]
 shortcut = "f5"
 ctrl-o = "actions:open"
+ctrl-c = "actions:copy_id_to_clipboard"
 enter = "actions:open"
 
 [actions.open]
 description = "open issue in browser"
 command = "open '{split:\\t:5}'"
+
+[actions.copy_id_to_clipboard]
+description = "copy id to clipboard"
+command = "echo '{split:\\t:1}' | xclip -silent -i"

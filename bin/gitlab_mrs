@@ -7,7 +7,7 @@ function _get_gitlab_mrs_list_by_scope_and_state() {
 	CACHE_FILE="/tmp/cache_gitlab_mrs_${SCOPE}_${STATE}"
 	CACHE_TTL_SECONDS=300
 
-	if [ -f "$CACHE_FILE" ]; then
+	if [ -s "$CACHE_FILE" ]; then
 		LAST_MOD=$(stat -c %Y "$CACHE_FILE")
 		NOW=$(date +%s)
 		DIFF=$((NOW - LAST_MOD))
