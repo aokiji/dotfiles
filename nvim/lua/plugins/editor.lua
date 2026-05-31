@@ -103,7 +103,6 @@ return {
         { '<leader>pr',       pickers.registers,                                                 desc = "Pick from registers" },
         { '<leader>pT',       pickers.treesitter,                                                desc = "Pick from treesitter" },
         { '<leader>pv',       pick_visit_paths,                                                  desc = "Pick from visit paths" },
-        { '<leader><leader>', pick_visit_paths,                                                  desc = "Pick from visit paths" },
       }
     end
   },
