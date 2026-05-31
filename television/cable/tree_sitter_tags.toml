@@ -6,7 +6,7 @@ requirements = ["tree_sitter_tags"]
 [source]
 command = "tree_sitter_tags | perl -lane 'print if $F[1] =~ \"(function|class|method)\"'"
 display = "{split:\\t:0|pad:40: :left} {split:\\t:1|pad:10: :left} {split:\\t:3}"
-output = "{split:\\t:0}"
+output = "{split:\\t:3}:{split:\\t:4}"
 
 [preview]
 command = "bat --color=always --style=numbers --highlight-line {split:\\t:4} {split:\\t:3}"
