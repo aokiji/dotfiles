@@ -65,7 +65,6 @@ return {
         { '<leader>pg', '<cmd>Pick grep_live<cr>',               desc = "Pick from grep" },
         { '<leader>ph', '<cmd>Pick help<cr>',                    desc = "Pick from help" },
         { '<leader>pb', '<cmd>Pick buffers<cr>',                 desc = "Pick from buffers" },
-        { '<leader>pw', "<cmd>:Pick grep pattern='<cword>'<cr>", desc = "Pick from current word" },
       }
     end,
     cmd = 'Pick'
@@ -190,6 +189,9 @@ return {
       vim.keymap.set({ 'n', 'v' }, '<leader>pg', function()
         require('tv').tv_channel('text')
       end, { desc = "Tv Grep" })
+      vim.keymap.set({ 'n', 'v' }, '<leader>pw', function()
+        require('tv').tv_channel('text', vim.fn.expand('<cword>'))
+      end, { desc = "Tv Grep (Current word)" })
     end,
   },
   -- Fuzzy Finder (files, lsp, etc)
