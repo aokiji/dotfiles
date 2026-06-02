@@ -62,7 +62,6 @@ return {
         }, config)
       end
       return {
-        { '<leader>pg', '<cmd>Pick grep_live<cr>',               desc = "Pick from grep" },
         { '<leader>ph', '<cmd>Pick help<cr>',                    desc = "Pick from help" },
         { '<leader>pb', '<cmd>Pick buffers<cr>',                 desc = "Pick from buffers" },
       }
