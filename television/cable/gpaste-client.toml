@@ -1,0 +1,14 @@
+[metadata]
+name = "gpaste-client"
+description = "Select from clipboard history"
+requirements = ["gpaste-client"]
+
+[source]
+command = "gpaste-client --oneline | tac"
+display = "{split:\\::1}"
+output = "{split:\\::1}"
+no_sort = true
+
+[preview]
+command = "gpaste-client get {split:\\::0}"
+header = "{split:\\::0}"
