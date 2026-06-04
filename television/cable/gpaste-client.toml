@@ -4,7 +4,7 @@ description = "Select from clipboard history"
 requirements = ["gpaste-client"]
 
 [source]
-command = "gpaste-client --oneline | tac"
+command = "gpaste-client --oneline"
 display = "{split:\\::1}"
 output = "{split:\\::1}"
 no_sort = true
