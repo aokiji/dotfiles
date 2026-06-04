@@ -5,10 +5,10 @@ requirements = ["gpaste-client"]
 
 [source]
 command = "gpaste-client --oneline"
-display = "{split:\\::1}"
-output = "{split:\\::1}"
+display = "{split:\\: :1}"
+output = "{split:\\: :1}"
 no_sort = true
 
 [preview]
-command = "gpaste-client get {split:\\::0}"
-header = "{split:\\::0}"
+command = "gpaste-client get {split:\\: :0}"
+header = "{split:\\: :0}"
