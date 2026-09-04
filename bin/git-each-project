@@ -1,9 +1,4 @@
 #!/bin/bash
+PARALLEL_CMD="parallel"
 
-function __exec_git {
-  git -C "$@" | xargs -L1 echo "$1:"
-}
-
-export -f __exec_git
-
-git-projects | parallel "__exec_git '{}' $@"
+git-projects | $PARALLEL_CMD $PARALLEL_OPTS --tag --tagstring "{}:" git -C {} "$@"
