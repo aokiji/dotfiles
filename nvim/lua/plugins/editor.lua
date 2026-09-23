@@ -189,7 +189,7 @@ return {
         require('tv').tv_channel('text')
       end, { desc = "Tv Grep" })
       vim.keymap.set({ 'n', 'v' }, '<leader>pw', function()
-        require('tv').tv_channel('text', vim.fn.expand('<cword>'))
+        require('tv').tv_channel('text', "'" .. vim.fn.expand('<cword>'))
       end, { desc = "Tv Grep (Current word)" })
     end,
   },
